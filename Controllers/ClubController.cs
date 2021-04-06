@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLibrary;
 using DataLibrary.Logic;
+using StatTrack.Data;
 using static DataLibrary.Logic.ClubProcessor;
 using StatTrack.Models;
 
@@ -14,7 +15,7 @@ namespace StatTrack.Controllers
     {
         public IActionResult Index()
         {
-            var data = LoadClubs();
+            var data = LoadClubs(DatabaseHandler.GetConnectionString());
             List<ClubModel> clubs = new List<ClubModel>();
 
             foreach (var item in data)
