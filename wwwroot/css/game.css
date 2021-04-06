@@ -1,0 +1,23 @@
+﻿.btn {
+    margin: .10rem;
+}
+
+.overall_row {
+    justify-content: center;
+}
+
+.timeContainer {
+    justify-content: center;
+    width: 50%;
+}
+
+.gametimer {
+    width: 75%;
+    font-size: 20pt;
+    border-top: none;
+    border-bottom-color: 8b8b8b;
+    padding: .25rem;
+    margin: .10rem;
+    border-left: none;
+    border-right: none;
+}

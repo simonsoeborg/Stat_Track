@@ -182,3 +182,4 @@ C:\Users\Gonhk\source\repos\StatTrack\bin\Debug\netcoreapp3.1\DataLibrary.pdb
 C:\Users\Gonhk\source\repos\StatTrack\obj\Debug\netcoreapp3.1\Razor\Views\Player\Edit.cshtml.g.cs
 C:\Users\Gonhk\source\repos\StatTrack\obj\Debug\netcoreapp3.1\Razor\Views\Club\Index.cshtml.g.cs
 C:\Users\Gonhk\source\repos\StatTrack\obj\Debug\netcoreapp3.1\Razor\Views\Club\Create.cshtml.g.cs
+C:\Users\Gonhk\source\repos\StatTrack\obj\Debug\netcoreapp3.1\Razor\Views\Game\Index.cshtml.g.cs
