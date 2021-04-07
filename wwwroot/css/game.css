@@ -11,13 +11,20 @@
     width: 50%;
 }
 
-.gametimer {
-    width: 75%;
-    font-size: 20pt;
-    border-top: none;
-    border-bottom-color: 8b8b8b;
-    padding: .25rem;
-    margin: .10rem;
-    border-left: none;
-    border-right: none;
+#timer {
+    font-size: 38pt;
+    font-family: Lato;
+    font-weight: 300;
+}
+
+.scoreForm {
+    width: 25% !important;
+}
+
+.teamForm {
+    width: 75% !important;
+}
+
+.ctnr_nopadding {
+    padding: 0;
 }

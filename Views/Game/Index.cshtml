@@ -7,52 +7,58 @@
 <div class="container">
     <div class="row overall_row">
         <div class="col-4">
-            <!-- My Club Name and score -->
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Mit hold navn">
-                <input type="text" class="form-control" placeholder="0">
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <!-- Set årgang & Række, dropdowns -->
+            <div class="container">
+                <!-- My Club Name and score -->
+                <div class="input-group">
+                    <input type="text" class="form-control teamForm" placeholder="Mit hold navn">
+                    <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <!-- Penalty button, modal -->
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Set årgang & Række, dropdowns -->
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <!-- Timer -->
-            <div class="container timeContainer">
-                <input class="gametimer" id="timer" placeholder="00:00" aria-disabled="True"/>
-            </div>
-            
-            <div class="row overall_row">
-                <div class="col-4">
-                    <!-- Start time, stop time Buttons-->
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <button id="startBtn" type="button" class="btn btn-outline-success" onclick="startTimer">Start</button>
-                        <button id="stopBtn" type="button" class="btn btn-outline-danger" onclick="stopTimer">Stop</button>
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Penalty button, modal -->
+                        <div class="container ctnr_nopadding">
+                            <p align="left">
+                                <button id="team1_eventBtn" type="button" class="btn btn-outline-warning" onclick="">Hændelse</button>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-4">
-            <!-- Opponent Club Name and score -->
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Modstander hold navn">
-                <input type="text" class="form-control" placeholder="0">
+            <div class="container" style="text-align: center;">
+                <h1 id="timer">00:00</h1>
+                <button id="startBtn" type="button" class="btn btn-outline-success" onclick="startTimer">Start</button>
+                <button id="stopBtn" type="button" class="btn btn-outline-danger" onclick="stopTimer">Stop</button>
             </div>
-            <div class="row">
-                <div class="col-4">
-                    <!-- Set årgang & Række, dropdowns -->
+        </div>
+
+        <div class="col-4">
+            <div class="container">
+                <!-- Opponent Club Name and score -->
+                <div class="input-group">
+                    <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input type="text" class="form-control teamForm" placeholder="Modstander hold navn">
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    <!-- Penalty button, modal -->
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Set årgang & Række, dropdowns -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Penalty button, modal -->
+                        <div class="input-group-prepend">
+                            <div class="container ctnr_nopadding">
+                                <button id="team2_eventBtn" type="button" class="btn btn-outline-warning" onclick="">Hændelse</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
