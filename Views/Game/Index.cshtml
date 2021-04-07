@@ -17,6 +17,11 @@
                     <!-- Set årgang & Række, dropdowns -->
                     <div class="input-group">
                         <select class="form-select" id="team1_yearBtn">
+                            @*
+                                Hent data fra Databasen
+                                U3 - U19 (U3, U5, U7, U9, U11, U13, U15, U17, U19)
+                                2021 - 4 = 2018 = 18, (18, 16, 14, 12, 10, 08, 06, 04, 02)
+                            *@
                             <option selected>Vælg Årgang</option>
                             <option value="1">00</option>
                             <option value="2">02</option>
@@ -26,6 +31,9 @@
                             <option value="6">10</option>
                         </select>
                         <select class="form-select" id="team1_leagueBtn">
+                        @*
+                            Liga, 1. Div, 2. Div, 3. Div, Cup event
+                        *@
                             <option selected>Vælg Række</option>
                             <option value="1">Liga</option>
                             <option value="2">1. Div</option>
@@ -95,7 +103,61 @@
     </div>
 
     <div class="row">
-        <!-- Tabel for all players -->
+        <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
+            <!-- Tabel for all players -->
+            <div class="row">
+                <div class="col-3"><b>Spillernavn</b></div>
+                <div class="col-3"><b>Spillerposition</b></div>
+                <div class="col-1"><b>Skud</b></div>
+                <div class="col-1"><b>Mål</b></div>
+                <div class="col-1"><b>Assists</b></div>
+                <div class="col-1"><b>Redninger</b></div>
+            </div>
+            <div class="row">
+                @for (int i = 0; i < 12; i++)
+                {
+                    int player = i + 1;
+                    <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
+                        <div class="col-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Spiller @player" aria-label="player_@player"/>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <select class="form-select" id="playerPosition_@player">
+                                <option value="1">Målvogter</option>
+                                <option value="2">Højrefløj</option>
+                                <option value="3">Venstrefløj</option>
+                                <option value="4">Højreback</option>
+                                <option value="5">Venstreback</option>
+                                <option value="6">Playmaker</option>
+                                <option value="7">Streg</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>
 
