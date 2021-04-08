@@ -9315,23 +9315,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Gonhk\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Fridolf\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gonhk\\source\\repos\\StatTrack\\StatTrack.csproj",
+      "projectUniqueName": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\StatTrack\\StatTrack.csproj",
       "projectName": "StatTrack",
-      "projectPath": "C:\\Users\\Gonhk\\source\\repos\\StatTrack\\StatTrack.csproj",
-      "packagesPath": "C:\\Users\\Gonhk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gonhk\\source\\repos\\StatTrack\\obj\\",
+      "projectPath": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\StatTrack\\StatTrack.csproj",
+      "packagesPath": "C:\\Users\\Fridolf\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\StatTrack\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Gonhk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Fridolf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9345,8 +9346,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Gonhk\\source\\repos\\DataLibrary\\DataLibrary.csproj": {
-              "projectPath": "C:\\Users\\Gonhk\\source\\repos\\DataLibrary\\DataLibrary.csproj"
+            "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\DataLibrary\\DataLibrary.csproj": {
+              "projectPath": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\DataLibrary\\DataLibrary.csproj"
             }
           }
         }
@@ -9412,7 +9413,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

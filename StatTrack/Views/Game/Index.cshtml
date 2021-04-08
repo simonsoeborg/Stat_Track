@@ -10,7 +10,7 @@
             <div class="container">
                 <!-- My Club Name and score -->
                 <div class="input-group">
-                    <input type="text" class="form-control teamForm" placeholder="Mit hold navn">
+                    <input type="text" class="form-control teamForm" placeholder="Mit klub navn">
                     <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
                 </div>
                 <div class="row">
@@ -67,7 +67,7 @@
                 <!-- Opponent Club Name and score -->
                 <div class="input-group">
                     <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
-                    <input type="text" class="form-control teamForm" placeholder="Modstander hold navn">
+                    <input type="text" class="form-control teamForm" placeholder="Modstander klub navn">
                 </div>
                 <div class="row">
                     <!-- Set årgang & Række, dropdowns -->
@@ -102,12 +102,12 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-md-center">
         <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
             <!-- Tabel for all players -->
             <div class="row">
-                <div class="col-3"><b>Spillernavn</b></div>
-                <div class="col-3"><b>Spillerposition</b></div>
+                <div class="col-4"><b>Spillernavn</b></div>
+                <div class="col-4"><b>Spillerposition</b></div>
                 <div class="col-1"><b>Skud</b></div>
                 <div class="col-1"><b>Mål</b></div>
                 <div class="col-1"><b>Assists</b></div>
@@ -121,12 +121,12 @@
                 {
                     int player = i + 1;
                     <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
-                        <div class="col-3">
+                        <div class="col-4">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Spiller @player" aria-label="player_@player" />
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <select class="form-select" id="playerPosition_@player">
                                 <option value="1">Målvogter</option>
                                 <option value="2">Højrefløj</option>
