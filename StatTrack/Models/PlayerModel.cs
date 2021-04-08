@@ -8,7 +8,8 @@ namespace StatTrack.Models
 {
     public class PlayerModel
     {
-        public int Id { get; set; }
+        // public int Id { get; set; }
+
         [Display(Name = "Spillernavn")]
         [Required(ErrorMessage = "Der skal indtastes et navn på spilleren")]
         public string PlayerName { get; set; }

@@ -24,7 +24,7 @@ namespace StatTrack.Controllers
             {
                 players.Add(new PlayerModel()
                 {
-                    Id = item.Id,
+                    // Id = item.Id,
                     PlayerName = item.Name,
                     PlayerPosition = item.Position,
                     YOB = item.YOB

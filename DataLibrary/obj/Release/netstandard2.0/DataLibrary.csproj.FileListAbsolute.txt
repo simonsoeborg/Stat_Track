@@ -1,9 +1,0 @@
-C:\Users\Gonhk\source\repos\DataLibrary\bin\Release\netstandard2.0\DataLibrary.deps.json
-C:\Users\Gonhk\source\repos\DataLibrary\bin\Release\netstandard2.0\DataLibrary.dll
-C:\Users\Gonhk\source\repos\DataLibrary\bin\Release\netstandard2.0\DataLibrary.pdb
-C:\Users\Gonhk\source\repos\DataLibrary\obj\Release\netstandard2.0\DataLibrary.csprojAssemblyReference.cache
-C:\Users\Gonhk\source\repos\DataLibrary\obj\Release\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
-C:\Users\Gonhk\source\repos\DataLibrary\obj\Release\netstandard2.0\DataLibrary.AssemblyInfo.cs
-C:\Users\Gonhk\source\repos\DataLibrary\obj\Release\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
-C:\Users\Gonhk\source\repos\DataLibrary\obj\Release\netstandard2.0\DataLibrary.dll
-C:\Users\Gonhk\source\repos\DataLibrary\obj\Release\netstandard2.0\DataLibrary.pdb
