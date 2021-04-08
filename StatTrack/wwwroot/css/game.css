@@ -1,0 +1,31 @@
+﻿.btn {
+    margin: .10rem;
+}
+
+.overall_row {
+    justify-content: center;
+}
+
+.timeContainer {
+    justify-content: center;
+    width: 50%;
+}
+
+#timer {
+    font-size: 38pt;
+    font-family: Lato;
+    font-weight: 300;
+}
+
+.scoreForm {
+    width: 25% !important;
+    text-align: center !important;
+}
+
+.teamForm {
+    width: 75% !important;
+}
+
+.ctnr_nopadding {
+    padding: 0;
+}

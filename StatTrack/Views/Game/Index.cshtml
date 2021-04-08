@@ -1,0 +1,174 @@
+﻿@{
+    ViewData["Title"] = "Kamp";
+}
+
+<script src="js/game.js" language="javascript" type="text/javascript"></script>
+
+<div class="container">
+    <div class="row overall_row">
+        <div class="col-4">
+            <div class="container">
+                <!-- My Club Name and score -->
+                <div class="input-group">
+                    <input type="text" class="form-control teamForm" placeholder="Mit hold navn">
+                    <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                </div>
+                <div class="row">
+                    <!-- Set årgang & Række, dropdowns -->
+                    <div class="input-group">
+                        <select class="form-select" id="team1_yearBtn">
+                            @*
+                                Hent data fra Databasen
+                                U3 - U19 (U3, U5, U7, U9, U11, U13, U15, U17, U19)
+                                2021 - 4 = 2018 = 18, (18, 16, 14, 12, 10, 08, 06, 04, 02)
+                            *@
+                            <option selected>Vælg Årgang</option>
+                            <option value="1">00</option>
+                            <option value="2">02</option>
+                            <option value="3">04</option>
+                            <option value="4">06</option>
+                            <option value="5">08</option>
+                            <option value="6">10</option>
+                        </select>
+                        <select class="form-select" id="team1_leagueBtn">
+                        @*
+                            Liga, 1. Div, 2. Div, 3. Div, Cup event
+                        *@
+                            <option selected>Vælg Række</option>
+                            <option value="1">Liga</option>
+                            <option value="2">1. Div</option>
+                            <option value="3">2. Div</option>
+                            <option value="4">3. Div</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Penalty button, modal -->
+                        <div class="container ctnr_nopadding">
+                            <p align="left">
+                                <button id="team1_eventBtn" type="button" class="btn btn-outline-warning" onclick="">Hændelse</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="container" style="text-align: center;">
+                <h1 id="timer">00:00</h1>
+                <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
+                <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="container">
+                <!-- Opponent Club Name and score -->
+                <div class="input-group">
+                    <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input type="text" class="form-control teamForm" placeholder="Modstander hold navn">
+                </div>
+                <div class="row">
+                    <!-- Set årgang & Række, dropdowns -->
+                    <div class="input-group">
+                        <select class="form-select" id="team2_yearBtn">
+                            <option selected>Vælg Årgang</option>
+                            <option value="1">00</option>
+                            <option value="2">02</option>
+                            <option value="3">04</option>
+                            <option value="4">06</option>
+                            <option value="5">08</option>
+                            <option value="6">10</option>
+                        </select>
+                        <select class="form-select" id="team2_leagueBtn">
+                            <option selected>Vælg Række</option>
+                            <option value="1">Liga</option>
+                            <option value="2">1. Div</option>
+                            <option value="3">2. Div</option>
+                            <option value="4">3. Div</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <!-- Penalty button, modal -->
+                            <button id="team2_eventBtn" type="button" class="btn btn-outline-warning" onclick="">Hændelse</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
+            <!-- Tabel for all players -->
+            <div class="row">
+                <div class="col-3"><b>Spillernavn</b></div>
+                <div class="col-3"><b>Spillerposition</b></div>
+                <div class="col-1"><b>Skud</b></div>
+                <div class="col-1"><b>Mål</b></div>
+                <div class="col-1"><b>Assists</b></div>
+                <div class="col-1"><b>Redninger</b></div>
+            </div>
+            <div class="row">
+                @{
+                    int n = 12;
+                }
+                @for (int i = 0; i < n; i++)
+                {
+                    int player = i + 1;
+                    <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
+                        <div class="col-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Spiller @player" aria-label="player_@player" />
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <select class="form-select" id="playerPosition_@player">
+                                <option value="1">Målvogter</option>
+                                <option value="2">Højrefløj</option>
+                                <option value="3">Venstrefløj</option>
+                                <option value="4">Højreback</option>
+                                <option value="5">Venstreback</option>
+                                <option value="6">Playmaker</option>
+                                <option value="7">Streg</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="0" min="0" max="100">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
