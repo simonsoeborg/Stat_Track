@@ -8,7 +8,7 @@ namespace DataLibrary.Logic
 {
     public class PlayerProcessor
     {
-        public static int CreatePlayer(string playerName, string playerPosition, int playerYOB, string connectionString)
+        public static int CreatePlayer(string playerName, string playerPosition, int playerYOB)
         {
             PlayerModel data = new PlayerModel()
             {
@@ -19,21 +19,21 @@ namespace DataLibrary.Logic
 
             string query = @"INSERT INTO Player (Name, Position, YOB) VALUES (@Name, @Position, @YOB);";
 
-            return SQLDataAccess.SaveData(query, data, connectionString);
+            return SQLDataAccess.SaveData(query, data);
         }
 
-        public static int DeletePlayer(int playerId, string connectionString)
+        public static int DeletePlayer(int playerId)
         {
             string query = @"DELETE FROM Player WHERE Id = " + playerId + ";";
 
-            return SQLDataAccess.SaveData(query, new { }, connectionString);
+            return SQLDataAccess.SaveData(query, new { });
         }
 
-        public static List<PlayerModel> LoadPlayers(string connectionString)
+        public static List<PlayerModel> LoadPlayers()
         {
             string query = @"SELECT * FROM Player;";
 
-            return SQLDataAccess.GetData<PlayerModel>(query, connectionString);
+            return SQLDataAccess.GetData<PlayerModel>(query);
         }
     }
 }

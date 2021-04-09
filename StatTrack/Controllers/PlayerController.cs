@@ -17,7 +17,7 @@ namespace StatTrack.Controllers
         public IActionResult Index()
         {
 
-            var data = LoadPlayers(DatabaseHandler.GetConnectionString());
+            var data = LoadPlayers();
             List<PlayerModel> players = new List<PlayerModel>();
 
             foreach (var item in data)
@@ -46,7 +46,7 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB, DatabaseHandler.GetConnectionString());
+                CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB);
      
                     return RedirectToAction("Index");
             }

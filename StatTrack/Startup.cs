@@ -15,6 +15,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLibrary;
+using DataLibrary.DataAccess;
 using Microsoft.Data.SqlClient;
 
 namespace StatTrack
@@ -24,6 +25,7 @@ namespace StatTrack
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            SQLDataAccess.connString = ConfigurationExtensions.GetConnectionString(this.Configuration, "MySQLConnection");
         }
 
         public IConfiguration Configuration { get; }
@@ -31,19 +33,36 @@ namespace StatTrack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string dbConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
-
-            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
-
             services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddAuthentication()
+                .AddGoogle(googleOptions =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    googleOptions.ClientId = googleAuthNSection["ClientId"];
+                    googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
+                })
+                .AddTwitter(twitterOptions =>
+                {
+                    twitterOptions.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
+                    twitterOptions.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
+                    twitterOptions.RetrieveUserDetails = true;
+                })
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

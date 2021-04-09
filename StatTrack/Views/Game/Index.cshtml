@@ -2,8 +2,6 @@
     ViewData["Title"] = "Kamp";
 }
 
-<script src="js/game.js" language="javascript" type="text/javascript"></script>
-
 <div class="container">
     <div class="row overall_row">
         <div class="col-4">
@@ -59,6 +57,19 @@
                 <h1 id="timer">00:00</h1>
                 <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
                 <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
+                <div class="row justify-content-md-center">
+                    <div class="col-7">
+                        <div class="input-group">
+                            <select class="form-select" id="gameLength">
+                                <option selected>Kampens varighed</option>
+                                <option value="1">30 min</option>
+                                <option value="2">40 min</option>
+                                <option value="3">50 min</option>
+                                <option value="4">60 min</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -123,7 +134,7 @@
                     <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
                         <div class="col-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Spiller @player" aria-label="player_@player" />
+                                <input type="text" class="form-control" placeholder="Spiller @player" id="player_@player" />
                             </div>
                         </div>
                         <div class="col-4">
@@ -163,12 +174,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kg4KSVXiA4SnHL8WmAWHpWbn4DcRKYLlaUYoNR4rYw28gjOjU6oknTvgTVFec5GMWtKxno7wml0PqpRnYznR2A==",
+  "dgSpecHash": "0gr4G7bMaY/iY0LVQ1zC681eHvk/GVL8VD2g7/UDpGMwvyw55SRimDAJaJXdTO+3dWE4HoKIWW8JqW6/6yVV3A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\StatTrack\\StatTrack.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,9 @@
     "C:\\Users\\Fridolf\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",
     "C:\\Users\\Fridolf\\.nuget\\packages\\k4os.compression.lz4.streams\\1.1.11\\k4os.compression.lz4.streams.1.1.11.nupkg.sha512",
     "C:\\Users\\Fridolf\\.nuget\\packages\\k4os.hash.xxhash\\1.0.6\\k4os.hash.xxhash.1.0.6.nupkg.sha512",
+    "C:\\Users\\Fridolf\\.nuget\\packages\\microsoft.aspnetcore.authentication.facebook\\3.1.14\\microsoft.aspnetcore.authentication.facebook.3.1.14.nupkg.sha512",
+    "C:\\Users\\Fridolf\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.14\\microsoft.aspnetcore.authentication.google.3.1.14.nupkg.sha512",
+    "C:\\Users\\Fridolf\\.nuget\\packages\\microsoft.aspnetcore.authentication.twitter\\3.1.14\\microsoft.aspnetcore.authentication.twitter.3.1.14.nupkg.sha512",
     "C:\\Users\\Fridolf\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.13\\microsoft.aspnetcore.cryptography.internal.3.1.13.nupkg.sha512",
     "C:\\Users\\Fridolf\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.13\\microsoft.aspnetcore.cryptography.keyderivation.3.1.13.nupkg.sha512",
     "C:\\Users\\Fridolf\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.13\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.13.nupkg.sha512",

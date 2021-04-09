@@ -465,6 +465,7 @@
       "path": "netstandard.library/2.0.3",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "build/netstandard2.0/NETStandard.Library.targets",
@@ -1139,11 +1140,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fridolf\\Source\\Repos\\Stat_Track\\DataLibrary\\DataLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\DataLibrary\\DataLibrary.csproj",
       "projectName": "DataLibrary",
-      "projectPath": "C:\\Users\\Fridolf\\Source\\Repos\\Stat_Track\\DataLibrary\\DataLibrary.csproj",
+      "projectPath": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\DataLibrary\\DataLibrary.csproj",
       "packagesPath": "C:\\Users\\Fridolf\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Fridolf\\Source\\Repos\\Stat_Track\\DataLibrary\\obj\\",
+      "outputPath": "C:\\Users\\Fridolf\\source\\repos\\Stat_Track\\DataLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
