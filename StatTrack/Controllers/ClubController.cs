@@ -15,7 +15,7 @@ namespace StatTrack.Controllers
     {
         public IActionResult Index()
         {
-            var data = LoadClubs(DatabaseHandler.GetConnectionString());
+            var data = LoadClubs();
             List<ClubModel> clubs = new List<ClubModel>();
 
             foreach (var item in data)

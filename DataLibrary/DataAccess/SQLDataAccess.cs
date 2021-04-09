@@ -10,19 +10,37 @@ using MySql.Data.MySqlClient;
 
 namespace DataLibrary.DataAccess
 {
-    class SQLDataAccess
+    public class SQLDataAccess
     {
-        public static List<T> GetData<T>(string query, string connectionString)
+        public static string connString;
+
+        public static MySqlConnection GetConnection()
         {
-            using (IDbConnection conn = new MySqlConnection(connectionString))
+            try
+            {
+                MySqlConnection conn =
+                    new MySqlConnection(connString);
+                return conn;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+
+        public static List<T> GetData<T>(string query)
+        {
+            using (IDbConnection conn = GetConnection())
             {
                 return conn.Query<T>(query).ToList();
             }
         }
         
-        public static int SaveData<T>(string query, T data, string connectionString)
+        public static int SaveData<T>(string query, T data)
         {
-            using (IDbConnection conn = new MySqlConnection(connectionString))
+            using (IDbConnection conn = GetConnection())
             {
                 return conn.Execute(query, data);
             }
