@@ -8,7 +8,7 @@ namespace DataLibrary.Logic
 {
     public class PlayerProcessor
     {
-        public static int CreatePlayer(string playerName, string playerPosition, string playerYOB)
+        public static int CreatePlayer(string playerName, string playerPosition, int playerYOB)
         {
             PlayerModel data = new PlayerModel()
             {
@@ -17,7 +17,7 @@ namespace DataLibrary.Logic
                 YOB = playerYOB
             };
 
-            string query = @"INSERT INTO Player (Name, Position, YOB) VALUES (@PlayerName, @PlayerPosition, @PlayerYOB);";
+            string query = @"INSERT INTO Player (Name, Position, YOB) VALUES (@Name, @Position, @YOB);";
 
             return SQLDataAccess.SaveData(query, data);
         }

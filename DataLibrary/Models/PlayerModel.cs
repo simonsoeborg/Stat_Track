@@ -9,6 +9,6 @@ namespace DataLibrary.Models
         /// public int Id { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
-        public string YOB { get; set; }
+        public int YOB { get; set; }
     }
 }
