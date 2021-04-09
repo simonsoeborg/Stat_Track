@@ -24,13 +24,11 @@ namespace StatTrack.Controllers
             {
                 players.Add(new PlayerModel()
                 {
-                    // Id = item.Id,
                     PlayerName = item.Name,
                     PlayerPosition = item.Position,
                     YOB = item.YOB
                 });
             }
-
             return View(players);
         }
 
@@ -47,8 +45,8 @@ namespace StatTrack.Controllers
             if (ModelState.IsValid)
             {
                 CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB);
-     
-                    return RedirectToAction("Index");
+
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -59,10 +57,25 @@ namespace StatTrack.Controllers
             return View();
         }
 
-        public IActionResult Delete()
+        // Skal få oplysninger om brugeren (Get userInfo()) 
+        public IActionResult Delete(int? id)
         {
             return View();
         }
+
+        // Skal slette personen fra ovenstående page, hvis der trykkes på knappen. 
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePlayer(PlayerModel model)
+        {
+           // DeletePlayer();
+            return RedirectToAction("Index");
+        }
+
+
+
+
 
         public IActionResult Details()
         {

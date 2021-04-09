@@ -22,7 +22,7 @@ namespace DataLibrary.Logic
             return SQLDataAccess.SaveData(query, data);
         }
 
-        public static int DeletePlayer(int playerId)
+        public static int DeletePlayer(int? playerId)
         {
             string query = @"DELETE FROM Player WHERE Id = " + playerId + ";";
 
