@@ -34,10 +34,25 @@ namespace StatTrack.Controllers
             return View(players);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(PlayerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB, DatabaseHandler.GetConnectionString());
+     
+                    return RedirectToAction("Index");
+            }
+            return View();
+        }
+
 
         public IActionResult Edit()
         {
