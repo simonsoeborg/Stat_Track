@@ -15,6 +15,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLibrary;
+using DataLibrary.DataAccess;
 using Microsoft.Data.SqlClient;
 
 namespace StatTrack
@@ -24,6 +25,7 @@ namespace StatTrack
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            SQLDataAccess.connString = ConfigurationExtensions.GetConnectionString(this.Configuration, "DefaultConnection");
         }
 
         public IConfiguration Configuration { get; }
@@ -31,13 +33,14 @@ namespace StatTrack
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string dbConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
+            //string dbConnectionString = this.Configuration.GetConnectionString("DefaultConnection");
+            // string dbConnectionString = this.Configuration.GetSection("ConnectionStrings").GetConnectionString("DefaultConnection");
 
-            services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
+            // services.AddTransient<IDbConnection>((sp) => new SqlConnection(dbConnectionString));
 
             services.AddDbContext<ApplicationDbContext>(options => 
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

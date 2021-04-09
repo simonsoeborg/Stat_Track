@@ -8,7 +8,7 @@ namespace DataLibrary.Logic
 {
     public class ClubProcessor
     {
-        public static int CreateClub(string clubInitials, string clubName, string clubAddress, int clubPostal, string clubCity, string connectionString)
+        public static int CreateClub(string clubInitials, string clubName, string clubAddress, int clubPostal, string clubCity)
         {
             ClubModel data = new ClubModel()
             {
@@ -21,21 +21,21 @@ namespace DataLibrary.Logic
 
             string query = @"INSERT INTO Clubs (initials, name, address, postal, city) VALUES (@Initials, @Name, @Address, @Postal, @City);";
 
-            return SQLDataAccess.SaveData(query, data, connectionString);
+            return SQLDataAccess.SaveData(query, data);
         }
 
-        public static int DeleteClub(int clubId, string connectionString)
+        public static int DeleteClub(int clubId)
         {
             string query = @"DELETE FROM Clubs WHERE Id = " + clubId + ";";
 
-            return SQLDataAccess.SaveData(query, new { }, connectionString);
+            return SQLDataAccess.SaveData(query, new { });
         }
 
-        public static List<ClubModel> LoadClubs(string connectionString)
+        public static List<ClubModel> LoadClubs()
         {
             string query = @"SELECT id, initials, name, address, postal, city FROM Clubs;";
 
-            return SQLDataAccess.GetData<ClubModel>(query, connectionString);
+            return SQLDataAccess.GetData<ClubModel>(query);
         }
     }
 }
