@@ -1,5 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Kamp";
+
+    var CurrentYear = 0;
+    List<string> uYearsNames = new List<string>(); CurrentYear = DateTime.Now.Year;
+
+        
+    uYearsNames.Add("Senior");
+    uYearsNames.Add("Oldies");
+    string newItem = "U19 " + (CurrentYear - 19).ToString()[2] + (CurrentYear - 19).ToString()[3] + "/" + (CurrentYear - 18).ToString()[2] + (CurrentYear - 18).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U17 " + (CurrentYear - 17).ToString()[2] + (CurrentYear - 17).ToString()[3] + "/" + (CurrentYear - 16).ToString()[2] + (CurrentYear - 16).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U15 " + (CurrentYear - 15).ToString()[2] + (CurrentYear - 15).ToString()[3] + "/" + (CurrentYear - 14).ToString()[2] + (CurrentYear - 14).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U13 " + (CurrentYear - 13).ToString()[2] + (CurrentYear - 13).ToString()[3] + "/" + (CurrentYear - 12).ToString()[2] + (CurrentYear - 12).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U11 " + (CurrentYear - 11).ToString()[2] + (CurrentYear - 11).ToString()[3] + "/" + (CurrentYear - 10).ToString()[2] + (CurrentYear - 10).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U10 " + (CurrentYear - 9).ToString()[2] + (CurrentYear - 9).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U9 " + (CurrentYear - 8).ToString()[2] + (CurrentYear - 8).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U8 " + (CurrentYear - 7).ToString()[2] + (CurrentYear - 7).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U7 " + (CurrentYear - 6).ToString()[2] + (CurrentYear - 6).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U6 " + (CurrentYear - 5).ToString()[2] + (CurrentYear - 5).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U5 " + (CurrentYear - 4).ToString()[2] + (CurrentYear - 4).ToString()[3];
+    uYearsNames.Add(newItem);
+    newItem = "U4 " + (CurrentYear - 3).ToString()[2] + (CurrentYear - 3).ToString()[3];
+    uYearsNames.Add(newItem);
+
+    List<string> leagueList = new List<string>();
+    leagueList.Add("Liga");
+    leagueList.Add("1. Div");
+    leagueList.Add("2. Div");
+    leagueList.Add("3. Div");
+    leagueList.Add("Niveaustævne");
+    leagueList.Add("Turnering");
 }
 
 <div class="container">
@@ -20,23 +59,22 @@
                                 U3 - U19 (U3, U5, U7, U9, U11, U13, U15, U17, U19)
                                 2021 - 4 = 2018 = 18, (18, 16, 14, 12, 10, 08, 06, 04, 02)
                             *@
+
                             <option selected>Vælg Årgang</option>
-                            <option value="1">00</option>
-                            <option value="2">02</option>
-                            <option value="3">04</option>
-                            <option value="4">06</option>
-                            <option value="5">08</option>
-                            <option value="6">10</option>
+                            @for (int i = 0; i < uYearsNames.Count; i++)
+                            {
+                                <option value="@i">@uYearsNames[i]</option>
+                            }
                         </select>
                         <select class="form-select" id="team1_leagueBtn">
-                        @*
-                            Liga, 1. Div, 2. Div, 3. Div, Cup event
-                        *@
+                            @*
+                                Liga, 1. Div, 2. Div, 3. Div, Cup event
+                            *@
                             <option selected>Vælg Række</option>
-                            <option value="1">Liga</option>
-                            <option value="2">1. Div</option>
-                            <option value="3">2. Div</option>
-                            <option value="4">3. Div</option>
+                            @for (int i = 0; i < leagueList.Count; i++)
+                            {
+                                <option value="@i">@leagueList[i]</option>
+                            }
                         </select>
                     </div>
                 </div>
@@ -85,19 +123,17 @@
                     <div class="input-group">
                         <select class="form-select" id="team2_yearBtn">
                             <option selected>Vælg Årgang</option>
-                            <option value="1">00</option>
-                            <option value="2">02</option>
-                            <option value="3">04</option>
-                            <option value="4">06</option>
-                            <option value="5">08</option>
-                            <option value="6">10</option>
+                            @for (int i = 0; i < uYearsNames.Count; i++)
+                            {
+                                <option value="@i">@uYearsNames[i]</option>
+                            }
                         </select>
                         <select class="form-select" id="team2_leagueBtn">
                             <option selected>Vælg Række</option>
-                            <option value="1">Liga</option>
-                            <option value="2">1. Div</option>
-                            <option value="3">2. Div</option>
-                            <option value="4">3. Div</option>
+                            @for (int i = 0; i < leagueList.Count; i++)
+                            {
+                                <option value="@i">@leagueList[i]</option>
+                            }
                         </select>
                     </div>
                 </div>
