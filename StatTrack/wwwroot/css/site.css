@@ -69,3 +69,39 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.btn-outline-facebook {
+    color: #4267B2 !important;
+    background-color: transparent !important;
+    border-color: #4267B2 !important;
+}
+
+.btn-outline-facebook:hover {
+    color: #304c82 !important;
+    background-color: #8fa7d6 !important;
+    border-color: #304c82 !important;
+}
+
+.btn-outline-twitter {
+    color: #1DA1F2 !important;
+    background-color: transparent !important;
+    border-color: #1DA1F2 !important;
+}
+
+.btn-outline-twitter:hover {
+    color: #085c91 !important;
+    background-color: #9fd7f9 !important;
+    border-color: #085c91 !important;
+}
+
+.btn-outline-google {
+    color: #DB4437 !important;
+    background-color: transparent !important;
+    border-color: #DB4437 !important;
+}
+
+.btn-outline-google:hover {
+    color: #c23124 !important;
+    background-color: #f7d7d4 !important;
+    border-color: #c23124 !important;
+}
