@@ -5,7 +5,10 @@
       "connectionId": "DefaultConnection"
     },
     "secrets1": {
-      "type": "secrets.user"
+      "resourceId": null,
+      "type": "secrets.user",
+      "connectionId": null,
+      "secretStore": null
     }
   }
 }

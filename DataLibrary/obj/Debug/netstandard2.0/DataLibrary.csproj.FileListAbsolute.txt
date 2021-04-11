@@ -7,3 +7,12 @@ C:\Users\Fridolf\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\Da
 C:\Users\Fridolf\source\repos\Stat_Track\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
 C:\Users\Fridolf\source\repos\Stat_Track\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
 C:\Users\Fridolf\source\repos\Stat_Track\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.deps.json
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\bin\Debug\netstandard2.0\DataLibrary.pdb
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csprojAssemblyReference.cache
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfoInputs.cache
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.AssemblyInfo.cs
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.dll
+C:\Users\Simon Søborg\source\repos\Stat_Track\DataLibrary\obj\Debug\netstandard2.0\DataLibrary.pdb
