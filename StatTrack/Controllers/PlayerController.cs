@@ -55,15 +55,22 @@ namespace StatTrack.Controllers
 
         public IActionResult Edit(int playerId, string playerName, string playerPosition, int YOB)
         {
-            var model = new PlayerModel { Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+            var model = new PlayerModel {Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+            Console.WriteLine(playerId);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit()
+        public IActionResult Edit(PlayerModel model)
         {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine(model.Id);
+                UpdatePlayer(model.Id, model.PlayerName, model.PlayerPosition, model.YOB);
+                return RedirectToAction("Index");
+            }
             return View();
         }
 

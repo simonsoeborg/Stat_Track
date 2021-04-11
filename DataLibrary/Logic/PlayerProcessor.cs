@@ -35,5 +35,14 @@ namespace DataLibrary.Logic
 
             return SQLDataAccess.GetData<PlayerModel>(query);
         }
+
+        public static int UpdatePlayer(int playerId, string playerName, string playerPosition, int YOB)
+        {
+            string query = @"UPDATE Player SET Name = " + "'" + playerName + "'" + ", Position = " + "'" + playerPosition + "'" + ", YOB = " + "'" + YOB + "'" + "  WHERE  Id =" + playerId + ";";
+
+            Console.WriteLine(query);
+
+            return SQLDataAccess.SaveData(query, new { });
+        }
     }
 }
