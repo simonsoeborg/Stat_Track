@@ -95,9 +95,11 @@ namespace StatTrack.Controllers
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int playerId, string playerName, string playerPosition, int YOB)
         {
-            return View();
+            var model = new PlayerModel { Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+
+            return View(model);       
         }
     }
 }
