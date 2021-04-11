@@ -26,8 +26,9 @@ namespace StatTrack.Controllers
                 {
                     PlayerName = item.Name,
                     PlayerPosition = item.Position,
-                    YOB = item.YOB
-                });
+                    YOB = item.YOB,
+                    Id = item.Id 
+                });;
             }
             return View(players);
         }
@@ -58,24 +59,39 @@ namespace StatTrack.Controllers
         }
 
         // Skal få oplysninger om brugeren (Get userInfo()) 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int playerId, string playerName, string playerPosition, int YOB)
         {
-            return View();
-        }
 
-        // Skal slette personen fra ovenstående page, hvis der trykkes på knappen. 
+            Console.WriteLine(playerId);
+            if (playerId == null)
+            {
+                Console.WriteLine("pis off");
+            }
+            var model = new PlayerModel { Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+
+            return View(model);
+        }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeletePlayer(PlayerModel model)
+        public IActionResult Delete(int Id)
         {
-           // DeletePlayer();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine(Id);
+                DeletePlayer(Id);
+
+                return RedirectToAction("Index");
+            }
+            return View();
+
+
         }
+             
 
+        // Skal slette personen fra ovenstående page, hvis der trykkes på knappen. 
 
-
-
+      
 
         public IActionResult Details()
         {
