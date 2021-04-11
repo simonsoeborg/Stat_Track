@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Vælg Klub</span>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        @{
+                            <option value="1">One</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Vælg Årgang</span>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        @{
+                            StatTrack.Logic.DataHandler dataHandler = new StatTrack.Logic.DataHandler();
+                            List<string> dataYears = dataHandler.getYears();
+
+                            for (int i = 0; i < dataYears.Count; i++)
+                            {
+                                <option value="@i">dataYears[i]</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Vælg Række</span>
+                    <select class="form-select" aria-label="Default select example">
+                        @{
+                            List<string> dataLeagues = dataHandler.getLeagues();
+
+                            for (int i = 0; i < dataLeagues.Count; i++)
+                            {
+                                <option value="@i">dataLeagues[i]</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    // Vælg klub
+        // Hvis klub ikke findes, så (optional) Opret klub
+    // Vælg Årgang
+    // Vælg Række
+    // Indtast mængde af spillere
+    // Indtast spillerData:
+        // Indtast Navn
+        // Indtast Fødsels år
+        // Indtast Position
+}
