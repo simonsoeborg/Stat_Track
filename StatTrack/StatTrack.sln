@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatTrack", "StatTrack.csproj", "{7AFB5F95-C2F7-4F22-BFD1-8F20FA125BBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatTrack", "StatTrack.csproj", "{7AFB5F95-C2F7-4F22-BFD1-8F20FA125BBA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLibrary", "..\DataLibrary\DataLibrary.csproj", "{2138C4B6-9B1B-417E-8EAE-B2FCF3CA43C9}"
 EndProject

@@ -32,24 +32,71 @@ namespace StatTrack.Controllers
             }
             return View(clubs);
         }
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ClubModel model)
         {
+            if (ModelState.IsValid)
+            {
+                CreateClub(model.Initials,model.Name, model.Address, model.Postal, model.City);
+
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
         {
+            var model = new ClubModel { Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal, Address = clubAddress};
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int Id)
+        {
+            if (ModelState.IsValid)
+            {
+                DeleteClub(Id);
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
-        public IActionResult Details()
+
+        public IActionResult Edit(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
         {
+            var model = new ClubModel { Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal, Address = clubAddress };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ClubModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine(model.Id);
+                UpdateClub(model.Id,model.Initials,model.Name,model.City,model.Postal,model.Address);
+                return RedirectToAction("Index");
+            }
             return View();
+        }
+
+
+        public IActionResult Details(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
+        {
+            var model = new ClubModel { Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal, Address = clubAddress};
+
+            return View(model);
         }
     }
 }

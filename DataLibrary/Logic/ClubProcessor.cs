@@ -37,5 +37,15 @@ namespace DataLibrary.Logic
 
             return SQLDataAccess.GetData<ClubModel>(query);
         }
+
+        public static int UpdateClub(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
+        {
+            string query = @"UPDATE Clubs SET initials = " + "'" + clubInitials + "'" + ", name = " + "'" + clubName + "'" + ", address = " + "'" + clubAddress + "'" + ", postal = " + clubPostal + ", city = " + "'" + clubCity + "'" + "  WHERE  id =" + clubId + ";";
+
+            Console.WriteLine(query);
+
+            return SQLDataAccess.SaveData(query, new { });
+        }
+
     }
 }
