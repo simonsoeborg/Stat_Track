@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Informationer om @Model.PlayerName</h1>
 
 <div>
-    <h4>PlayerModel</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -30,7 +29,9 @@
         </dd>
     </dl>
     <div>
-        @Html.ActionLink("Edit", "Edit", new { playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, YOB = Model.YOB })|
-        <a asp-action="Index">Back to List</a>
+        @Html.ActionLink("Edit", "Edit", new { playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, YOB = Model.YOB }, new { @class="btn btn-outline-warning"})
+        <form asp-action="Index">
+            <button type="submit" class="btn btn-outline-secondary">Back to List</button>
+        </form>
     </div>
 </div>
