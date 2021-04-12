@@ -70,15 +70,17 @@ namespace StatTrack.Logic
             return uYearsNames;
         }
 
-        /*
-         * Positioner:
-         * Målvogter
-         * Højrefløj
-         * Venstrefløj
-         * Højreback
-         * Venstreback
-         * Playermaker
-         * Stregspiller
-         */
+        public List<string> getPositions()
+        {
+            List<string> playerPositions = new List<string>();
+            playerPositions.Add("Målvogter");
+            playerPositions.Add("Højrefløj");
+            playerPositions.Add("Venstrefløj");
+            playerPositions.Add("Højreback");
+            playerPositions.Add("Venstreback");
+            playerPositions.Add("Playermaker");
+            playerPositions.Add("Stregspiller");
+            return playerPositions;
+        }
     }
 }
