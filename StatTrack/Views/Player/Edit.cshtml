@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
 <h1>Edit</h1>
 
 <h4>PlayerModel</h4>
@@ -27,8 +26,9 @@
                 <input asp-for="YOB" class="form-control" />
                 <span asp-validation-for="YOB" class="text-danger"></span>
             </div>
+            @Html.HiddenFor(Model => Model.Id)
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
     </div>

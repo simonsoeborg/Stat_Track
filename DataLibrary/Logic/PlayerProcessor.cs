@@ -22,7 +22,7 @@ namespace DataLibrary.Logic
             return SQLDataAccess.SaveData(query, data);
         }
 
-        public static int DeletePlayer(int playerId)
+        public static int DeletePlayer(int? playerId)
         {
             string query = @"DELETE FROM Player WHERE Id = " + playerId + ";";
 
@@ -34,6 +34,15 @@ namespace DataLibrary.Logic
             string query = @"SELECT * FROM Player;";
 
             return SQLDataAccess.GetData<PlayerModel>(query);
+        }
+
+        public static int UpdatePlayer(int playerId, string playerName, string playerPosition, int YOB)
+        {
+            string query = @"UPDATE Player SET Name = " + "'" + playerName + "'" + ", Position = " + "'" + playerPosition + "'" + ", YOB = " + "'" + YOB + "'" + "  WHERE  Id =" + playerId + ";";
+
+            Console.WriteLine(query);
+
+            return SQLDataAccess.SaveData(query, new { });
         }
     }
 }

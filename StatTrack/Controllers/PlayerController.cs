@@ -24,13 +24,12 @@ namespace StatTrack.Controllers
             {
                 players.Add(new PlayerModel()
                 {
-                    // Id = item.Id,
                     PlayerName = item.Name,
                     PlayerPosition = item.Position,
-                    YOB = item.YOB
-                });
+                    YOB = item.YOB,
+                    Id = item.Id 
+                });;
             }
-
             return View(players);
         }
 
@@ -47,26 +46,60 @@ namespace StatTrack.Controllers
             if (ModelState.IsValid)
             {
                 CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB);
-     
-                    return RedirectToAction("Index");
+
+                return RedirectToAction("Index");
             }
             return View();
         }
 
 
-        public IActionResult Edit()
+        public IActionResult Edit(int playerId, string playerName, string playerPosition, int YOB)
         {
+            var model = new PlayerModel {Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+            Console.WriteLine(playerId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(PlayerModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Console.WriteLine(model.Id);
+                UpdatePlayer(model.Id, model.PlayerName, model.PlayerPosition, model.YOB);
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
-        public IActionResult Delete()
+
+
+        public IActionResult Delete(int playerId, string playerName, string playerPosition, int YOB)
         {
+            var model = new PlayerModel { Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int Id)
+        {
+            if (ModelState.IsValid)
+            {
+                DeletePlayer(Id);
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
-        public IActionResult Details()
+        public IActionResult Details(int playerId, string playerName, string playerPosition, int YOB)
         {
-            return View();
+            var model = new PlayerModel { Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+
+            return View(model);       
         }
     }
 }
