@@ -37,7 +37,7 @@ namespace StatTrack.Logic
             return clubs;
         }
 
-        public List<string> getLeagues()
+        public List<string> GetLeagues()
         {
             List<string> leagues = new List<string>();
             leagues.Add("Liga");
@@ -69,5 +69,16 @@ namespace StatTrack.Logic
 
             return uYearsNames;
         }
+
+        /*
+         * Positioner:
+         * Målvogter
+         * Højrefløj
+         * Venstrefløj
+         * Højreback
+         * Venstreback
+         * Playermaker
+         * Stregspiller
+         */
     }
 }
