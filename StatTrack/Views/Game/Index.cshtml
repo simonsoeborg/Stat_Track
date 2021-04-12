@@ -1,4 +1,5 @@
-﻿@{
+﻿@using StatTrack.Logic
+@{
     ViewData["Title"] = "Kamp";
 
     var CurrentYear = 0;
@@ -32,13 +33,9 @@
     newItem = "U4 " + (CurrentYear - 3).ToString()[2] + (CurrentYear - 3).ToString()[3];
     uYearsNames.Add(newItem);
 
-    List<string> leagueList = new List<string>();
-    leagueList.Add("Liga");
-    leagueList.Add("1. Div");
-    leagueList.Add("2. Div");
-    leagueList.Add("3. Div");
-    leagueList.Add("Niveaustævne");
-    leagueList.Add("Turnering");
+
+    DataHandler data = new DataHandler();
+    List<string> leagueList = data.GetLeagues();
 }
 
 <div class="container">

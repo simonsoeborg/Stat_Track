@@ -4,11 +4,11 @@
     ViewData["Title"] = "Spillerliste";
 }
 
-<h1>Index</h1>
+<h1>Spillerliste</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<form asp-action="Create">
+    <button type="submit" class="btn btn-outline-primary">Opret ny spiller</button>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.YOB)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }) |
-                @Html.ActionLink("Details", "Details", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }) |
-                @Html.ActionLink("Delete", "Delete", new {playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB })
+                @Html.ActionLink("Rediger", "Edit", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-warning" })
+                @Html.ActionLink("Info", "Details", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("Slet", "Delete", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
             </td>
         </tr>
 }
