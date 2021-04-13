@@ -28,8 +28,9 @@
             @Html.DisplayFor(model => model.YOB)
         </dd>
     </dl>
-    <div>
+    <div class="form-group">
         @Html.ActionLink("Edit", "Edit", new { playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, YOB = Model.YOB }, new { @class="btn btn-outline-warning"})
+        
         <form asp-action="Index">
             <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
         </form>

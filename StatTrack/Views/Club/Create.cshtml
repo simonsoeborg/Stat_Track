@@ -1,12 +1,11 @@
 ﻿@model StatTrack.Models.ClubModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Kluboprettelse";
 }
 
-<h1>Create</h1>
+<h1>Opret ny klub</h1>
 
-<h4>ClubModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -38,14 +37,13 @@
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-success" />
+                <form asp-action="Index">
+                    <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
+                </form>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
