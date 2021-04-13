@@ -105,3 +105,23 @@ body {
     background-color: #f7d7d4 !important;
     border-color: #c23124 !important;
 }
+
+.specific-a {
+    text-decoration: none;
+}
+
+.success-a {
+    color: var(--bs-success);
+}
+
+.success-a:hover {
+    color: white;
+}
+
+.secondary-a {
+    color: var(--bs-secondary);
+}
+
+.secondary-a:hover {
+    color: white;
+}

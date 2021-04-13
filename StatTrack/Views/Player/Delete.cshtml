@@ -28,11 +28,12 @@
             @Html.DisplayFor(model => model.YOB)
         </dd>
     </dl>
-    
-    <form asp-action="Delete" asp-route-id="@Model.Id">
-        <input type="submit" value="Slet" class="btn btn-outline-danger" />
-    </form>
-    <form asp-action="Index">
-        <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
-    </form>
+    <div class="form-group">
+        <form asp-action="Delete" asp-route-id="@Model.Id">
+            <input type="submit" value="Slet" class="btn btn-outline-danger" />
+        </form>
+        <form asp-action="Index">
+            <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
+        </form>
+    </div>
 </div>

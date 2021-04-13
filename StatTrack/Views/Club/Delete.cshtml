@@ -4,11 +4,10 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Er du sikker på at du vil slette @Model.Initials?</h1>
 
-<h3>Are you sure you want to delete this Club?</h3>
+<h3></h3>
 <div>
-    <h4>ClubModel</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -43,8 +42,12 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete" asp-route-id="@Model.Id">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <div class="form-group">
+        <form asp-action="Delete" asp-route-id="@Model.Id">
+            <input type="submit" value="Slet" class="btn btn-danger" />
+        </form>
+        <form asp-action="Index">
+            <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
+        </form>
+    </div>
 </div>

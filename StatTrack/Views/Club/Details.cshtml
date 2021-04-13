@@ -1,13 +1,12 @@
 ﻿@model StatTrack.Models.ClubModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detaljer";
 }
 
-<h1>Details</h1>
+<h1>Informationer om @Model.Initials</h1>
 
 <div>
-    <h4>ClubModel</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -41,8 +40,11 @@
             @Html.DisplayFor(model => model.Postal)
         </dd>
     </dl>
-    <div>
-        @Html.ActionLink("Edit", "Edit", new { clubId = Model.Id, clubInitials = Model.Initials, clubName = Model.Name, clubAddress = Model.Address, clubCity = Model.City, clubPostal = Model.Postal })|
-        <a asp-action="Index">Back to List</a>
+    <div class="form-group">
+        @Html.ActionLink("Edit", "Edit", new { clubId = Model.Id, clubInitials = Model.Initials, clubName = Model.Name, clubAddress = Model.Address, clubCity = Model.City, clubPostal = Model.Postal }, new {@class="btn btn-outline-warning"})
+    
+        <form asp-action="Index">
+            <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
+        </form>
     </div>
 </div>
