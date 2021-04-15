@@ -1,6 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using StatTrack.Logic
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@{
+    DataHandler dataH = new DataHandler();
+    var clubs = dataH.getClubs();
+    List<string> dataLeagues = dataH.GetLeagues();
+    List<string> dataYears = dataH.getYears();
+}
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -10,9 +17,8 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">Vælg Klub</span>
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        @{
-                            <option value="1">One</option>
+                        @foreach(ClubModel club in clubs) { 
+                            <option value="1" aria-describedby="@club.Name">@club.Initials</option>
                         }
                     </select>
                 </div>
@@ -21,16 +27,10 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">Vælg Årgang</span>
                     <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        @{
-                            StatTrack.Logic.DataHandler dataHandler = new StatTrack.Logic.DataHandler();
-                            List<string> dataYears = dataHandler.getYears();
-
-                            for (int i = 0; i < dataYears.Count; i++)
+                        @foreach(string year in dataYears)
                             {
-                                <option value="@i">dataYears[i]</option>
+                                <option value="@year">@year</option>
                             }
-                        }
                     </select>
                 </div>
             </div>
@@ -38,19 +38,16 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text">Vælg Række</span>
                     <select class="form-select" aria-label="Default select example">
-                        @{
-                            List<string> dataLeagues = dataHandler.GetLeagues();
-
-                            for (int i = 0; i < dataLeagues.Count; i++)
+                        @foreach (string league in dataLeagues)
                             {
-                                <option value="@i">dataLeagues[i]</option>
+                                <option value="@league">@league</option>
                             }
-                        }
                     </select>
                 </div>
             </div>
         </div>
     </div>
+    // Indtast navn
     // Vælg klub
         // Hvis klub ikke findes, så (optional) Opret klub
     // Vælg Årgang

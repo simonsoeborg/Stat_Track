@@ -10,16 +10,16 @@ using MySql.Data.MySqlClient;
 
 namespace DataLibrary.DataAccess
 {
-    public class SQLDataAccess
+    public class SqlDataAccess
     {
-        public static string connString;
+        public static string ConnString;
 
         public static MySqlConnection GetConnection()
         {
             try
             {
                 MySqlConnection conn =
-                    new MySqlConnection(connString);
+                    new MySqlConnection(ConnString);
                 return conn;
             }
             catch (Exception e)

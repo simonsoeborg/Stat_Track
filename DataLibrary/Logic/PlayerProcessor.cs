@@ -19,21 +19,21 @@ namespace DataLibrary.Logic
 
             string query = @"INSERT INTO Player (Name, Position, YOB) VALUES (@Name, @Position, @YOB);";
 
-            return SQLDataAccess.SaveData(query, data);
+            return SqlDataAccess.SaveData(query, data);
         }
 
         public static int DeletePlayer(int? playerId)
         {
             string query = @"DELETE FROM Player WHERE Id = " + playerId + ";";
 
-            return SQLDataAccess.SaveData(query, new { });
+            return SqlDataAccess.SaveData(query, new { });
         }
 
         public static List<PlayerModel> LoadPlayers()
         {
             string query = @"SELECT * FROM Player;";
 
-            return SQLDataAccess.GetData<PlayerModel>(query);
+            return SqlDataAccess.GetData<PlayerModel>(query);
         }
 
         public static int UpdatePlayer(int playerId, string playerName, string playerPosition, int YOB)
@@ -42,7 +42,7 @@ namespace DataLibrary.Logic
 
             Console.WriteLine(query);
 
-            return SQLDataAccess.SaveData(query, new { });
+            return SqlDataAccess.SaveData(query, new { });
         }
     }
 }
