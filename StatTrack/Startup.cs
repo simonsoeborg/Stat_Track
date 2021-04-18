@@ -25,7 +25,7 @@ namespace StatTrack
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            SQLDataAccess.connString = ConfigurationExtensions.GetConnectionString(this.Configuration, "MySQLConnection");
+            SqlDataAccess.ConnString = ConfigurationExtensions.GetConnectionString(this.Configuration, "MySQLConnection");
         }
 
         public IConfiguration Configuration { get; }
