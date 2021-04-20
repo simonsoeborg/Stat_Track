@@ -4,18 +4,20 @@ using System.Text;
 
 namespace DataLibrary.Models
 {
-    class TeamModel
+    public class TeamModel
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
-        public ClubModel Club { get; set; }
-        public string Year { get; set; }
-        public string League { get; set; }
+
+        public int ClubId { get; set; }
+
+        public string CreatorId { get; set; }
+
+        public string TeamUYear { get; set; }
+        public string Division { get; set; }
         public List<PlayerModel> PlayerList { get; set; }
 
-        public int StartYear { get; set; }
-        public int EndYear { get; set; }
-
+       // public int StartYear { get; set; }
+       // public int EndYear { get; set; }
     }
 }

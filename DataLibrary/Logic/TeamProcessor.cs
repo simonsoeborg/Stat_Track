@@ -6,23 +6,26 @@ using DataLibrary.Models;
 
 namespace DataLibrary.Logic
 {
-    class TeamProcessor
+    public class TeamProcessor
     {
-        public static int CreateTeam(string teamName, ClubModel club, string teamUYear, List<PlayerModel> playerList, int startYear, int endYear)
+     
+        public static int CreateTeam(string teamName, int clubId, string creatorId, string teamUYear, string division)
         {
+
             TeamModel data = new TeamModel()
             {
                 Name = teamName,
-                Club = club,
-                Year = teamUYear,
-                PlayerList = playerList,
-                StartYear = startYear,
-                EndYear = endYear
+                Club = clubId,
+                CreatorId = creatorId,
+                TeamUYear = teamUYear,
+                Division = division,
+                PlayerList = new List<PlayerModel>()
+                
             };
 
             int ClubId = club.Id; 
 
-            string query = @"INSERT INTO Team (Name, ClubId, TeamUYear, playerId, startDate, endDate) VALUES (@Name, @Position, @YOB);";
+            string query = @"INSERT INTO Team (Name, CreatorId, ClubId, TeamUYear, Divison) VALUES (@Name, @CreatorId, @ClubId, @TeamUYear, @Division);";
 
             return SqlDataAccess.SaveData(query, data);
         }

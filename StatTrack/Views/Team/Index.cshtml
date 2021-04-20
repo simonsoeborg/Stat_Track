@@ -1,60 +1,77 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using StatTrack.Logic
+@model StatTrack.Models.TeamModel
+
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @{
+
     DataHandler dataH = new DataHandler();
-    var clubs = dataH.getClubs();
+    List<ClubModel> clubs = dataH.getClubs();
     List<string> dataLeagues = dataH.GetLeagues();
     List<string> dataYears = dataH.getYears();
+    String GetCreatorId = UserManager.GetUserId(User);
+    Console.WriteLine(GetCreatorId);
 }
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="row justify-content-md-center">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Vælg Klub</span>
-                    <select class="form-select" aria-label="Default select example">
-                        @foreach(ClubModel club in clubs) { 
-                            <option value="1" aria-describedby="@club.Name">@club.Initials</option>
-                        }
-                    </select>
-                </div>
+<h1>Opret nyt hold</h1>
+
+<hr />
+@Html.HiddenFor(CreatorId => GetCreatorId);
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="row justify-content-md-center">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Vælg Årgang</span>
-                    <select class="form-select" aria-label="Default select example">
-                        @foreach(string year in dataYears)
-                            {
-                                <option value="@year">@year</option>
-                            }
-                    </select>
-                </div>
+            <div class="form-group">
+                <label asp-for="ClubId" class="form-label"> </label>
+                <select asp-for="ClubId" select class="form-select">
+                    <option selected>Vælg Klub</option>
+                    @for (int i = 0; i < clubs.Count; i++)
+                    {
+                        <option value="@clubs[i].Name.ToString()">@clubs[i].Name</option>
+                    }
+                </select>
+                <span asp-validation-for="ClubId" class="text-danger"></span>
             </div>
-            <div class="row justify-content-md-center">
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Vælg Række</span>
-                    <select class="form-select" aria-label="Default select example">
-                        @foreach (string league in dataLeagues)
-                            {
-                                <option value="@league">@league</option>
-                            }
-                    </select>
-                </div>
+            <div class="form-group">
+                <label asp-for="TeamUYear" class="form-label"> </label>
+                <select asp-for="TeamUYear" select class="form-select">
+                    <option selected>Vælg Årgang</option>
+                    @for (int i = 0; i < dataYears.Count; i++)
+                    {
+                        <option value="@dataYears[i].ToString()">@dataYears[i]</option>
+                    }
+                </select>
+                <span asp-validation-for="TeamUYear" class="text-danger"></span>
             </div>
-        </div>
+            <div class="form-group">
+                <label asp-for="Division" class="form-label"> </label>
+                <select asp-for="Division" select class="form-select">
+                    <option selected>Vælg division</option>
+                    @for (int i = 0; i < dataLeagues.Count; i++)
+                    {
+                        <option value="@dataLeagues[i].ToString()">@dataLeagues[i]</option>
+                    }
+                </select>
+                <span asp-validation-for="Division" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-outline-success" />
+                <form asp-action="Index">
+                    <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
+                </form>
+            </div>
+        </form>
     </div>
-    // Indtast navn
-    // Vælg klub
-        // Hvis klub ikke findes, så (optional) Opret klub
-    // Vælg Årgang
-    // Vælg Række
-    // Indtast mængde af spillere
-    // Indtast spillerData:
-        // Indtast Navn
-        // Indtast Fødsels år
-        // Indtast Position
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
