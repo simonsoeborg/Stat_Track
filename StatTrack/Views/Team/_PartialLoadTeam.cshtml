@@ -1,0 +1,22 @@
+﻿@model IEnumerable<StatTrack.Models.TeamModel>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="card" style="width: 16rem">
+                <div class="card-body">
+                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
+
+                    <t font-size:18px;">@Html.DisplayNameFor(model => model.Division):</t>
+                    <b font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b><br>
+
+                    <t font-size:18px;">Årgang:</t>
+                    <b font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b><br>
+
+
+                    <a href="#" class="btn btn-primary">Se info</a>
+                </div>
+         </div>
+        }
+    </div>
+

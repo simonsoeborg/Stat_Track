@@ -1,0 +1,70 @@
+﻿@model StatTrack.Models.TeamModel
+@using Microsoft.AspNetCore.Identity
+@using StatTrack.Logic
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    DataHandler dataH = new DataHandler();
+    List<ClubModel> clubs = dataH.getClubs();
+    List<string> dataLeagues = dataH.GetLeagues();
+    List<string> dataYears = dataH.getYears();
+}
+
+<div class="row">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.HiddenFor(Model => Model.ClubId)
+        <div class="form-group">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ClubId" class="form-label"> </label>
+            <select asp-for="ClubId" select class="form-select">
+                <option selected>Vælg Klub</option> @Model => Model.Id
+                @for (int i = 0; i < clubs.Count; i++)
+                {
+                    <option value="@clubs[i].Id.ToString()">@clubs[i].Name</option>
+                }
+            </select>
+            <span asp-validation-for="ClubId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TeamUYear" class="form-label"> </label>
+            <select asp-for="TeamUYear" select class="form-select">
+                <option selected>Vælg Årgang</option>
+                @for (int i = 0; i < dataYears.Count; i++)
+                {
+                    <option value="@dataYears[i].ToString()">@dataYears[i]</option>
+                }
+            </select>
+            <span asp-validation-for="TeamUYear" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Division" class="form-label"> </label>
+            <select asp-for="Division" select class="form-select">
+                <option selected>Vælg division</option>
+                @for (int i = 0; i < dataLeagues.Count; i++)
+                {
+                    <option value="@dataLeagues[i].ToString()">@dataLeagues[i]</option>
+                }
+            </select>
+            <span asp-validation-for="Division" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Opret" class="btn btn-outline-success" />
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

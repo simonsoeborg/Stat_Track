@@ -16,9 +16,9 @@ namespace StatTrack.Controllers
     {
         public IActionResult Index()
         {
-
             var data = LoadPlayers();
             List<PlayerModel> players = new List<PlayerModel>();
+
 
             foreach (var item in data)
             {

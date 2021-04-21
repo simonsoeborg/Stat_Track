@@ -10,6 +10,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\Team.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.14" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.14" />

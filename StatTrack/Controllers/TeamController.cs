@@ -8,23 +8,57 @@ using static DataLibrary.Logic.TeamProcessor;
 
 public class TeamController : Controller
     {
-        public IActionResult Index()
+
+    public IActionResult Index()
+    {
+        var data = LoadTeams();
+
+        var TeamViewModel = new TeamViewModel();
+
+        List<TeamModel> teams = new List<TeamModel>();
+        
+        foreach (var item in data)
         {
-        return View();
+            teams.Add(new TeamModel
+            {
+                Name = item.Name,
+                ClubId = item.ClubId,
+                CreatorId = item.CreatorId,
+                Division = item.Division,
+                TeamUYear = item.TeamUYear,
+                Id = item.Id
+            }); ; 
+        }
+
+        TeamViewModel.TModels = teams;
+
+        TeamViewModel.TModel = new TeamModel();
+
+        return View(TeamViewModel);
     }
 
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
+        Console.WriteLine("test 1");
+    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(TeamModel model)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Create(TeamModel model)
         {
+        Console.WriteLine("test 2");
             if (ModelState.IsValid)
             {
-                CreateTeam(model.Name, model.Club, model.CreatorId, model.TeamUYear, model.Division);
+            Console.WriteLine(model.Name + "  " + model.ClubId + "  " + model.CreatorId + "   " + model.TeamUYear + "    " + model.Division); 
+
+                CreateTeam(model.Name, model.ClubId, model.CreatorId, model.TeamUYear, model.Division);
+
 
                 return RedirectToAction("Index");
             }
             return Index();
         }
     }
-}
+

@@ -8,24 +8,29 @@ namespace DataLibrary.Logic
 {
     public class TeamProcessor
     {
-     
-        public static int CreateTeam(string teamName, int clubId, string creatorId, string teamUYear, string division)
+
+        public static List <TeamModel> LoadTeams()
+        {
+            string query = @"SELECT * FROM Team;";
+
+            return SqlDataAccess.GetData<TeamModel>(query);
+        }
+
+        public static int CreateTeam(string teamName, string clubId, string creatorId, string teamUYear, string division)
         {
 
             TeamModel data = new TeamModel()
             {
                 Name = teamName,
-                Club = clubId,
+                ClubId = clubId,
                 CreatorId = creatorId,
                 TeamUYear = teamUYear,
                 Division = division,
-                PlayerList = new List<PlayerModel>()
+                // PlayerList = new List<PlayerModel>()
                 
             };
-
-            int ClubId = club.Id; 
-
-            string query = @"INSERT INTO Team (Name, CreatorId, ClubId, TeamUYear, Divison) VALUES (@Name, @CreatorId, @ClubId, @TeamUYear, @Division);";
+            string query = @"INSERT INTO Team (Name, CreatorId, ClubId, TeamUYear, Division) VALUES (@Name, @CreatorId, @ClubId, @TeamUYear, @Division);";
+            Console.WriteLine(query);
 
             return SqlDataAccess.SaveData(query, data);
         }
