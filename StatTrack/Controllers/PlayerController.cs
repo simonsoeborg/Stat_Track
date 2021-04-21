@@ -9,6 +9,7 @@ using static DataLibrary.Logic.PlayerProcessor;
 using Microsoft.Extensions.Configuration;
 using StatTrack.Data;
 using StatTrack.Models;
+using System.Security.Claims;
 
 namespace StatTrack.Controllers
 {
@@ -16,9 +17,10 @@ namespace StatTrack.Controllers
     {
         public IActionResult Index()
         {
-
+           
             var data = LoadPlayers();
             List<PlayerModel> players = new List<PlayerModel>();
+
 
             foreach (var item in data)
             {
@@ -101,5 +103,25 @@ namespace StatTrack.Controllers
 
             return View(model);       
         }
+
+        public IActionResult PlayerLineUp(int Id)
+        {
+
+            var data = LoadSpecificPlayers(Id);
+            List<PlayerModel> players = new List<PlayerModel>();
+
+            foreach (var item in data)
+            {
+                players.Add(new PlayerModel()
+                {
+                    PlayerName = item.Name,
+                    PlayerPosition = item.Position,
+                    YOB = item.YOB,
+                    Id = item.Id
+                }); ;
+            }
+            return View(players);
+        }
+
     }
 }

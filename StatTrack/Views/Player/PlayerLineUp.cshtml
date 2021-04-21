@@ -1,0 +1,45 @@
+﻿@model IEnumerable<StatTrack.Models.PlayerModel>
+
+@{
+    ViewData["Title"] = "PlayerLineUp";
+}
+
+<h1>Spillerlist for spillere på hold X </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YOB)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlayerPosition)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YOB)
+                </td>
+                <td>
+                    @Html.ActionLink("Rediger", "Edit", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-warning" })
+                    @Html.ActionLink("Info", "Details", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Slet", "Delete", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
