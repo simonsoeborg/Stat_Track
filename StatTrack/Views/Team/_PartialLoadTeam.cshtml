@@ -3,19 +3,23 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="card" style="width: 16rem">
+            <div class="card border-primary mb-3" style="width: 16rem">
                 <div class="card-body">
                     <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
 
-                    <t font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division):</t>
-                    <b font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b><br>
+                    <p style="font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division): <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b></p>
 
-                    <t font-size:18px;">Årgang:</t>
-                    <b font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b><br>
+                    <p style="font-size:18px;">Årgang: <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b></p>
 
-                    <a class="btn btn-primary" asp-area="" asp-controller="Player" asp-action="PlayerLineUp" asp-route-id="@item.Id">Se Hold</a>
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Player" asp-action="PlayerLineUp" asp-route-id="@item.Id">Se Hold</a>
                 </div>
          </div>
         }
     </div>
 
+<!--
+    
+<div class="card-body text-secondary">
+<h5 class="card-title">Secondary card title</h5>
+
+-->

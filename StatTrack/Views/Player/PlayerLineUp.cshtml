@@ -1,10 +1,15 @@
-﻿@model IEnumerable<StatTrack.Models.PlayerModel>
+﻿@using StatTrack.Controllers
+@model IEnumerable<StatTrack.Models.PlayerModel>
 
 @{
     ViewData["Title"] = "PlayerLineUp";
+    var id = PlayerController.currentTeamId;
+
 }
 
-<h1>Spillerlist for spillere på hold X </h1>
+<h1>Spillerlist for spillere på hold </h1>
+
+<!-- Tilføj spiller knap, skal åbne en modal -->
 
 <table class="table">
     <thead>

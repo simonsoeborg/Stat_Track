@@ -15,6 +15,7 @@ namespace StatTrack.Controllers
 {
     public class PlayerController : Controller
     {
+        public static int currentTeamId { get; set; }
         public IActionResult Index()
         {
            
@@ -106,7 +107,7 @@ namespace StatTrack.Controllers
 
         public IActionResult PlayerLineUp(int Id)
         {
-
+            currentTeamId = Id;
             var data = LoadSpecificPlayers(Id);
             List<PlayerModel> players = new List<PlayerModel>();
 

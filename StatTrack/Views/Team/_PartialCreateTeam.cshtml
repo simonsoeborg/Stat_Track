@@ -21,16 +21,16 @@
         @Html.HiddenFor(Model => Model.CreatorId)
 
         <div class="form-group">
-            <label asp-for="Name" class="form-label"></label>
+            <label asp-for="Name" class="form-label">Hold Navn / Tag</label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
 
         </div>
 
         <div class="form-group">
-            <label asp-for="ClubId" class="form-label"> </label>
+            <label asp-for="ClubId" class="form-label">Vælg Klub</label>
             <select asp-for="ClubId" select class="form-select">
-                <option selected>Vælg Klub</option>
+                <option selected></option>
                 @for (int i = 0; i < clubs.Count; i++)
                 {
                     <option value="@clubs[i].Id">@clubs[i].Name</option>
@@ -40,9 +40,9 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="TeamUYear" class="form-label"> </label>
+            <label asp-for="TeamUYear" class="form-label">Årgang</label>
             <select asp-for="TeamUYear" select class="form-select">
-                <option selected>Vælg Årgang</option>
+                <option selected></option>
                 @for (int i = 0; i < dataYears.Count; i++)
                 {
                     <option value="@dataYears[i].ToString()">@dataYears[i]</option>
@@ -52,9 +52,9 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="Division" class="form-label"> </label>
+            <label asp-for="Division" class="form-label">Vælg Division</label>
             <select asp-for="Division" select class="form-select">
-                <option selected>Vælg division</option>
+                <option selected></option>
                 @for (int i = 0; i < dataLeagues.Count; i++)
                 {
                     <option value="@dataLeagues[i].ToString()">@dataLeagues[i]</option>
