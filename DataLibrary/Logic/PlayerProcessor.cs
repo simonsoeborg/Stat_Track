@@ -36,6 +36,13 @@ namespace DataLibrary.Logic
             return SqlDataAccess.GetData<PlayerModel>(query);
         }
 
+        public static List<PlayerModel> LoadSpecificPlayers(int id)
+        {
+            string query = @"SELECT * FROM TeamLineUp WHERE TeamID = '" + id +"' ;";
+
+            return SqlDataAccess.GetData<PlayerModel>(query);
+        }
+
         public static int UpdatePlayer(int playerId, string playerName, string playerPosition, int YOB)
         {
             string query = @"UPDATE Player SET Name = " + "'" + playerName + "'" + ", Position = " + "'" + playerPosition + "'" + ", YOB = " + "'" + YOB + "'" + "  WHERE  Id =" + playerId + ";";

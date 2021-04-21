@@ -7,14 +7,13 @@
                 <div class="card-body">
                     <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
 
-                    <t font-size:18px;">@Html.DisplayNameFor(model => model.Division):</t>
+                    <t font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division):</t>
                     <b font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b><br>
 
                     <t font-size:18px;">Årgang:</t>
                     <b font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b><br>
 
-
-                    <a href="#" class="btn btn-primary">Se info</a>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Player" asp-action="PlayerLineUp" asp-route-id="@item.Id">Se Hold</a>
                 </div>
          </div>
         }
