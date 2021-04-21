@@ -9,9 +9,10 @@ namespace DataLibrary.Logic
     public class TeamProcessor
     {
 
-        public static List <TeamModel> LoadTeams()
+        public static List <TeamModel> LoadTeams(string userID)
         {
-            string query = @"SELECT * FROM Team;";
+            // Indputtet userId her sørger for at kun dine egne oprettede hold bliver vist.
+            string query = @"SELECT * FROM Team WHERE CreatorId = '"+ userID+"';";
 
             return SqlDataAccess.GetData<TeamModel>(query);
         }

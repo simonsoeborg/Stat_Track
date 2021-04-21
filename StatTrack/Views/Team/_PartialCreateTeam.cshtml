@@ -10,25 +10,30 @@
     List<ClubModel> clubs = dataH.getClubs();
     List<string> dataLeagues = dataH.GetLeagues();
     List<string> dataYears = dataH.getYears();
+    Console.WriteLine(UserManager.GetUserId(User).ToString());
 }
 
 <div class="row">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @Html.HiddenFor(Model => Model.ClubId)
+
+        @{ Model.CreatorId = UserManager.GetUserId(User).ToString();}
+        @Html.HiddenFor(Model => Model.CreatorId)
+
         <div class="form-group">
             <label asp-for="Name" class="form-label"></label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
+
         </div>
 
         <div class="form-group">
             <label asp-for="ClubId" class="form-label"> </label>
             <select asp-for="ClubId" select class="form-select">
-                <option selected>Vælg Klub</option> @Model => Model.Id
+                <option selected>Vælg Klub</option>
                 @for (int i = 0; i < clubs.Count; i++)
                 {
-                    <option value="@clubs[i].Id.ToString()">@clubs[i].Name</option>
+                    <option value="@clubs[i].Id">@clubs[i].Name</option>
                 }
             </select>
             <span asp-validation-for="ClubId" class="text-danger"></span>

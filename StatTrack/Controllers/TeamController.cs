@@ -4,14 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StatTrack.Models;
+using Microsoft.AspNetCore.Identity;
 using static DataLibrary.Logic.TeamProcessor;
+using System.Security.Claims;
 
 public class TeamController : Controller
     {
 
     public IActionResult Index()
     {
-        var data = LoadTeams();
+        ClaimsPrincipal currentUser = this.User;
+        var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+        var data = LoadTeams(currentUserID);
 
         var TeamViewModel = new TeamViewModel();
 
@@ -37,24 +41,24 @@ public class TeamController : Controller
         return View(TeamViewModel);
     }
 
+
     [HttpGet]
     public IActionResult Create()
     {
         return View();
-        Console.WriteLine("test 1");
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(TeamModel model)
         {
+       
         Console.WriteLine("test 2");
             if (ModelState.IsValid)
             {
             Console.WriteLine(model.Name + "  " + model.ClubId + "  " + model.CreatorId + "   " + model.TeamUYear + "    " + model.Division); 
 
                 CreateTeam(model.Name, model.ClubId, model.CreatorId, model.TeamUYear, model.Division);
-
 
                 return RedirectToAction("Index");
             }
