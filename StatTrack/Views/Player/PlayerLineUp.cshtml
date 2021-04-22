@@ -1,10 +1,13 @@
 ﻿@using StatTrack.Controllers
-@model IEnumerable<StatTrack.Models.TeamPlayerModel>
+@using StatTrack.Logic
+@model TeamPlayersViewModel
 
 @{
     ViewData["Title"] = "PlayerLineUp";
     var id = PlayerController.currentTeamId;
 
+    DataHandler data = new DataHandler();
+    List<string> PlayerPosition = data.getPositions();
 
 }
 
@@ -12,23 +15,75 @@
 
 <!-- Tilføj spiller knap, skal åbne en modal -->
 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreatePlayerModal">
+    Tilføj spiller til hold
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="CreatePlayerModal" tabindex="-1" aria-labelledby="PlayerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="Create">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Tilføj spiller</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!-- Modal body -->
+
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="TModel.Name" class="form-label"></label>
+                        <input asp-for="TModel.Name" class="form-control" />
+                        <span asp-validation-for="TModel.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TModel.Position" class="form-label"> </label>
+                        <select asp-for="TModel.Position" select class="form-select">
+                            <option selected>Vælg Position</option>
+                            @for (int i = 0; i < PlayerPosition.Count; i++)
+                            {
+                                <option value="@PlayerPosition[i].ToString()">@PlayerPosition[i]</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TModel.Position" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TModel.YOB" class="form-label"></label>
+                        <input asp-for="TModel.YOB" class="form-control" />
+                        <span asp-validation-for="TModel.YOB" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+
+                <div class="modal-footer">
+                    <input type="submit" value="Opret" class="btn btn-outline-success" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.TModel.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Position)
+                @Html.DisplayNameFor(model => model.TModel.Position)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YOB)
+                @Html.DisplayNameFor(model => model.TModel.YOB)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.TModels)
         {
             <tr>
                 <td>

@@ -110,8 +110,10 @@ namespace StatTrack.Controllers
         {
             currentTeamId = Id;
             var data = LoadTeamPlayers(Id);
-            List<TeamPlayerModel> players = new List<TeamPlayerModel>();
 
+            var TeamPlayersViewModel = new TeamPlayersViewModel();
+
+            List<TeamPlayerModel> players = new List<TeamPlayerModel>();
             foreach (var item in data)
             {
                 players.Add(new TeamPlayerModel()
@@ -123,7 +125,10 @@ namespace StatTrack.Controllers
                     TeamID = item.TeamID
                 }); ;
             }
-            return View(players);
+
+            TeamPlayersViewModel.TModels = players;
+            TeamPlayersViewModel.TModel = new TeamPlayerModel();
+            return View(TeamPlayersViewModel);
         }
 
     }
