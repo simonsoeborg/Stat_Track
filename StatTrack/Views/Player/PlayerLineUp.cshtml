@@ -1,9 +1,10 @@
 ﻿@using StatTrack.Controllers
-@model IEnumerable<StatTrack.Models.PlayerModel>
+@model IEnumerable<StatTrack.Models.TeamPlayerModel>
 
 @{
     ViewData["Title"] = "PlayerLineUp";
     var id = PlayerController.currentTeamId;
+
 
 }
 
@@ -15,10 +16,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PlayerName)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlayerPosition)
+                @Html.DisplayNameFor(model => model.Position)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.YOB)
@@ -31,18 +32,18 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PlayerName)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PlayerPosition)
+                    @Html.DisplayFor(modelItem => item.Position)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.YOB)
                 </td>
                 <td>
-                    @Html.ActionLink("Rediger", "Edit", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-warning" })
-                    @Html.ActionLink("Info", "Details", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-primary" })
-                    @Html.ActionLink("Slet", "Delete", new { playerId = item.Id, playerName = item.PlayerName, playerPosition = item.PlayerPosition, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
+                    @Html.ActionLink("Rediger", "Edit", new { playerId = item.PlayerID, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-warning" })
+                    @Html.ActionLink("Info", "Details", new { playerId = item.PlayerID, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-primary" })
+                    @Html.ActionLink("Slet", "Delete", new { playerId = item.PlayerID, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
                 </td>
             </tr>
         }

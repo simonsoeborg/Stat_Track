@@ -37,7 +37,7 @@ namespace DataLibrary.DataAccess
                 return conn.Query<T>(query).ToList();
             }
         }
-        
+
         public static int SaveData<T>(string query, T data)
         {
             using (IDbConnection conn = GetConnection())

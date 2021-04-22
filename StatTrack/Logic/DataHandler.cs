@@ -37,6 +37,7 @@ namespace StatTrack.Logic
             return clubs;
         }
 
+
         public List<string> GetLeagues()
         {
             List<string> leagues = new List<string>();

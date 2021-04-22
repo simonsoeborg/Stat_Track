@@ -50,7 +50,7 @@ namespace StatTrack.Controllers
             {
                 CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB);
 
-                return RedirectToAction("Index");
+                Console.WriteLine("i was here");
             }
             return View();
         }
@@ -72,7 +72,7 @@ namespace StatTrack.Controllers
             {
                 Console.WriteLine(model.Id);
                 UpdatePlayer(model.Id, model.PlayerName, model.PlayerPosition, model.YOB);
-                return RedirectToAction("Index");
+                return RedirectToAction("PlayerLineUp", new { id = currentTeamId});
             }
             return View();
         }
@@ -93,7 +93,8 @@ namespace StatTrack.Controllers
             if (ModelState.IsValid)
             {
                 DeletePlayer(Id);
-                return RedirectToAction("Index");
+                return RedirectToAction("PlayerLineUp", new { id = currentTeamId });
+
             }
             return View();
         }
@@ -108,17 +109,18 @@ namespace StatTrack.Controllers
         public IActionResult PlayerLineUp(int Id)
         {
             currentTeamId = Id;
-            var data = LoadSpecificPlayers(Id);
-            List<PlayerModel> players = new List<PlayerModel>();
+            var data = LoadTeamPlayers(Id);
+            List<TeamPlayerModel> players = new List<TeamPlayerModel>();
 
             foreach (var item in data)
             {
-                players.Add(new PlayerModel()
+                players.Add(new TeamPlayerModel()
                 {
-                    PlayerName = item.Name,
-                    PlayerPosition = item.Position,
+                    Name = item.Name,
+                    Position = item.Position,
                     YOB = item.YOB,
-                    Id = item.Id
+                    PlayerID = item.PlayerID,
+                    TeamID = item.TeamID
                 }); ;
             }
             return View(players);
