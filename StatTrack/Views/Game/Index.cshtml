@@ -1,40 +1,11 @@
 ﻿@using StatTrack.Logic
+@model StatTrack.Models.MasterModel
 @{
     ViewData["Title"] = "Kamp";
-
-    var CurrentYear = 0;
-    List<string> uYearsNames = new List<string>(); 
-    CurrentYear = DateTime.Now.Year;
-        
-    uYearsNames.Add("Senior");
-    uYearsNames.Add("Oldies");
-    string newItem = "U19 " + (CurrentYear - 19).ToString()[2] + (CurrentYear - 19).ToString()[3] + "/" + (CurrentYear - 18).ToString()[2] + (CurrentYear - 18).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U17 " + (CurrentYear - 17).ToString()[2] + (CurrentYear - 17).ToString()[3] + "/" + (CurrentYear - 16).ToString()[2] + (CurrentYear - 16).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U15 " + (CurrentYear - 15).ToString()[2] + (CurrentYear - 15).ToString()[3] + "/" + (CurrentYear - 14).ToString()[2] + (CurrentYear - 14).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U13 " + (CurrentYear - 13).ToString()[2] + (CurrentYear - 13).ToString()[3] + "/" + (CurrentYear - 12).ToString()[2] + (CurrentYear - 12).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U11 " + (CurrentYear - 11).ToString()[2] + (CurrentYear - 11).ToString()[3] + "/" + (CurrentYear - 10).ToString()[2] + (CurrentYear - 10).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U10 " + (CurrentYear - 9).ToString()[2] + (CurrentYear - 9).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U9 " + (CurrentYear - 8).ToString()[2] + (CurrentYear - 8).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U8 " + (CurrentYear - 7).ToString()[2] + (CurrentYear - 7).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U7 " + (CurrentYear - 6).ToString()[2] + (CurrentYear - 6).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U6 " + (CurrentYear - 5).ToString()[2] + (CurrentYear - 5).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U5 " + (CurrentYear - 4).ToString()[2] + (CurrentYear - 4).ToString()[3];
-    uYearsNames.Add(newItem);
-    newItem = "U4 " + (CurrentYear - 3).ToString()[2] + (CurrentYear - 3).ToString()[3];
-    uYearsNames.Add(newItem);
-
-
     DataHandler data = new DataHandler();
+
+    List<string> uYearsNames = data.getYears();
+
     List<string> leagueList = data.GetLeagues();
 }
 
@@ -80,7 +51,9 @@
                         <!-- Penalty button, modal -->
                         <div class="container ctnr_nopadding">
                             <p align="left">
-                                <button id="team1_eventBtn" type="button" class="btn btn-outline-warning" onclick="">Hændelse</button>
+                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#HomeEventModal">
+                                    Hændelse
+                                </button>
                             </p>
                         </div>
                     </div>
@@ -138,7 +111,9 @@
                     <div class="container">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <!-- Penalty button, modal -->
-                            <button id="team2_eventBtn" type="button" class="btn btn-outline-warning" onclick="">Hændelse</button>
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AwayEventModal">
+                                Hændelse
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -159,7 +134,7 @@
             </div>
             <div class="row">
                 @{
-                    int n = 12;
+                    int n = 7;
                 }
                 @for (int i = 0; i < n; i++)
                 {
@@ -203,6 +178,89 @@
                         </div>
                     </div>
                 }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="HomeEventModalTitle">Hændelse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Load spillerliste -> Vælg spiller -->
+                <div class="input-group">
+                    <select class="form-select">
+                        <option selected>Vælg spiller</option>
+                    </select>
+                </div>
+                <!-- Vælg hændelse -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="Home2minEvent">
+                    <label class="form-check-label" for="Home2minEvent">
+                        2 minutters udvisning
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="HomeWarningEvent">
+                    <label class="form-check-label" for="HomeWarningEvent">
+                        Gult kort
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="HomeRedCardEvent">
+                    <label class="form-check-label" for="HomeRedCardEvent">
+                        Rødt kort
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success">Tilføj</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AwayEventModal" tabindex="-1" aria-labelledby="AwayEventModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AwayEventModalTitle">Hændelse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Load spillerliste -> Vælg spiller -->
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">#</span>
+                    <input type="number" class="form-control" placeholder="Spillernummer" aria-label="Spillernummer" aria-describedby="addon-wrapping">
+                </div>
+                <!-- Vælg hændelse -->
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="Away2minEvent">
+                    <label class="form-check-label" for="Away2minEvent">
+                        2 minutters udvisning
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="AwayWarningEvent">
+                    <label class="form-check-label" for="AwayWarningEvent">
+                        Gult kort
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="AwayRedCardEvent">
+                    <label class="form-check-label" for="AwayRedCardEvent">
+                        Rødt kort
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success">Tilføj</button>
             </div>
         </div>
     </div>
