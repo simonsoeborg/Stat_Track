@@ -13,6 +13,72 @@
     Console.WriteLine(UserManager.GetUserId(User).ToString());
 }
 
+<div class="accordion" id="CreateTeamAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="createTeamHeading1">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#createTeamAccordionBody" aria-controls="createTeamAccordionBody">Opret et nyt hold</button>
+        </h2>
+        <div id="createTeamAccordionBody" class="accordion-collapse collapse" aria-labelledby="createTeamHeading1" data-bs-parent="#CreateTeamAccordion">
+            <div class="accordion-body">
+                <form asp-action="Create">
+                    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+                    @{ Model.CreatorId = UserManager.GetUserId(User).ToString();}
+                    @Html.HiddenFor(Model => Model.CreatorId)
+
+                    <div class="form-group">
+                        <label asp-for="Name" class="form-label">Hold Navn / Tag</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ClubId" class="form-label">Vælg Klub</label>
+                        <select asp-for="ClubId" select class="form-select">
+                            <option selected></option>
+                            @for (int i = 0; i < clubs.Count; i++)
+                            {
+                                <option value="@clubs[i].Id">@clubs[i].Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="ClubId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TeamUYear" class="form-label">Årgang</label>
+                        <select asp-for="TeamUYear" select class="form-select">
+                            <option selected></option>
+                            @for (int i = 0; i < dataYears.Count; i++)
+                            {
+                                <option value="@dataYears[i].ToString()">@dataYears[i]</option>
+                            }
+                        </select>
+                        <span asp-validation-for="TeamUYear" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Division" class="form-label">Vælg Division</label>
+                        <select asp-for="Division" select class="form-select">
+                            <option selected></option>
+                            @for (int i = 0; i < dataLeagues.Count; i++)
+                            {
+                                <option value="@dataLeagues[i].ToString()">@dataLeagues[i]</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Division" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Opret" class="btn btn-outline-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+@*
 <div class="row">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -68,7 +134,7 @@
         </div>
     </form>
 </div>
-
+*@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
