@@ -1,5 +1,7 @@
-﻿.card {
-    background-color: lightblue;
-    margin: 10px;
+﻿.card:hover {
+    background-color: #E4E4E4;
 }
 
+.card {
+    margin: 1rem;
+}

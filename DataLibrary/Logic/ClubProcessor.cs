@@ -24,6 +24,7 @@ namespace DataLibrary.Logic
             return SqlDataAccess.SaveData(query, data);
         }
 
+
         public static int DeleteClub(int clubId)
         {
             string query = @"DELETE FROM Clubs WHERE Id = " + clubId + ";";
