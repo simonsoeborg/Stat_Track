@@ -44,11 +44,13 @@ namespace StatTrack.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PlayerModel model)
+        public IActionResult Create(TeamPlayerModel model)
         {
             if (ModelState.IsValid)
             {
-                CreatePlayer(model.PlayerName, model.PlayerPosition, model.YOB);
+   
+                CreatePlayer(model.Name , model.Position, model.YOB, currentTeamId);
+//              InsertPlayerInTeam(model.PlayerID, model.TeamID);
 
                 Console.WriteLine("i was here");
             }

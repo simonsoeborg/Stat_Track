@@ -8,16 +8,30 @@ namespace DataLibrary.Logic
 {
     public class PlayerProcessor
     {
-        public static int CreatePlayer(string playerName, string playerPosition, int playerYOB)
+        public static int CreatePlayer(string playerName, string playerPosition, int playerYOB, int TeamID)
         {
-            PlayerModel data = new PlayerModel()
+            TeamPlayerModel data = new TeamPlayerModel()
             {
                 Name = playerName,
                 Position = playerPosition,
-                YOB = playerYOB
+                YOB = playerYOB,
+                TeamID = TeamID
             };
 
             string query = @"INSERT INTO Player (Name, Position, YOB) VALUES (@Name, @Position, @YOB);";
+
+            return SqlDataAccess.SaveData(query, data);
+        }
+
+        public static int InsertPlayerInTeam(int TeamID, int PlayerID)
+        {
+
+            TeamPlayerModel data = new TeamPlayerModel()
+            {
+                PlayerID = PlayerID,
+                TeamID = TeamID
+            };
+            string query = @"INSERT INTO TeamPlayers (TeamID, PlayerID) VALUES (@TeamID, @PlayerID);";
 
             return SqlDataAccess.SaveData(query, data);
         }

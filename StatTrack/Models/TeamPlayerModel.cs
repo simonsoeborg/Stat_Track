@@ -11,7 +11,7 @@ namespace StatTrack.Models
         public string Name { get; set; }
         public string Position { get; set; }
         public int YOB { get; set; }
-        public string TeamID { get; set; }
+        public int TeamID { get; set; }
 
     }
 }
