@@ -36,6 +36,8 @@ namespace DataLibrary.Logic
             return SqlDataAccess.SaveData(query, data);
         }
 
+
+
         public static int DeletePlayer(int? playerId)
         {
             string query = @"DELETE FROM Player WHERE Id = " + playerId + ";";
@@ -49,6 +51,15 @@ namespace DataLibrary.Logic
 
             return SqlDataAccess.GetData<PlayerModel>(query);
         }
+
+
+        public static List<PlayerModel> LoadSpecificPlayer(int id)
+        {
+            string query = @"SELECT * FROM Player Where Id = '"+ id + "' ;";
+
+            return SqlDataAccess.GetData<PlayerModel>(query);
+        }
+
 
         public static List<TeamPlayerModel> LoadTeamPlayers(int id)
         {

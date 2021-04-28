@@ -48,10 +48,14 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-   
-                CreatePlayer(model.Name , model.Position, model.YOB, currentTeamId);
-//              InsertPlayerInTeam(model.PlayerID, model.TeamID);
+                Console.WriteLine(model.PlayerID);
+                Console.WriteLine(model.TeamID);
 
+
+                CreatePlayer(model.Name , model.Position, model.YOB, currentTeamId);
+                LoadSpecificPlayer(model.Id)
+
+                //InsertPlayerInTeam(model.PlayerID, model.TeamID);
                 Console.WriteLine("i was here");
             }
             return View();
