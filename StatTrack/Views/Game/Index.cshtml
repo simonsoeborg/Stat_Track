@@ -68,12 +68,13 @@
                 <div class="row justify-content-md-center">
                     <div class="col-7">
                         <div class="input-group">
-                            <select class="form-select" id="gameLength">
-                                <option selected>Kampens varighed</option>
-                                <option value="1">30 min</option>
-                                <option value="2">40 min</option>
-                                <option value="3">50 min</option>
-                                <option value="4">60 min</option>
+                            <select onchange="setGameTime(this)" class="form-select" id="gameLength">
+                                <option selected>Kampens varighed i (min)</option>
+                                <option value="30">30:00</option>
+                                <option value="40">40:00</option>
+                                <option value="50">50:00</option>
+                                <option value="60">60:00</option>
+                                <option value="0.10">00:10</option>
                             </select>
                         </div>
                     </div>

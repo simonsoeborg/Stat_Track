@@ -2,6 +2,13 @@
 var timer = document.getElementById("timer");
 var startBtn = document.getElementById("startBtn");
 var stopBtn = document.getElementById("stopBtn");
+var gameLength = document.getElementById("gameLength");
+
+function setGameTime(val) {
+    var temp = val.options[val.selectedIndex].getAttribute('value');
+    console.log(temp);
+    gameLength = temp;
+}
 
 var stopWatch = new Timer(timer);
 
@@ -24,10 +31,15 @@ function Timer(element) {
     var time = 0;
     var interval;
     var offset;
+    var formattedTime;
 
     function update() {
         time += delta();
-        var formattedTime = timeFormatter(time);
+        formattedTime = timeFormatter(time);
+/*        console.log(timeFormatter(10));
+        if (formattedTime >= timeFormatter(gameLength) || formattedTime >= timeFormatter(gameLength/2) ) {
+            stopWatch.stop();
+        }*/
         element.textContent = formattedTime;
     }
 
@@ -39,9 +51,9 @@ function Timer(element) {
     }
 
     function timeFormatter(timeInMilliseconds) {
-        var time = new Date(timeInMilliseconds);
-        var minutes = time.getMinutes().toString();
-        var seconds = time.getSeconds().toString();
+        var tempTime = new Date(timeInMilliseconds);
+        var minutes = tempTime.getMinutes().toString();
+        var seconds = tempTime.getSeconds().toString();
 
         if (minutes.length < 2) {
             minutes = '0' + minutes;
@@ -76,5 +88,13 @@ function Timer(element) {
         time = 0;
         var formattedTime = timeFormatter(time);
         element.textContent = formattedTime;
+    };
+
+    this.pause = function() {
+        if (this.isOn) {
+            clearInterval(interval);
+            interval = null;
+            this.isOn = false;
+        }
     };
 }
