@@ -35,7 +35,7 @@ namespace StatTrack.Controllers
                     Name = item.Name,
                     Position = item.Position,
                     YOB = item.YOB,
-                    PlayerID = item.PlayerID,
+                    Id = item.Id,
                     TeamID = item.TeamID
                 });
             }
