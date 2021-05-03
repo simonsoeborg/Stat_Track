@@ -1,13 +1,39 @@
-﻿
+﻿document.getElementById("GameFinished").style.visibility = "hidden";
+document.getElementById("GameHalvleg").style.visibility = "hidden";
 var timer = document.getElementById("timer");
 var startBtn = document.getElementById("startBtn");
+var halfTimeBtn = document.getElementById("halfTimeBtn");
 var stopBtn = document.getElementById("stopBtn");
-var gameLength = document.getElementById("gameLength");
+var gameLength;
+var boolFlag = false;
 
 function setGameTime(val) {
-    var temp = val.options[val.selectedIndex].getAttribute('value');
+    //var temp = val.options[val.selectedIndex].getAttribute('value');
+    var temp = val.options[val.selectedIndex].text;
     console.log(temp);
     gameLength = temp;
+}
+
+function getHalfTime() {
+    var result;
+    switch (gameLength) {
+    case "20:00":
+        result = "10:00";
+        break;
+    case "30:00":
+        result = "15:00";
+        break;
+    case "50:00":
+        result = "25:00";
+            break;
+    case "00:10":
+        result = "00:05";
+        break;
+    default:
+        result = "30:00";
+        break;
+    }
+    return result;
 }
 
 var stopWatch = new Timer(timer);
@@ -15,11 +41,23 @@ var stopWatch = new Timer(timer);
 startBtn.addEventListener('click', function () {
     if (!stopWatch.isOn) {
         stopWatch.start();
+        document.getElementById("SetGameTimeSelectionBar").style.visibility = 'hidden';
     }
+});
+
+halfTimeBtn.addEventListener('click', function () {
+    if (!stopWatch.isOn) {
+        stopWatch.start();
+        document.getElementById("primaryTimerBtnsRow").style.visibility = 'visible';
+        document.getElementById("halfTimeRow").style.visibility = 'hidden';
+        document.getElementById("GameHalvleg").style.visibility = "hidden";
+    }
+
 });
 
 stopBtn.addEventListener('click', function () {
     stopWatch.stop();
+    document.getElementById("SetGameTimeSelectionBar").style.visibility = 'visible';
 });
 
 stopBtn.addEventListener('dblclick', function () {
@@ -40,6 +78,10 @@ function Timer(element) {
         if (formattedTime >= timeFormatter(gameLength) || formattedTime >= timeFormatter(gameLength/2) ) {
             stopWatch.stop();
         }*/
+
+
+        console.log("Time: " + element.textContent);
+        console.log("GameLength: " + gameLength);
         element.textContent = formattedTime;
     }
 
@@ -70,9 +112,13 @@ function Timer(element) {
 
     this.start = function () {
         if (!this.isOn) {
-            interval = setInterval(update, 10);
+            interval = setInterval(update, 500);
+            setInterval(checkIfHalftime, 500);
+            setInterval(checkIfFulltime, 500);
             offset = Date.now();
             this.isOn = true;
+            console.log("Timer Started");
+            console.log("isOn status: " + this.isOn);
         }
     };
 
@@ -81,6 +127,8 @@ function Timer(element) {
             clearInterval(interval);
             interval = null;
             this.isOn = false;
+            console.log("Timer Stopped");
+            console.log("isOn status: " + this.isOn);
         }
     };
 
@@ -97,4 +145,65 @@ function Timer(element) {
             this.isOn = false;
         }
     };
+}
+
+function checkIfHalftime() {
+    if (timer.textContent === getHalfTime() && stopWatch.isOn && !boolFlag) {
+        console.log("Halftime");
+        document.getElementById("primaryTimerBtnsRow").style.visibility = 'hidden';
+        document.getElementById("halfTimeRow").style.visibility = 'visible';
+        boolFlag = true;
+        stopWatch.stop();
+        gameHalfTime();
+    }
+};
+
+function checkIfFulltime() {
+    var time = document.getElementById("timer").textContent;
+    if (time === gameLength) {
+        console.log("Game Ended");
+        document.getElementById("primaryTimerBtnsRow").style.visibility = 'hidden';
+        document.getElementById("halfTimeRow").style.visibility = 'hidden';
+        stopWatch.stop();
+        gameEnded();
+    }
+};
+
+function gameHalfTime() {
+    var titel = document.getElementById("GameHalvlegTitel");
+    var result = document.getElementById("GameHalvlegResult");
+    var scoreTeam1 = document.getElementById("myTeamScore").value;
+    var scoreTeam2 = document.getElementById("AwayTeamScore").value;
+
+    result.textContent = scoreTeam1 + "\t:\t" + scoreTeam2;
+    titel.textContent = "Halvleg";
+
+    document.getElementById("GameHalvleg").style.visibility = "visible";
+}
+
+function gameEnded() {
+    var paragraphTitel = document.getElementById("GameFinishedResultTitel");
+    var paragraph = document.getElementById("GameFinishedResult");
+    var team1 = document.getElementById("myTeamName").value;
+    var scoreTeam1 = document.getElementById("myTeamScore").value;
+    var team2 = document.getElementById("AwayTeamName").value;
+    var scoreTeam2 = document.getElementById("AwayTeamScore").value;
+
+    if (scoreTeam1 === "") {
+        scoreTeam1 = 0;
+    }
+    if (scoreTeam2 === "") {
+        scoreTeam2 = 0;
+    }
+
+    paragraphTitel.textContent = "Kamp Resultat:";
+    if (scoreTeam1 > scoreTeam2) {
+        paragraph.textContent = team1 + " vinder " + scoreTeam1 + ":" + scoreTeam2 + " over " + team2;
+    } else if (scoreTeam2 > scoreTeam1) {
+        paragraph.textContent = team2 + " vinder " + scoreTeam2 + ":" + scoreTeam1 + " over " + team1;
+    } else {
+        paragraph.textContent = team1 + " spiller uafgjort mod " + team2 + "\n" + scoreTeam1 + ":" + scoreTeam2;
+    }
+
+    document.getElementById("GameFinished").style.visibility = "visible";
 }

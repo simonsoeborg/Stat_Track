@@ -15,8 +15,8 @@
             <div class="container">
                 <!-- My Club Name and score -->
                 <div class="input-group">
-                    <input type="text" class="form-control teamForm" placeholder="Mit klub navn">
-                    <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn">
+                    <input id="myTeamScore"  type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
                 </div>
                 <div class="row">
                     <!-- Set årgang & Række, dropdowns -->
@@ -63,12 +63,35 @@
         <div class="col-4">
             <div class="container" style="text-align: center;">
                 <h1 id="timer">00:00</h1>
-                <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
-                <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
-                <div class="row justify-content-md-center">
+                <div id="primaryTimerBtnsRow" class="row justify-content-md-center">
+                    <div class="col-4">
+                        <div class="btn-group" role="group">
+                            <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
+                            <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="halfTimeRow" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-4">
+                        <button id="halfTimeBtn" type="button" class="btn btn-outline-success">Fortsæt</button>
+                    </div>
+                </div>
+                <div id="GameHalvleg" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-4">
+                        <h2 id="GameHalvlegTitel"></h2>
+                        <h3 id="GameHalvlegResult"></h3>
+                    </div>
+                </div>
+                <div id="GameFinished" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-4">
+                        <h3 id="GameFinishedResultTitel"></h3>
+                        <p id="GameFinishedResult"></p>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center" id="SetGameTimeSelectionBar">
                     <div class="col-7">
                         <div class="input-group">
-                            <select onchange="setGameTime(this)" class="form-select" id="gameLength">
+                            <select onchange="setGameTime(this);" class="form-select">
                                 <option selected>Kampens varighed i (min)</option>
                                 <option value="30">30:00</option>
                                 <option value="40">40:00</option>
@@ -80,14 +103,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
 
         <div class="col-4">
             <div class="container">
                 <!-- Opponent Club Name and score -->
                 <div class="input-group">
-                    <input type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
-                    <input type="text" class="form-control teamForm" placeholder="Modstander klub navn">
+                    <input id="AwayTeamScore" type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input id="AwayTeamName"  type="text" class="form-control teamForm" placeholder="Modstander klub navn">
                 </div>
                 <div class="row">
                     <!-- Set årgang & Række, dropdowns -->
