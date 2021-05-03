@@ -64,5 +64,20 @@ public class TeamController : Controller
             }
             return Index();
         }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Delete(int Id)
+    {
+        Console.WriteLine(Id);
+        if (ModelState.IsValid)
+        {
+            DeleteTeam(Id);
+            return RedirectToAction("Index");
+
+        }
+        return View();
     }
+
+}
 

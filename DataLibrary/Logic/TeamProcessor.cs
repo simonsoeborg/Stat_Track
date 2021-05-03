@@ -36,5 +36,13 @@ namespace DataLibrary.Logic
             return SqlDataAccess.SaveData(query, data);
         }
 
+
+        public static int DeleteTeam(int? id)
+        {
+            string query = @"DELETE FROM Team WHERE Id = " + id + ";";
+
+            return SqlDataAccess.SaveData(query, new { });
+        }
+
     }
 }
