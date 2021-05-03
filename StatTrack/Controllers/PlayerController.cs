@@ -16,7 +16,8 @@ namespace StatTrack.Controllers
     public class PlayerController : Controller
     {
         public static int currentTeamId { get; set; }
-        public IActionResult Index()
+
+  /*      public IActionResult Index()
         {
            
             var data = LoadPlayers();
@@ -35,7 +36,7 @@ namespace StatTrack.Controllers
                 });;
             }
             return View(players);
-        }
+        }*/
 
 
         [HttpPost]

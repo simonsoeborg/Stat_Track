@@ -23,21 +23,7 @@ namespace DataLibrary.Logic
             return SqlDataAccess.SaveData(query, data);
         }
 
-        public static int InsertPlayerInTeam(int TeamID, int PlayerID)
-        {
-
-            TeamPlayerModel data = new TeamPlayerModel()
-            {
-                Id = PlayerID,
-                TeamID = TeamID
-            };
-            string query = @"INSERT INTO TeamPlayer (TeamID, PlayerID) VALUES (@TeamID, @PlayerID);";
-
-            return SqlDataAccess.SaveData(query, data);
-        }
-
-
-
+  
         public static int DeletePlayer(int? playerId)
         {
             string query = @"DELETE FROM TeamPlayer WHERE Id = " + playerId + ";";
@@ -50,14 +36,6 @@ namespace DataLibrary.Logic
             string query = @"SELECT * FROM TeamPlayer;";
 
             return SqlDataAccess.GetData<TeamPlayerModel>(query);
-        }
-
-
-        public static List<PlayerModel> LoadSpecificPlayer(int id)
-        {
-            string query = @"SELECT * FROM TeamPlayer Where Id = '" + id + "' ;";
-
-            return SqlDataAccess.GetData<PlayerModel>(query);
         }
 
 

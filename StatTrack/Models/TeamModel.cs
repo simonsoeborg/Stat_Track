@@ -15,7 +15,5 @@ namespace StatTrack.Models
         public string TeamUYear { get; set; }
         public string Division { get; set; }
 
-        // public List<PlayerModel> PlayerList { get; set; }
-
     }
 }

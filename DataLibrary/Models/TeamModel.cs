@@ -15,9 +15,6 @@ namespace DataLibrary.Models
 
         public string TeamUYear { get; set; }
         public string Division { get; set; }
-        // public List<PlayerModel> PlayerList { get; set; }
-
-       // public int StartYear { get; set; }
-       // public int EndYear { get; set; }
+   
     }
 }
