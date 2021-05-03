@@ -20,27 +20,23 @@ namespace StatTrack.Controllers
         {
            
             var data = LoadPlayers();
-            List<PlayerModel> players = new List<PlayerModel>();
+            List<TeamPlayerModel> players = new List<TeamPlayerModel>();
 
 
             foreach (var item in data)
             {
-                players.Add(new PlayerModel()
+                players.Add(new TeamPlayerModel()
                 {
-                    PlayerName = item.Name,
-                    PlayerPosition = item.Position,
+                    Name = item.Name,
+                    Position = item.Position,
                     YOB = item.YOB,
-                    Id = item.Id 
+                    TeamID = item.TeamID,
+                    Id = item.Id
                 });;
             }
             return View(players);
         }
 
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,17 +44,12 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(model.PlayerID);
-                Console.WriteLine(model.TeamID);
-
+                Console.WriteLine(model.Id);
+                Console.WriteLine(currentTeamId);
 
                 CreatePlayer(model.Name , model.Position, model.YOB, currentTeamId);
-                LoadSpecificPlayer(model.Id)
-
-                //InsertPlayerInTeam(model.PlayerID, model.TeamID);
-                Console.WriteLine("i was here");
             }
-            return View();
+            return RedirectToAction("PlayerLineUp", new { id = currentTeamId });
         }
 
 
@@ -127,7 +118,7 @@ namespace StatTrack.Controllers
                     Name = item.Name,
                     Position = item.Position,
                     YOB = item.YOB,
-                    PlayerID = item.PlayerID,
+                    Id = item.Id,
                     TeamID = item.TeamID
                 }); ;
             }

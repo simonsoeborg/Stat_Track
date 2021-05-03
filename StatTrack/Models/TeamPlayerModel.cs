@@ -7,7 +7,7 @@ namespace StatTrack.Models
 {
     public class TeamPlayerModel
     {
-        public int PlayerID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
         public int YOB { get; set; }

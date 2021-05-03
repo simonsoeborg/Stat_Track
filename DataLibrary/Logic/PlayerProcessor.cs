@@ -18,7 +18,7 @@ namespace DataLibrary.Logic
                 TeamID = TeamID
             };
 
-            string query = @"INSERT INTO Player (Name, Position, YOB) VALUES (@Name, @Position, @YOB);";
+            string query = @"INSERT INTO TeamPlayer (TeamID, Name, Position, YOB) VALUES (@TeamID, @Name, @Position, @YOB);";
 
             return SqlDataAccess.SaveData(query, data);
         }
@@ -28,10 +28,10 @@ namespace DataLibrary.Logic
 
             TeamPlayerModel data = new TeamPlayerModel()
             {
-                PlayerID = PlayerID,
+                Id = PlayerID,
                 TeamID = TeamID
             };
-            string query = @"INSERT INTO TeamPlayers (TeamID, PlayerID) VALUES (@TeamID, @PlayerID);";
+            string query = @"INSERT INTO TeamPlayer (TeamID, PlayerID) VALUES (@TeamID, @PlayerID);";
 
             return SqlDataAccess.SaveData(query, data);
         }
@@ -40,22 +40,22 @@ namespace DataLibrary.Logic
 
         public static int DeletePlayer(int? playerId)
         {
-            string query = @"DELETE FROM Player WHERE Id = " + playerId + ";";
+            string query = @"DELETE FROM TeamPlayer WHERE Id = " + playerId + ";";
 
             return SqlDataAccess.SaveData(query, new { });
         }
 
-        public static List<PlayerModel> LoadPlayers()
+        public static List<TeamPlayerModel> LoadPlayers()
         {
-            string query = @"SELECT * FROM Player;";
+            string query = @"SELECT * FROM TeamPlayer;";
 
-            return SqlDataAccess.GetData<PlayerModel>(query);
+            return SqlDataAccess.GetData<TeamPlayerModel>(query);
         }
 
 
         public static List<PlayerModel> LoadSpecificPlayer(int id)
         {
-            string query = @"SELECT * FROM Player Where Id = '"+ id + "' ;";
+            string query = @"SELECT * FROM TeamPlayer Where Id = '" + id + "' ;";
 
             return SqlDataAccess.GetData<PlayerModel>(query);
         }
@@ -63,14 +63,14 @@ namespace DataLibrary.Logic
 
         public static List<TeamPlayerModel> LoadTeamPlayers(int id)
         {
-            string query = @"SELECT * FROM TeamLineUp WHERE TeamID = '" + id +"' ;";
+            string query = @"SELECT * FROM TeamPlayer WHERE TeamID = '" + id +"' ;";
 
             return SqlDataAccess.GetData<TeamPlayerModel>(query);
         }
 
         public static int UpdatePlayer(int playerId, string playerName, string playerPosition, int YOB)
         {
-            string query = @"UPDATE Player SET Name = " + "'" + playerName + "'" + ", Position = " + "'" + playerPosition + "'" + ", YOB = " + "'" + YOB + "'" + "  WHERE  Id =" + playerId + ";";
+            string query = @"UPDATE TeamPlayer SET Name = " + "'" + playerName + "'" + ", Position = " + "'" + playerPosition + "'" + ", YOB = " + "'" + YOB + "'" + "  WHERE  Id =" + playerId + ";";
 
             Console.WriteLine(query);
 
