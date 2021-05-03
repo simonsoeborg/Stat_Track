@@ -121,7 +121,7 @@ namespace StatTrack.Controllers
                     YOB = item.YOB,
                     Id = item.Id,
                     TeamID = item.TeamID
-                }); ;
+                });
             }
 
             TeamPlayersViewModel.TModels = players;
