@@ -41,7 +41,7 @@ namespace DataLibrary.Logic
 
         public static List<TeamPlayerModel> LoadTeamPlayers(int id)
         {
-            string query = @"SELECT * FROM TeamPlayer WHERE TeamID = '" + id +"' ;";
+            string query = @"SELECT * FROM TeamPlayer WHERE TeamID =" + id +";";
 
             return SqlDataAccess.GetData<TeamPlayerModel>(query);
         }

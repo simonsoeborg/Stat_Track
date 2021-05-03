@@ -5,7 +5,7 @@
     DataHandler data = new DataHandler();
 
     List<string> uYearsNames = data.getYears();
-
+    List<string> Position = data.getPositions();
     List<string> leagueList = data.GetLeagues();
 }
 
@@ -157,28 +157,23 @@
                 <div class="col-1"><b>Redninger</b></div>
             </div>
             <div class="row">
-                @{
-                    int n = 7;
-                }
-                @for (int i = 0; i < n; i++)
+                @foreach (var item in Model.TeamPlayerModels)
                 {
-                    int player = i + 1;
                     <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
                         <div class="col-4">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Spiller @player" id="player_@player" />
+                                <input type="text" class="form-control" value=" @item.Name"  />
                             </div>
                         </div>
                         <div class="col-4">
-                            <select class="form-select" id="playerPosition_@player">
-                                <option value="1">Målvogter</option>
-                                <option value="2">Højrefløj</option>
-                                <option value="3">Venstrefløj</option>
-                                <option value="4">Højreback</option>
-                                <option value="5">Venstreback</option>
-                                <option value="6">Playmaker</option>
-                                <option value="7">Streg</option>
-                            </select>
+                            <div class="form-group">
+                                <select asp-for="@item.Position" name="Position" select class="form-select">
+                                    @for (int i = 0; i < Position.Count; i++)
+                                    {
+                                        <option value="@Position[i].ToString()">@Position[i]</option>
+                                    }
+                                </select>
+                            </div>       
                         </div>
                         <div class="col-1">
                             <div class="input-group">

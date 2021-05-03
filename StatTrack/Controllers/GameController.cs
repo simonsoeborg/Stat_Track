@@ -10,23 +10,12 @@ namespace StatTrack.Controllers
 {
     public class GameController : Controller
     {
-        public IActionResult Index(int id)
+        public IActionResult Index(int Id)
         {
-            // Id will be TeamId, load team, and team players
+            Console.WriteLine(Id);
+            var data = LoadTeamPlayers(Id);
+            var MasterModel = new MasterModel();
 
-            // 
-
-            if (id == 0)
-            {
-                return View();
-            } else { 
-                return View();
-            }
-        }
-
-        public List<TeamPlayerModel> GetPlayerList(int TeamId)
-        {
-            var data = LoadTeamPlayers(TeamId);
             List<TeamPlayerModel> players = new List<TeamPlayerModel>();
             foreach (var item in data)
             {
@@ -40,7 +29,41 @@ namespace StatTrack.Controllers
                 });
             }
 
-            return players;
+            MasterModel.TeamPlayerModels = players;
+
+            return View(MasterModel);
+
+            // Id will be TeamId, load team, and team players
         }
     }
 }
+   
+
+
+
+       /* public IActionResult GetPlayerList(int TeamId)
+        {
+            var data = LoadTeamPlayers(TeamId);
+
+
+            var MasterModel = new MasterModel();
+
+
+            List<TeamPlayerModel> players = new List<TeamPlayerModel>();
+            foreach (var item in data)
+            {
+                players.Add(new TeamPlayerModel()
+                {
+                    Name = item.Name,
+                    Position = item.Position,
+                    YOB = item.YOB,
+                    Id = item.Id,
+                    TeamID = item.TeamID
+                });
+            }
+
+            MasterModel.TeamPlayerModels = players;
+            MasterModel.TeamPlayerModel = new TeamPlayerModel(); 
+           
+            return View(MasterModel);
+        }*/

@@ -9,6 +9,6 @@ namespace StatTrack.Models
     {
         public TeamModel TeamModel { get; set; }
         public ClubModel ClubModel { get; set; }
-        public TeamPlayerModel TeamPlayerModel { get; set; }
+        public IEnumerable<TeamPlayerModel> TeamPlayerModels { get; set; }
     }
 }
