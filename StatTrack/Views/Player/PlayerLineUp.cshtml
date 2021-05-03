@@ -1,21 +1,24 @@
 ﻿@using StatTrack.Controllers
 @using StatTrack.Logic
 @model TeamPlayersViewModel
+@using static DataLibrary.Logic.TeamProcessor;
+@using Microsoft.AspNetCore.Routing
 
 @{
     ViewData["Title"] = "PlayerLineUp";
     var id = PlayerController.currentTeamId;
 
     DataHandler data = new DataHandler();
-    List<string> PlayerPosition = data.getPositions();
+    List<string> playerPosition = data.getPositions();
 
+    string currentTeam = data.getTeam(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
 }
 
-<h1>Spillerlist for spillere på hold </h1>
+<h1>Spillerliste for @currentTeam</h1>
 
 <!-- Tilføj spiller knap, skal åbne en modal -->
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreatePlayerModal">
+<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#CreatePlayerModal">
     Tilføj spiller til hold
 </button>
 
@@ -34,7 +37,7 @@
                 <div class="modal-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="TModel.Name" class="form-label"></label>
+                        <label asp-for="TModel.Name" class="form-label">Navn</label>
                         <input asp-for="TModel.Name" name="Name" class="form-control" />
                         <span asp-validation-for="TModel.Name" class="text-danger"></span>
                     </div>
@@ -43,16 +46,16 @@
                         <label asp-for="TModel.Position" class="form-label"> </label>
                         <select asp-for="TModel.Position" name="Position" select class="form-select">
                             <option selected>Vælg Position</option>
-                            @for (int i = 0; i < PlayerPosition.Count; i++)
+                            @for (int i = 0; i < playerPosition.Count; i++)
                             {
-                                <option value="@PlayerPosition[i].ToString()">@PlayerPosition[i]</option>
+                                <option value="@playerPosition[i].ToString()">@playerPosition[i]</option>
                             }
                         </select>
                         <span asp-validation-for="TModel.Position" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="TModel.YOB" class="form-label"></label>
-                        <input asp-for="TModel.YOB" name="YOB" class="form-control" />
+                        <label asp-for="TModel.YOB" class="form-label">Årgang</label>
+                        <input asp-for="TModel.YOB" name="YOB" class="form-control" placeholder="1980" />
                         <span asp-validation-for="TModel.YOB" class="text-danger"></span>
                     </div>
                 </div>
@@ -61,47 +64,51 @@
 
                 <div class="modal-footer">
                     <input type="submit" value="Opret" class="btn btn-outline-success" />
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
                 </div>
             </form>
         </div>
-        </div>
     </div>
+</div>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TModel.Name)
+                Navn
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TModel.Position)
+                Position
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TModel.YOB)
-            </th>      
+                Årgang
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.TModels)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YOB)
-            </td>
-            <td>
-                @Html.ActionLink("Rediger", "Edit", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-warning" })
-                @Html.ActionLink("Info", "Details", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-primary" })
-                @Html.ActionLink("Slet", "Delete", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @{
+                        var yearTwoDigits = item.YOB.ToString();
+                        yearTwoDigits = yearTwoDigits[2] + "" + yearTwoDigits[3];
+                    }
+                    @yearTwoDigits
+                </td>
+                <td>
+                    @Html.ActionLink("Rediger", "Edit", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-secondary" })
+                    @Html.ActionLink("Info", "Details", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-secondary" })
+                    @Html.ActionLink("Slet", "Delete", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
         }
     </tbody>
 </table>

@@ -213,24 +213,27 @@
                 <!-- Load spillerliste -> Vælg spiller -->
                 <div class="input-group">
                     <select class="form-select">
-                        <option selected>Vælg spiller</option>
+                    @foreach (var item in Model.TeamPlayerModels)
+                    {
+                        <option id="@item.Id">@item.Name</option>
+                    }
                     </select>
                 </div>
                 <!-- Vælg hændelse -->
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="Home2minEvent">
+                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option1" id="Home2minEvent">
                     <label class="form-check-label" for="Home2minEvent">
                         2 minutters udvisning
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="HomeWarningEvent">
+                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option2" id="HomeWarningEvent">
                     <label class="form-check-label" for="HomeWarningEvent">
                         Gult kort
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="HomeRedCardEvent">
+                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option3" id="HomeRedCardEvent">
                     <label class="form-check-label" for="HomeRedCardEvent">
                         Rødt kort
                     </label>
@@ -259,26 +262,26 @@
                 </div>
                 <!-- Vælg hændelse -->
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="Away2minEvent">
+                    <input class="form-check-input" name="penaltyEventAway" type="radio" value="option1" id="Away2minEvent">
                     <label class="form-check-label" for="Away2minEvent">
                         2 minutters udvisning
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="AwayWarningEvent">
+                    <input class="form-check-input" name="penaltyEventAway" type="radio" value="option2" id="AwayWarningEvent">
                     <label class="form-check-label" for="AwayWarningEvent">
                         Gult kort
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="AwayRedCardEvent">
+                    <input class="form-check-input"  name="penaltyEventAway" type="radio" value="option3" id="AwayRedCardEvent">
                     <label class="form-check-label" for="AwayRedCardEvent">
                         Rødt kort
                     </label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annullér</button>
                 <button type="button" class="btn btn-outline-success">Tilføj</button>
             </div>
         </div>

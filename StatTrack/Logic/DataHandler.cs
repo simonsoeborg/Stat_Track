@@ -6,6 +6,7 @@ using static DataLibrary.Logic.ClubProcessor;
 using StatTrack.Models;
 using DataLibrary;
 using DataLibrary.Logic;
+using static DataLibrary.Logic.TeamProcessor;
 
 namespace StatTrack.Logic
 {
@@ -82,6 +83,28 @@ namespace StatTrack.Logic
             playerPositions.Add("Playermaker");
             playerPositions.Add("Stregspiller");
             return playerPositions;
+        }
+
+        public string getTeam(int teamId)
+        {
+            var teamModelData = GetTeam(teamId);
+
+            List<TeamModel> team = new List<TeamModel>();
+
+            foreach (var item in teamModelData)
+            {
+                team.Add(new TeamModel
+                {
+                    Name = item.Name,
+                    ClubId = item.ClubId,
+                    CreatorId = item.CreatorId,
+                    Division = item.Division,
+                    TeamUYear = item.TeamUYear,
+                    Id = item.Id
+                }); ;
+            }
+
+            return team[0].Name;
         }
     }
 }
