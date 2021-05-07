@@ -1,30 +1,76 @@
 ﻿@model IEnumerable<StatTrack.Models.TeamModel>
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="card border-primary mb-3" style="width: 16rem">
-                <div class="card-body">
-                  
-                    <button type="button" class="btn-close" asp-controller="Team" asp-area="" asp-action="Delete" asp-route-id="@item.Id"></button>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card border-primary mb-3" style="width: 16rem">
+            <div class="card-body">
 
-                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#DeleteTeam"><i class="fa fa-close"></i></button>
 
-                    <p style="font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division): <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b></p>
 
-                    <p style="font-size:18px;">Årgang: <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b></p>
+                <!-- Modal -->
+                <div class="modal fade" id="DeleteTeam" tabindex="-1" aria-labelledby="TeamModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form asp-action="Create">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"> Er du sikker på du vil slette @item.Name og alle de tilknyttede brugere </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
 
-                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Player" asp-action="PlayerLineUp" asp-route-id="@item.Id">Se Hold</a>
+                                <!-- Modal body -->
+                                <div class="modal-body">
 
-                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Game" asp-action="Index" asp-route-id="@item.Id">Start Kamp</a>
+                                    <dl class="row">
+                                        <dt class="col-sm-4">
+                                            @Html.DisplayNameFor(modelItem => item.Name)
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </dd>
+                                        <dt class="col-sm-4">
+                                            @Html.DisplayNameFor(modelItem => item.Division)
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            @Html.DisplayFor(modelItem => item.Division)
+                                        </dd>
+                                        <dt class="col-sm-4">
+                                            @Html.DisplayNameFor(modelItem => item.TeamUYear)
+                                        </dt>
+                                        <dd class="col-sm-8">
+                                            @Html.DisplayFor(modelItem => item.TeamUYear)
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <!-- Modal footer -->
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
+                                    <a class="btn btn-outline-danger" type="submit" asp-area="" asp-action="Delete" asp-route-id="@item.Id"> Slet </a>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-         </div>
-        }
-    </div>
 
-<!--
-    
-<div class="card-body text-secondary">
-<h5 class="card-title">Secondary card title</h5>
 
--->
+
+
+                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
+
+                <p style="font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division): <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b></p>
+
+                <p style="font-size:18px;">Årgang: <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b></p>
+
+                <a class="btn btn-outline-primary" asp-area="" asp-controller="Player" asp-action="PlayerLineUp" asp-route-id="@item.Id">Se Hold</a>
+
+                <a class="btn btn-outline-primary" asp-area="" asp-controller="Game" asp-action="Index" asp-route-id="@item.Id">Start Kamp</a>
+            </div>
+        </div>
+    }
+</div>
+

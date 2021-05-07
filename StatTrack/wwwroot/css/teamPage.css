@@ -2,7 +2,6 @@
     background-color: #E4E4E4;
 }
 
-
 .card {
     margin: 1rem;
 }
@@ -11,9 +10,4 @@
     color: coral;
 }
 
- #deleteTeam {
-    color: aqua;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
+
