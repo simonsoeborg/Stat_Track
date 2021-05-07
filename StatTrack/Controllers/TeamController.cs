@@ -9,13 +9,14 @@ using static DataLibrary.Logic.TeamProcessor;
 using System.Security.Claims;
 
 public class TeamController : Controller
-    {
-
+{
+    public static string GetCurrentUser = ""; 
     public IActionResult Index()
     {
         ClaimsPrincipal currentUser = this.User;
         var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
         var data = LoadTeams(currentUserID);
+        GetCurrentUser = currentUserID;
 
         var TeamViewModel = new TeamViewModel();
 

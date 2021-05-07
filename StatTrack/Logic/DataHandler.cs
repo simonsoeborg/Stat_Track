@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using static DataLibrary.Logic.ClubProcessor;
 using StatTrack.Models;
 using DataLibrary;
 using DataLibrary.Logic;
+using Org.BouncyCastle.Bcpg;
 using static DataLibrary.Logic.TeamProcessor;
+using static DataLibrary.Logic.PlayerProcessor;
 
 namespace StatTrack.Logic
 {
     public class DataHandler
     {
-        public DataHandler()
-        {
-
-        }
-
         public List<ClubModel> getClubs()
         {
             var data = LoadClubs();
@@ -149,6 +147,22 @@ namespace StatTrack.Logic
             }
 
             return club.FirstOrDefault();
+        }
+
+        public List<DataLibrary.Models.TeamPlayerModel> GetAllPlayersFromAllTeams()
+        {
+            string userId = TeamController.GetCurrentUser;
+            List<DataLibrary.Models.TeamModel> teams = LoadTeams(userId);
+            List<DataLibrary.Models.TeamPlayerModel> AllPlayers = new List<DataLibrary.Models.TeamPlayerModel>();
+            foreach (var team in teams)
+            {
+                foreach (var player in LoadAllUsersPlayers(team.Id))
+                {
+                    AllPlayers.Add(player);
+                }
+            }
+
+            return AllPlayers;
         }
     }
 }
