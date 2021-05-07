@@ -85,7 +85,7 @@ namespace StatTrack.Logic
             return playerPositions;
         }
 
-        public string getTeam(int teamId)
+        public string getTeamName(int teamId)
         {
             var teamModelData = GetTeam(teamId);
 
@@ -105,6 +105,50 @@ namespace StatTrack.Logic
             }
 
             return team[0].Name;
+        }
+
+        public TeamModel getTeamModel(int teamId)
+        {
+            var teamModelData = GetTeam(teamId);
+
+            List<TeamModel> team = new List<TeamModel>();
+
+            foreach (var item in teamModelData)
+            {
+                team.Add(new TeamModel
+                {
+                    Name = item.Name,
+                    ClubId = item.ClubId,
+                    CreatorId = item.CreatorId,
+                    Division = item.Division,
+                    TeamUYear = item.TeamUYear,
+                    Id = item.Id
+                }); ;
+            }
+
+            return team.FirstOrDefault();
+        }
+
+        public ClubModel getClub(int clubId)
+        {
+            var clubModelView = GetClub(clubId);
+
+            List<ClubModel> club = new List<ClubModel>();
+
+            foreach (var item in clubModelView)
+            {
+                club.Add(new ClubModel()
+                {
+                    Name = item.Name,
+                    Initials = item.Initials,
+                    Address = item.Address,
+                    Postal = item.Postal,
+                    City = item.City,
+                    Id = item.Id
+                }); ;
+            }
+
+            return club.FirstOrDefault();
         }
     }
 }

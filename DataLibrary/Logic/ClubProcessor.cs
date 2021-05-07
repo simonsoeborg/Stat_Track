@@ -47,6 +47,11 @@ namespace DataLibrary.Logic
 
             return SqlDataAccess.SaveData(query, new { });
         }
+        public static List<ClubModel> GetClub(int? id)
+        {
+            string query = @"SELECT * FROM Clubs WHERE id = " + id + ";";
 
+            return SqlDataAccess.GetData<ClubModel>(query);
+        }
     }
 }
