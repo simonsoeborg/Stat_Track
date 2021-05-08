@@ -5,6 +5,10 @@
     ViewData["Title"] = "Details";
     var id = PlayerController.currentTeamId;
 
+
+    // Get player stats
+    
+
 }
 
 <h1>Informationer om @Model.PlayerName</h1>
@@ -38,4 +42,70 @@
         @Html.ActionLink("Tilbage", "PlayerLineUp", new { id }, new { @class = "btn btn-outline-secondary" })
 
     </div>
+</div>
+
+@*
+Get information about the player. Goals, attempts, Matches, Overall statistics
+*@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <h2>Spillerstatistik for nuværende sæson</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Antal kampe
+                </th>
+                <th>
+                    Antal skud på mål
+                </th>
+                <th>
+                    Antal mål
+                </th>
+                <th>
+                    Antal udvisninger (2 min)
+                </th>
+                <th>
+                    Antal Gulekort
+                </th>
+                <th>
+                    Antal Rødekort
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+    <h2>Spillerstatistik for alle sæsoner</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Antal kampe
+            </th>
+            <th>
+                Antal skud på mål
+            </th>
+            <th>
+                Antal mål
+            </th>
+            <th>
+                Antal udvisninger (2 min)
+            </th>
+            <th>
+                Antal Gulekort
+            </th>
+            <th>
+                Antal Rødekort
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
 </div>

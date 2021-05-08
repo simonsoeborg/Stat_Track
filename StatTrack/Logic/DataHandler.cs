@@ -10,6 +10,7 @@ using DataLibrary.Logic;
 using Org.BouncyCastle.Bcpg;
 using static DataLibrary.Logic.TeamProcessor;
 using static DataLibrary.Logic.PlayerProcessor;
+using static DataLibrary.Logic.PlayerStatsProcessor;
 
 namespace StatTrack.Logic
 {
@@ -163,6 +164,13 @@ namespace StatTrack.Logic
             }
 
             return AllPlayers;
+        }
+
+        public List<DataLibrary.Models.DLPlayerStatsModel> GetPlayerStats(int playerId)
+        {
+            List<DataLibrary.Models.DLPlayerStatsModel> data = GetOverallPlayerStats(playerId);
+            List<DataLibrary.Models.DLPlayerStatsModel> currentSeason;
+            return null;
         }
     }
 }
