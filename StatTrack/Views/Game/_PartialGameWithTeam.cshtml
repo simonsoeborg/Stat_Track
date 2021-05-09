@@ -1,0 +1,364 @@
+﻿@using StatTrack.Logic
+@model StatTrack.Models.MasterModel
+@{
+    DataHandler data = new DataHandler();
+
+    List<string> uYearsNames = data.getYears();
+    List<string> Position = data.getPositions();
+    List<string> leagueList = data.GetLeagues();
+
+    var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
+    var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
+
+}
+
+
+<div class="container">
+    <div class="row overall_row">
+        <div class="col-4">
+            <div class="container">
+                <!-- My Club Name and score -->
+                <div class="input-group">
+                    @if (currentClub != null)
+                    {
+                        <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn" value="@currentClub.Name" />
+                    }
+                    else
+                    {
+                        <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn">
+                    }
+                    <input id="myTeamScore" type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                </div>
+                <div class="row">
+                    <!-- Set årgang & Række, dropdowns -->
+                    <div class="input-group">
+                        <select class="form-select" id="team1_yearBtn">
+                            @*
+                                Hent data fra Databasen
+                                U3 - U19 (U3, U5, U7, U9, U11, U13, U15, U17, U19)
+                                2021 - 4 = 2018 = 18, (18, 16, 14, 12, 10, 08, 06, 04, 02)
+                            *@
+                            @if (currentTeam.TeamUYear != null)
+                            {
+                                <option selected>@currentTeam.TeamUYear</option>
+                                @for (int i = 0; i < uYearsNames.Count; i++)
+                                {
+                                    if (uYearsNames[i] != currentTeam.TeamUYear)
+                                    {
+                                        <option value="@i">@uYearsNames[i]</option>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <option selected>Vælg Årgang</option>
+                                @for (int i = 0; i < uYearsNames.Count; i++)
+                                {
+                                    <option value="@i">@uYearsNames[i]</option>
+                                }
+                            }
+                        </select>
+                        <select class="form-select" id="team1_leagueBtn">
+                            @*
+                                Liga, 1. Div, 2. Div, 3. Div, Cup event
+                            *@
+                            @if (currentTeam.Division != null)
+                            {
+                                <option selected>@currentTeam.Division</option>
+                                @for (int i = 0; i < leagueList.Count; i++)
+                                {
+                                    if (leagueList[i] != currentTeam.Division)
+                                    {
+                                        <option value="@i">@leagueList[i]</option>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <option selected>Vælg Række</option>
+                                @for (int i = 0; i < leagueList.Count; i++)
+                                {
+                                    <option value="@i">@leagueList[i]</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Penalty button, modal -->
+                        <div class="container ctnr_nopadding">
+                            <p align="left">
+                                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#HomeEventModal">
+                                    Hændelse
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="container" style="text-align: center;">
+                <h1 id="timer">00:00</h1>
+                <div id="primaryTimerBtnsRow" class="row justify-content-md-center">
+                    <div class="col-4">
+                        <div class="btn-group" role="group">
+                            <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
+                            <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="halfTimeRow" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-4">
+                        <button id="halfTimeBtn" type="button" class="btn btn-outline-success">Fortsæt</button>
+                    </div>
+                </div>
+                <div id="GameHalvleg" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-4">
+                        <h2 id="GameHalvlegTitel"></h2>
+                        <h3 id="GameHalvlegResult"></h3>
+                    </div>
+                </div>
+                <div id="GameFinished" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-4">
+                        <h3 id="GameFinishedResultTitel"></h3>
+                        <p id="GameFinishedResult"></p>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center" id="SetGameTimeSelectionBar">
+                    <div class="col-7">
+                        <div class="input-group">
+                            <select onchange="setGameTime(this);" class="form-select">
+                                <option selected>Kampens varighed i (min)</option>
+                                <option value="30">30:00</option>
+                                <option value="40">40:00</option>
+                                <option value="50">50:00</option>
+                                <option value="60">60:00</option>
+                                <option value="0.10">00:10</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="container">
+                <!-- Opponent Club Name and score -->
+                <div class="input-group">
+                    <input id="AwayTeamScore" type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input id="AwayTeamName" type="text" class="form-control teamForm" placeholder="Modstander klub navn">
+                </div>
+                <div class="row">
+                    <!-- Set årgang & Række, dropdowns -->
+                    <div class="input-group">
+                        <select class="form-select" id="team2_yearBtn">
+                            <option selected>Vælg Årgang</option>
+                            @for (int i = 0; i < uYearsNames.Count; i++)
+                            {
+                                <option value="@i">@uYearsNames[i]</option>
+                            }
+                        </select>
+                        <select class="form-select" id="team2_leagueBtn">
+                            <option selected>Vælg Række</option>
+                            @for (int i = 0; i < leagueList.Count; i++)
+                            {
+                                <option value="@i">@leagueList[i]</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <!-- Penalty button, modal -->
+                            <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AwayEventModal">
+                                Hændelse
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <!-- Penalty button, modal -->
+                            <button type="button" class="btn btn-outline-success" onclick="incrementAwayTeam();">
+                                Tilføj mål
+                            </button>
+                            <button type="button" class="btn btn-outline-danger" onclick="decrementAwayTeam();">
+                                Fjern mål
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
+            <!-- Tabel for all players -->
+            <div class="row">
+                <div class="col-2"><b>Spillernavn</b></div>
+                <div class="col-2"><b>Spillerposition</b></div>
+                <div class="col-2"><b>Skud</b></div>
+                <div class="col-2"><b>Mål</b></div>
+                <div class="col-2"><b>Assists</b></div>
+                <div class="col-2"><b>Redninger</b></div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.TeamPlayerModels)
+                {
+                    <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <input type="text" class="form-control" value=" @item.Name" />
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <select asp-for="@item.Position" name="Position" select class="form-select">
+                                    @for (int i = 0; i < Position.Count; i++)
+                                    {
+                                        <option value="@Position[i].ToString()">@Position[i]</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAttempts(@item.Id);">-</button>
+                                </div>
+                                <input id="amountOfShots_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAttempts(@item.Id);">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamGoal(@item.Id);">-</button>
+                                </div>
+                                <input id="goals_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamGoal(@item.Id);">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAssists(@item.Id);">-</button>
+                                </div>
+                                <input id="assists_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAssists(@item.Id);">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group input-group-sm">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamSaves(@item.Id);">-</button>
+                                </div>
+                                <input id="saves_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamSaves(@item.Id);">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="HomeEventModalTitle">Hændelse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Load spillerliste -> Vælg spiller -->
+                <div class="input-group">
+                    <select class="form-select">
+                        @foreach (var item in Model.TeamPlayerModels)
+                        {
+                            <option id="@item.Id">@item.Name</option>
+                        }
+                    </select>
+                </div>
+                <!-- Vælg hændelse -->
+                <div class="form-check">
+                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option1" id="Home2minEvent">
+                    <label class="form-check-label" for="Home2minEvent">
+                        2 minutters udvisning
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option2" id="HomeWarningEvent">
+                    <label class="form-check-label" for="HomeWarningEvent">
+                        Gult kort
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option3" id="HomeRedCardEvent">
+                    <label class="form-check-label" for="HomeRedCardEvent">
+                        Rødt kort
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline-success">Tilføj</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="AwayEventModal" tabindex="-1" aria-labelledby="AwayEventModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="AwayEventModalTitle">Hændelse</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Load spillerliste -> Vælg spiller -->
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping">#</span>
+                    <input type="number" class="form-control" placeholder="Spillernummer" aria-label="Spillernummer" aria-describedby="addon-wrapping">
+                </div>
+                <!-- Vælg hændelse -->
+                <div class="form-check">
+                    <input class="form-check-input" name="penaltyEventAway" type="radio" value="option1" id="Away2minEvent">
+                    <label class="form-check-label" for="Away2minEvent">
+                        2 minutters udvisning
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="penaltyEventAway" type="radio" value="option2" id="AwayWarningEvent">
+                    <label class="form-check-label" for="AwayWarningEvent">
+                        Gult kort
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="penaltyEventAway" type="radio" value="option3" id="AwayRedCardEvent">
+                    <label class="form-check-label" for="AwayRedCardEvent">
+                        Rødt kort
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Annullér</button>
+                <button type="button" class="btn btn-outline-success">Tilføj</button>
+            </div>
+        </div>
+    </div>
+</div>

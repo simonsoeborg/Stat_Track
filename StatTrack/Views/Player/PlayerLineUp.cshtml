@@ -11,7 +11,7 @@
     DataHandler data = new DataHandler();
     List<string> playerPosition = data.getPositions();
 
-    string currentTeam = data.getTeam(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
+    string currentTeam = data.getTeamName(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
 }
 
 <h1>Spillerliste for @currentTeam</h1>

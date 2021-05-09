@@ -1,0 +1,38 @@
+﻿@model StatTrack.Models.TeamModel
+@using Microsoft.AspNetCore.Identity
+@using StatTrack.Logic
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    DataHandler dataH = new DataHandler();
+}
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="ListPlayersHeading1">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#ListPlayersAccordionBody" aria-controls="ListPlayersAccordionBody">Se dine spillere</button>
+    </h2>
+    <div id="ListPlayersAccordionBody" class="accordion-collapse collapse show" aria-labelledby="ListPlayersHeading1" data-bs-parent="#CreateTeamAccordion">
+        <div class="accordion-body">
+            <table class="table">
+                <tbody>
+                @foreach(var item in dataH.GetAllPlayersFromAllTeams()) { 
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("Details", "Player", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB})">@item.Name</a>
+                        </td>
+                        <td>
+                            @item.YOB.ToString()[2]@item.YOB.ToString()[3]
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

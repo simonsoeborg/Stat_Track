@@ -1,15 +1,21 @@
 ﻿@model StatTrack.Models.PlayerModel
 @using StatTrack.Controllers
+@using StatTrack.Logic
 
 @{
     ViewData["Title"] = "Details";
     var id = PlayerController.currentTeamId;
 
+    DataHandler data = new DataHandler();
+    // Get player stats
+    List<PlayerStatsModel> currentSeason = data.GetCurrentSeasonPlayerStats(Model.Id);
+    List<PlayerStatsModel> overAllData = data.GetOverAllPlayerStats(Model.Id);
+
 }
 
-<h1>Informationer om @Model.PlayerName</h1>
+<h1>Spiller: @Model.PlayerName</h1>
 
-<div>
+<div class="row justify-content-md-start">
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -21,7 +27,7 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlayerPosition)
         </dt>
-        <dd class="col-sm-10">
+        <dd class="col-sm-10" id="playerPosition">
             @Html.DisplayFor(model => model.PlayerPosition)
         </dd>
         <dt class="col-sm-2">
@@ -39,3 +45,238 @@
 
     </div>
 </div>
+
+@*
+Get information about the player. Goals, attempts, Matches, Overall statistics
+*@
+@if(overAllData != null) {
+    <div class="row justify-content-md-start">
+        <div class="container">
+            <div class="col-12">
+                <h2>Spillerstatistik for nuværende sæson</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Kampe
+                        </th>
+                        <th>
+                            Skudforsøg
+                        </th>
+                        <th>
+                            Mål
+                        </th>
+                        <th>
+                            Scoringsprocent
+                        </th>
+                        <th>
+                            Assists
+                        </th>
+                        @if(Model.PlayerPosition == "Målvogter") { 
+                            <th>
+                                Redninger
+                            </th>
+                        }
+                        <th>
+                            Udvisninger (2 min)
+                        </th>
+                        <th>
+                            Gulekort
+                        </th>
+                        <th>
+                            Rødekort
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        int amountOfPlayedGames = 0;
+                        int amountOfAttempts = 0;
+                        int amountOfGoals = 0;
+                        int amountOfSaves = 0;
+                        int amountOf2Mins = 0;
+                        int amountOfYellow = 0;
+                        int amountOfRed = 0;
+                        int amountOfAssists = 0;
+
+                        foreach (var item in currentSeason)
+                        {
+                            amountOfPlayedGames += 1;
+                            amountOfAttempts += item.GoalAttempts;
+                            amountOfAssists += item.Assists;
+                            amountOfGoals += item.Goals;
+                            amountOfSaves += item.KeeperSaves;
+                            amountOf2Mins += item.Mins2;
+                            amountOfYellow += item.Yellowcards;
+                            amountOfRed += item.Redcards;
+                        }
+
+                    }
+                    <tr>
+                        <td id="amountOfPlayedGamesCurrent">
+                            @amountOfPlayedGames
+                        </td>
+                        <td id="amountOfGoalAttemptsCurrent">
+                            @amountOfAttempts
+                        </td>
+                        <td id="amountOfGoalsCurrent">
+                            @amountOfGoals
+                        </td>
+                        <td>
+                            @{
+                                double percentageCurrentSeason = ((double) amountOfGoals / (double) amountOfAttempts) * 100;
+                            }
+                            (@amountOfGoals/@amountOfAttempts) | @percentageCurrentSeason.ToString("0.00")%
+                        </td>
+                        <td id="amountOfAssistsCurrent">
+                            @amountOfAssists
+                        </td>
+                        @if(Model.PlayerPosition == "Målvogter") { 
+                            <td id="amountOfSavesCurrent">
+                                @amountOfSaves
+                            </td>
+                        }
+                        <td id="amountOf2MinsCurrent">
+                            @amountOf2Mins
+                        </td>
+                        <td id="amountOfYellowCardsCurrent">
+                            @amountOfYellow
+                        </td>
+                        <td id="amountOfRedCardsCurrent">
+                            @amountOfRed
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <canvas id="StatChart1"></canvas>
+        </div>
+        @if (Model.PlayerPosition == "Målvogter")
+        {
+            <div class="col-4">
+                <canvas id="StatChartKeeper"></canvas>
+            </div>
+        }
+    </div>
+    
+    <div class="row justify-content-md-start">
+        <div class="container">
+            <div class="col-12">
+                <h2>Spillerstatistik for alle sæsoner</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            Kampe
+                        </th>
+                        <th>
+                            Skudforsøg
+                        </th>
+                        <th>
+                            Mål
+                        </th>
+                        <th>
+                            Scoringsprocent
+                        </th>
+                        <th>
+                            Assists
+                        </th>
+                        @if(Model.PlayerPosition == "Målvogter") { 
+                            <th>
+                                Redninger
+                            </th>
+                        }
+                        <th>
+                            Udvisninger (2 min)
+                        </th>
+                        <th>
+                            Gulekort
+                        </th>
+                        <th>
+                            Rødekort
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        int amountOfPlayedGamesAll = 0;
+                        int amountOfAttemptsAll = 0;
+                        int amountOfGoalsAll = 0;
+                        int amountOfSavesAll = 0;
+                        int amountOf2MinsAll = 0;
+                        int amountOfYellowAll = 0;
+                        int amountOfAssistsAll = 0;
+                        int amountOfRedAll = 0;
+
+                        foreach (var item in overAllData)
+                        {
+                            amountOfPlayedGamesAll += 1;
+                            amountOfAttemptsAll += item.GoalAttempts;
+                            amountOfGoalsAll += item.Goals;
+                            amountOfSavesAll += item.KeeperSaves;
+                            amountOf2MinsAll += item.Mins2;
+                            amountOfAssistsAll += item.Assists;
+                            amountOfYellowAll += item.Yellowcards;
+                            amountOfRedAll += item.Redcards;
+                        }
+
+                    }
+                    <tr>
+                        <td id="amountOfPlayedGamesOverAll">
+                            @amountOfPlayedGamesAll
+                        </td>
+                        <td id="amountOfGoalAttemptsOverAll">
+                            @amountOfAttemptsAll
+                        </td>
+                        <td id="amountOfGoalsOverAll">
+                            @amountOfGoalsAll
+                        </td>
+                        <td>
+                            @{
+                                double percentageOverAll = ((double)amountOfGoalsAll / (double)amountOfAttemptsAll) * 100;
+                            }
+                            (@amountOfGoalsAll/@amountOfAttemptsAll) | @percentageOverAll.ToString("0.00")%
+                        </td>
+                        <td id="amountOfAssistsOverAll">
+                            @amountOfAssistsAll
+                        </td>
+                        @if (Model.PlayerPosition == "Målvogter")
+                        {
+                            <td id="amountOfSavesOverAll">
+                                @amountOfSaves
+                            </td>
+                        }
+                        <td id="amountOf2MinsOverAll">
+                            @amountOf2MinsAll
+                        </td>
+                        <td id="amountOfYellowCardsOverAll">
+                            @amountOfYellowAll
+                        </td>
+                        <td id="amountOfRedCardsOverAll">
+                            @amountOfRedAll
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-4">
+            <canvas id="StatChartOverall"></canvas>
+        </div>
+        @if (Model.PlayerPosition == "Målvogter")
+        {
+            <div class="col-4">
+                <canvas id="StatChartKeeperOverall"></canvas>
+            </div>
+        }
+    </div>
+}

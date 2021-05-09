@@ -16,16 +16,10 @@
         </div>
 
         <div class="col-md-4">
-            @await Html.PartialAsync("/Views/Team/_PartialCreateTeam.cshtml", Model.TModel)
-        </div>
-    </div>
-    <div class="row">
-
-        <div class="col-6 offset-md-1">
-        </div>
-
-        <div class="col-md-4">
-            <h2>Mine spillere</h2>
+            <div class="accordion" id="CreateTeamAccordion">
+                @await Html.PartialAsync("/Views/Team/_PartialCreateTeam.cshtml", Model.TModel)
+                @await Html.PartialAsync("/Views/Team/_PartialListPlayers.cshtml", Model.TModel)
+            </div>
         </div>
     </div>
 </div>
