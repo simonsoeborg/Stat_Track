@@ -10,9 +10,12 @@ namespace StatTrack.Models
         public int PlayerId { get; set; }
         public int GoalAttempts { get; set; }
         public int Goals { get; set; }
+        public int KeeperSaves { get; set; }
+        public int Assists { get; set; }
         public int Mins2 { get; set; }
         public int Yellowcards { get; set; }
         public int Redcards { get; set; }
         public int KampId { get; set; }
+        public string KampDato { get; set; }
     }
 }

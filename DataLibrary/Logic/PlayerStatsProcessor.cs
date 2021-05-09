@@ -10,7 +10,8 @@ namespace DataLibrary.Logic
     {
         public static List<DLPlayerStatsModel> GetOverallPlayerStats(int playerId)
         {
-            string query = @"SELECT * FROM SpillerStats WHERE SpillerId = '" + playerId + "';";
+            // "SELECT s.*, k.KampDato FROM SpillerStats s INNER JOIN KampData k ON s.KampId = k.KampId WHERE s.SpillerId = 10011"
+            string query = @"SELECT s.*, k.KampDato FROM SpillerStats s INNER JOIN KampData k ON s.KampId = k.KampId WHERE s.SpillerId = '"+ playerId +"';";
 
             return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
         }
@@ -18,14 +19,15 @@ namespace DataLibrary.Logic
         {
             DateTime date = DateTime.Now;
             int year = date.Year;
-            string seasonStart = "01/09/" + (year - 1);
-            string seasonEnd = "01/06/" + year;
+            string seasonStart = (year - 1) + "/09/01";
+            string seasonEnd = year + "/06/01";
             /*
-            SELECT * 
-            FROM sales 
-            WHERE salesDate BETWEEN '2020-05-18T00:00:00.00' AND '2020-05-18T23:59:59.999'
+            SELECT s.*, k.KampDato FROM SpillerStats s 
+            INNER JOIN KampData k ON s.KampId = k.KampId 
+            WHERE k.KampDato BETWEEN '"+ seasonStart +"' AND '" + seasonEnd + "' 
+            AND s.SpillerId = '" + playerId + "';
              */
-            string query = @"SELECT * FROM SpillerStats WHERE SpillerId = '" + playerId + "';";
+            string query = @"SELECT s.*, k.KampDato FROM SpillerStats s INNER JOIN KampData k ON s.KampId = k.KampId WHERE k.KampDato BETWEEN '" + seasonStart + "' AND '" + seasonEnd + "' AND s.SpillerId = '" + playerId + "';";
 
             return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
         }

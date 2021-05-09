@@ -166,11 +166,53 @@ namespace StatTrack.Logic
             return AllPlayers;
         }
 
-        public List<DataLibrary.Models.DLPlayerStatsModel> GetPlayerStats(int playerId)
+        public List<PlayerStatsModel> GetCurrentSeasonPlayerStats(int playerId)
         {
-            List<DataLibrary.Models.DLPlayerStatsModel> data = GetOverallPlayerStats(playerId);
-            List<DataLibrary.Models.DLPlayerStatsModel> currentSeason;
-            return null;
+            List<DataLibrary.Models.DLPlayerStatsModel> currentSeasonData = DataLibrary.Logic.PlayerStatsProcessor.GetCurrentSeasonPlayerStats(playerId);
+            
+            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
+
+            foreach (var item in currentSeasonData)
+            {
+                myData.Add(new PlayerStatsModel()
+                {
+                    PlayerId = item.PlayerId,
+                    GoalAttempts = item.Attempts,
+                    Goals = item.Goals,
+                    KeeperSaves = item.KeeperSaves,
+                    Mins2 = item.Mins2,
+                    Yellowcards = item.gulekort,
+                    Redcards = item.roedekort,
+                    Assists = item.Assists,
+                    KampId = item.KampId,
+                    KampDato = item.KampDato
+                });
+            }
+            return myData;
+        }
+        public List<PlayerStatsModel> GetOverAllPlayerStats(int playerId)
+        {
+            List<DataLibrary.Models.DLPlayerStatsModel> overAllData = GetOverallPlayerStats(playerId);
+
+            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
+
+            foreach (var item in overAllData)
+            {
+                myData.Add(new PlayerStatsModel()
+                {
+                    PlayerId = item.PlayerId,
+                    GoalAttempts = item.Attempts,
+                    Goals = item.Goals,
+                    KeeperSaves = item.KeeperSaves,
+                    Mins2 = item.Mins2,
+                    Yellowcards = item.gulekort,
+                    Redcards = item.roedekort,
+                    Assists = item.Assists,
+                    KampId = item.KampId,
+                    KampDato = item.KampDato
+                });
+            }
+            return myData;
         }
     }
 }
