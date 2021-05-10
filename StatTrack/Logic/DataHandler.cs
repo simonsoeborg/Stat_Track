@@ -16,6 +16,7 @@ namespace StatTrack.Logic
 {
     public class DataHandler
     {
+        public static int GameId;
         public List<ClubModel> getClubs()
         {
             var data = LoadClubs();

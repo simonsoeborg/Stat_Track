@@ -3,24 +3,16 @@
 @using System.Threading;
 @model StatTrack.Models.MasterModel
 @{
-        DataHandler data = new DataHandler();
+    DataHandler data = new DataHandler();
 
-        List<string> uYearsNames = data.getYears();
-        List<string> Position = data.getPositions();
-        List<string> leagueList = data.GetLeagues();
+    List<string> uYearsNames = data.getYears();
+    List<string> Position = data.getPositions();
+    List<string> leagueList = data.GetLeagues();
 
-        var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
-        var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
-        //var getGameId = 0;
+    var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
+    var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
 
-@*        while (getGameId == 0)
-        {
-            getGameId = GameController.kampId;
 
-            Thread.Sleep(1000);
-        }*@
-        // data = Method();
-        
 }
 
 
@@ -110,50 +102,39 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="container" style="text-align: center;">
-                <h1 id="timer">00:00</h1>
-                <div id="primaryTimerBtnsRow" class="row justify-content-md-center">
-                    <div class="col-4">
-                        <div class="btn-group" role="group">
-                            <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
-                            <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
+            <div class="row justify-content-md-center">
+                <div class="container" style="text-align: center;">
+                    <h1 id="timer">00:00</h1>
+                    <div id="primaryTimerBtnsRow" class="row justify-content-md-center">
+                        <div class="col-4">
+                            <div class="btn-group" role="group">
+                                <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
+                                <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div id="halfTimeRow" class="row justify-content-md-center" style="visibility: hidden;">
-                    <div class="col-4">
-                        <button id="halfTimeBtn" type="button" class="btn btn-outline-success">Fortsæt</button>
+                    <div class="row justify-content-md-center" id="SetGameTimeSelectionBar">
+                        <div class="col-7">
+                            <div class="input-group">
+                                <select onchange="setGameTime(this);" class="form-select">
+                                    <option selected>Kampens varighed i (min)</option>
+                                    <option value="30">30:00</option>
+                                    <option value="40">40:00</option>
+                                    <option value="50">50:00</option>
+                                    <option value="60">60:00</option>
+                                    <option value="0.10">00:10</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div id="GameHalvleg" class="row justify-content-md-center" style="visibility: hidden;">
-                    <div class="col-4">
-                        <h2 id="GameHalvlegTitel"></h2>
-                        <h3 id="GameHalvlegResult"></h3>
-                    </div>
-                </div>
-                <div id="GameFinished" class="row justify-content-md-center" style="visibility: hidden;">
-                    <div class="col-4">
-                        <h3 id="GameFinishedResultTitel"></h3>
-                        <p id="GameFinishedResult"></p>
-                    </div>
-                </div>
-                <div class="row justify-content-md-center" id="SetGameTimeSelectionBar">
-                    <div class="col-7">
-                        <div class="input-group">
-                            <select onchange="setGameTime(this);" class="form-select">
-                                <option selected>Kampens varighed i (min)</option>
-                                <option value="30">30:00</option>
-                                <option value="40">40:00</option>
-                                <option value="50">50:00</option>
-                                <option value="60">60:00</option>
-                                <option value="0.10">00:10</option>
-                            </select>
+                    <div id="halfTimeRow" class="row justify-content-md-center" style="visibility: hidden;">
+                        <div class="col-4">
+                            <button id="halfTimeBtn" type="button" class="btn btn-outline-success">Fortsæt</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col-4">
             <div class="container">
                 <!-- Opponent Club Name and score -->
@@ -206,7 +187,23 @@
             </div>
         </div>
     </div>
-
+    <div class="row justify-content-md-center">
+        <div class="col-10" style="text-align: center;">
+                <div id="GameHalvleg" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-10">
+                        <h2 id="GameHalvlegTitel"></h2>
+                        <h3 id="GameHalvlegResult"></h3>
+                    </div>
+                </div>
+                <div id="GameFinished" class="row justify-content-md-center" style="visibility: hidden;">
+                    <div class="col-10">
+                        <h3 id="GameFinishedResultTitel"></h3>
+                        <p id="GameFinishedResult"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-md-center">
         <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
             <!-- Tabel for all players -->
