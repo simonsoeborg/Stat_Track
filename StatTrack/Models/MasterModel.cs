@@ -10,5 +10,6 @@ namespace StatTrack.Models
         public TeamModel TeamModel { get; set; }
         public ClubModel ClubModel { get; set; }
         public IEnumerable<TeamPlayerModel> TeamPlayerModels { get; set; }
+        public OccurenceModel OccurenceModel { get; set; }
     }
 }
