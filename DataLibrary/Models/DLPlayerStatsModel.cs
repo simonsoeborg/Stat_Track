@@ -12,9 +12,9 @@ namespace DataLibrary.Models
         public int KeeperSaves { get; set; }
         public int Assists { get; set; }
         public int Mins2 { get; set; }
-        public int gulekort { get; set; }
-        public int roedekort { get; set; }
-        public string tidspunkt { get; set; }
+        public int Gulekort { get; set; }
+        public int Roedekort { get; set; }
+        public string Tidspunkt { get; set; }
         public int KampId { get; set; }
         public string KampDato { get; set; }
     }

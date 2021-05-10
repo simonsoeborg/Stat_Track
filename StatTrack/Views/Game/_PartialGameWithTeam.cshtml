@@ -12,7 +12,8 @@
     var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
     var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
 
-
+    int GameId;
+    
 }
 
 
@@ -24,7 +25,7 @@
                 <div class="input-group">
                     @if (currentClub != null)
                     {
-                        <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn" value="@currentClub.Name" />
+                        <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn" value="@currentClub.Initials" />
                     }
                     else
                     {
@@ -108,7 +109,7 @@
                     <div id="primaryTimerBtnsRow" class="row justify-content-md-center">
                         <div class="col-4">
                             <div class="btn-group" role="group">
-                                <button id="startBtn" type="button" class="btn btn-outline-success">Start</button>
+                                <button id="startBtn" type="button" class="btn btn-outline-success" onclick="@data.checkForGameId();" >Start</button>
                                 <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
                             </div>
                         </div>
@@ -189,100 +190,100 @@
     </div>
     <div class="row justify-content-md-center">
         <div class="col-10" style="text-align: center;">
-                <div id="GameHalvleg" class="row justify-content-md-center" style="visibility: hidden;">
-                    <div class="col-10">
-                        <h2 id="GameHalvlegTitel"></h2>
-                        <h3 id="GameHalvlegResult"></h3>
-                    </div>
+            <div id="GameHalvleg" class="row justify-content-md-center" style="visibility: hidden;">
+                <div class="col-10">
+                    <h2 id="GameHalvlegTitel"></h2>
+                    <h3 id="GameHalvlegResult"></h3>
                 </div>
-                <div id="GameFinished" class="row justify-content-md-center" style="visibility: hidden;">
-                    <div class="col-10">
-                        <h3 id="GameFinishedResultTitel"></h3>
-                        <p id="GameFinishedResult"></p>
-                    </div>
+            </div>
+            <div id="GameFinished" class="row justify-content-md-center" style="visibility: hidden;">
+                <div class="col-10">
+                    <h3 id="GameFinishedResultTitel"></h3>
+                    <p id="GameFinishedResult"></p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row justify-content-md-center">
-        <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
-            <!-- Tabel for all players -->
-            <div class="row">
-                <div class="col-2"><b>Spillernavn</b></div>
-                <div class="col-2"><b>Spillerposition</b></div>
-                <div class="col-2"><b>Skud</b></div>
-                <div class="col-2"><b>Mål</b></div>
-                <div class="col-2"><b>Assists</b></div>
-                <div class="col-2"><b>Redninger</b></div>
-            </div>
-            <div class="row">
-                @foreach (var item in Model.TeamPlayerModels)
-                {
-                    <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <input id="playerName_@item.Id" type="text" class="form-control" value="@item.Name" />
-                            </div>
+</div>
+<div class="row justify-content-md-center">
+    <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
+        <!-- Tabel for all players -->
+        <div class="row">
+            <div class="col-2"><b>Spillernavn</b></div>
+            <div class="col-2"><b>Spillerposition</b></div>
+            <div class="col-2"><b>Skud</b></div>
+            <div class="col-2"><b>Mål</b></div>
+            <div class="col-2"><b>Assists</b></div>
+            <div class="col-2"><b>Redninger</b></div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.TeamPlayerModels)
+            {
+                <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <input id="playerName_@item.Id" type="text" class="form-control" value="@item.Name" />
                         </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                                <select id="playerPosition_@item.Id" asp-for="@item.Position" name="Position" select class="form-select">
-                                    @for (int i = 0; i < Position.Count; i++)
-                                    {
-                                        <option value="@Position[i].ToString()">@Position[i]</option>
-                                    }
-                                </select>
-                            </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-group">
+                            <select id="playerPosition_@item.Id" asp-for="@item.Position" name="Position" select class="form-select">
+                                @for (int i = 0; i < Position.Count; i++)
+                                {
+                                    <option value="@Position[i].ToString()">@Position[i]</option>
+                                }
+                            </select>
                         </div>
-                        <div class="col-2">
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAttempts(@item.Id);">-</button>
-                                </div>
-                                <input id="amountOfShots_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAttempts(@item.Id);">+</button>
-                                </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAttempts(@item.Id);">-</button>
                             </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamGoal(@item.Id);">-</button>
-                                </div>
-                                <input id="goals_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamGoal(@item.Id);">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAssists(@item.Id);">-</button>
-                                </div>
-                                <input id="assists_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAssists(@item.Id);">+</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group input-group-sm">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamSaves(@item.Id);">-</button>
-                                </div>
-                                <input id="saves_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
-                                <div class="input-group-append">
-                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamSaves(@item.Id);">+</button>
-                                </div>
+                            <input id="amountOfShots_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAttempts(@item.Id);">+</button>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
+                    <div class="col-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamGoal(@item.Id);">-</button>
+                            </div>
+                            <input id="goals_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamGoal(@item.Id);">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAssists(@item.Id);">-</button>
+                            </div>
+                            <input id="assists_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAssists(@item.Id);">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamSaves(@item.Id);">-</button>
+                            </div>
+                            <input id="saves_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamSaves(@item.Id);">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
+</div>
 </div>
 
 <div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">

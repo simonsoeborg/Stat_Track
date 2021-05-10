@@ -81,7 +81,7 @@ namespace StatTrack.Controllers
 
         public JsonResult PlayerStatToDb([FromBody] PlayerStatsModel d)
         {
-            UpdatePlayerStats(d.tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, kampId);
+            insertDataToPlayerStats(d.Tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, kampId);
 
             return Json(d);
         }
