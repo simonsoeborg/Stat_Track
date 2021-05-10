@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using StatTrack.Logic
+@model IEnumerable<StatTrack.Models.GameDataModel>
+
+@{
+    DataHandler dataH = new DataHandler();
+    
+    ViewData["Title"] = "Match";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card border-primary mb-3" style="width: 24rem">
+            <div class="card-body">
+
+                <h5 class="card-title" id="MatchListHeader"> @dataH.getTeamName(item.CreatorTeamId).ToString()  - @Html.DisplayFor(modelItem => item.Modstander) </h5>
+                <p id="MatchListscore">@Html.DisplayFor(modelItem => item.CreatorTeamGoals)  -  @Html.DisplayFor(modelItem => item.ModstanderGoals)</p>
+
+
+                <p id="Matchdato">Dato: @Html.DisplayFor(modelItem => item.KampDato)</p>
+
+                <a class="btn btn-outline-primary" asp-area=""  asp-action="MatchInfo" asp-route-id="@item.KampId">Se mere</a>
+            </div>
+        </div>
+    }
+</div>
+
