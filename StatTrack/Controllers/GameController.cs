@@ -68,6 +68,39 @@ namespace StatTrack.Controllers
 
             return Index(teamId);
         }
+
+        public JsonResult RePostGameToDb([FromBody] GameDataModel d)
+        {
+            string currentUser = TeamController.GetCurrentUser;
+            DateTime date = DateTime.Now;
+            string formatDate = date.Year.ToString() + "/" + date.Month.ToString() + "/" + date.Day.ToString();
+            if (d.CreatorTeamGoals == 0 && d.ModstanderGoals == 0)
+            {
+                d.CreatorTeamGoals = 0;
+                d.ModstanderGoals = 0;
+
+                GameDataModel gmd = new GameDataModel
+                {
+                    CreatorID = currentUser,
+                    CreatorTeamId = d.CreatorTeamId,
+                    Modstander = d.Modstander,
+                    KampDato = formatDate,
+                    CreatorTeamGoals = d.CreatorTeamGoals,
+                    ModstanderGoals = d.ModstanderGoals
+                };
+
+                CreateGame(gmd.CreatorID, gmd.CreatorTeamId, gmd.Modstander, gmd.KampDato, gmd.CreatorTeamGoals,
+                    gmd.ModstanderGoals);
+            }
+            else
+            {
+                int kampId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate);
+                UpdateGameResults(kampId, d.CreatorTeamGoals, d.ModstanderGoals);
+            }
+
+
+            return Json(d);
+        }
     }
 }
    

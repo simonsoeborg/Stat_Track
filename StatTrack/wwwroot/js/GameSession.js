@@ -50,11 +50,41 @@ function getEvent(event) {
 
 
 function saveGameToDB() {
+    var teamIdLabel = $("#myTeamId").text();
+    var teamId = parseInt(teamIdLabel, 10);
+    var awayTeamName = document.getElementById('AwayTeamName').value;
+    var teamGoals = parseInt(document.getElementById('myTeamScore').value, 10);
+    var awayGoals = parseInt(document.getElementById('AwayTeamScore').value, 10);
 
-    var object = {};
+    if (teamGoals == null) {
+        teamGoals = parseInt(0, 10);
+    }
+
+    if (awayGoals == null) {
+        awayGoals = parseInt(0, 10);
+    }
+
+    var GameObj = JSON.stringify({
+        CreatorTeamId: teamId,
+        Modstander: awayTeamName,
+        CreatorTeamGoals: teamGoals,
+        ModstanderGoals: awayGoals
+    });
+    var obj = { CreatorTeamId: teamId, Modstander: awayTeamName, CreatorTeamGoals: teamGoals, ModstanderGoals: awayGoals };
+    //var obj = [teamId, awayTeamName, teamGoals, awayGoals];
+    var objToJson = JSON.stringify(obj);
+    console.log(GameObj);
     $.ajax({
         type: 'POST',
-        url: '/Game/PostGameToDb',
-        dataType: 
-    })
+        url: '/Game/RePostGameToDb',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: GameObj,
+        success: function(response) {
+            console.log("Send to PostGameToDB(): ", response);
+        },
+        error: function() {
+            console.log("Could not send Data to PostGameToDB()");
+        }
+    });
 }
