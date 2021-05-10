@@ -31,5 +31,19 @@ namespace DataLibrary.Logic
 
             return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
         }
+
+        public static int UpdatePlayerStats(string tidspunkt, int Attempts, int Goals, int KeeperSaves, int Assists, int playerId, int kampId)
+        {
+            DLPlayerStatsModel psm = new DLPlayerStatsModel
+            {
+                tidspunkt = tidspunkt,
+                Attempts = Attempts,
+                Assists = Assists,
+                KeeperSaves = KeeperSaves,
+                Goals = Goals
+            };
+            string query = @"UPDATE SpillerStats SET tidspunkt = @tidspunkt, Attempts = @Attempts, Goals = @Goals, Assists = @Assists, KeeperSaves = @KeeperSaves WHERE SpillerId = '" + playerId + "' AND KampId = '" + kampId + "';";
+            return SqlDataAccess.SaveData(query, psm);
+        }
     }
 }

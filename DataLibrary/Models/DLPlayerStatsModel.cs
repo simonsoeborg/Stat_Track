@@ -14,6 +14,7 @@ namespace DataLibrary.Models
         public int Mins2 { get; set; }
         public int gulekort { get; set; }
         public int roedekort { get; set; }
+        public string tidspunkt { get; set; }
         public int KampId { get; set; }
         public string KampDato { get; set; }
 

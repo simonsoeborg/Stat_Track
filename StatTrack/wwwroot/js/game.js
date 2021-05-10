@@ -52,6 +52,7 @@ function incrementMyTeamGoal(player) {
     document.getElementById("goals_" + player).value = myTeamPlayerGoals;
     document.getElementById("myTeamScore").value = myTeamScore;
     document.getElementById("amountOfShots_" + player).value = amountOfShots;
+    saveSession(player);
 }
 
 function decrementMyTeamGoal(player) {
@@ -83,6 +84,7 @@ function decrementMyTeamGoal(player) {
         document.getElementById("amountOfShots_" + player).value = 0;
     }
 
+    saveSession(player);
 }
 
 function incrementMyTeamAttempts(player) {
@@ -91,6 +93,8 @@ function incrementMyTeamAttempts(player) {
     amountOfShots++;
 
     document.getElementById("amountOfShots_" + player).value = amountOfShots;
+
+    saveSession(player);
 }
 
 function decrementMyTeamAttempts(player) {
@@ -103,6 +107,8 @@ function decrementMyTeamAttempts(player) {
     } else {
         document.getElementById("amountOfShots_" + player).value = 0;
     }
+
+    saveSession(player);
 }
 
 function incrementMyTeamAssists(player) {
@@ -111,6 +117,8 @@ function incrementMyTeamAssists(player) {
     amountOfAssists++;
 
     document.getElementById("assists_" + player).value = amountOfAssists;
+
+    saveSession(player);
 }
 
 function decrementMyTeamAssists(player) {
@@ -123,6 +131,8 @@ function decrementMyTeamAssists(player) {
     } else {
         document.getElementById("assists_" + player).value = 0;
     }
+
+    saveSession(player);
 }
 
 function incrementMyTeamSaves(player) {
@@ -131,6 +141,8 @@ function incrementMyTeamSaves(player) {
     amountOfSaves++;
 
     document.getElementById("saves_" + player).value = amountOfSaves;
+
+    saveSession(player);
 }
 
 function decrementMyTeamSaves(player) {
@@ -143,15 +155,8 @@ function decrementMyTeamSaves(player) {
     } else {
         document.getElementById("saves_" + player).value = 0;
     }
-}
 
-function incrementPlayerTable() {
-    var table = document.getElementById("playertable");
-    var rowCount = table.rows.length;
-
-    if (rowCount < 17) {
-
-    }
+    saveSession(player);
 }
 
 function incrementAwayTeam() {
@@ -159,6 +164,7 @@ function incrementAwayTeam() {
     awayTeamScore = isNaN(awayTeamScore) ? 0 : awayTeamScore;
     awayTeamScore++;
     document.getElementById("AwayTeamScore").value = awayTeamScore;
+
 }
 
 function decrementAwayTeam() {
@@ -170,4 +176,5 @@ function decrementAwayTeam() {
     } else {
         document.getElementById("AwayTeamScore").value = 0;
     }
+
 }

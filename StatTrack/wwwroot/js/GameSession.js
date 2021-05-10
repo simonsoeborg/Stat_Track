@@ -2,13 +2,39 @@
 function saveSession(playerId, event) {
     var playerName = document.getElementById('playerName_' + playerId).value;
     var playerPos = document.getElementById('playerPosition_' + playerId).value;
-    var playerCurrentAttempts = document.getElementById('amountOfShots_' + playerId).value;
-    var playerGoals = document.getElementById('goals_' + playerId).value;
-    var playerAssists = document.getElementById('assists_' + playerId).value;
-    var playerSaves = document.getElementById('saves_' + playerId).value;
+    var playerCurrentAttempts = parseInt(document.getElementById('amountOfShots_' + playerId).value, 10);
+    var playerGoals = parseInt(document.getElementById('goals_' + playerId).value, 10);
+    var playerAssists = parseInt(document.getElementById('assists_' + playerId).value, 10);
+    var playerSaves = parseInt(document.getElementById('saves_' + playerId).value, 10);
     var currentTeamScore = parseInt(document.getElementById("myTeamScore").value, 10);
     var currentAwayTeamScore = parseInt(document.getElementById("AwayTeamScore").value, 10);
     var currentTime = document.getElementById('timer').value;
+
+    // Save to DB
+    var dataObj = JSON.stringify({
+        PlayerId: playerId,
+        tidspunkt: currentTime,
+        Attempts: playerCurrentAttempts,
+        Goals: playerGoals,
+        KeeperSaves: playerSaves,
+        Assists: playerAssists
+    });
+
+    $.ajax({
+        type: 'POST',
+        url: '/Game/PlayerStatToDB',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: dataObj,
+        success: function (response) {
+            console.log("Send to PlayerStatToDB(): ", response);
+        },
+        error: function () {
+            console.log("Could not send Data to PostGameToDB()");
+        }
+    });
+
+    // Save DataString to DB for Kamp Historik
 }
 
 function createDataString(playerName, event, time) {
@@ -50,11 +76,53 @@ function getEvent(event) {
 
 
 function saveGameToDB() {
+    var teamIdLabel = $("#myTeamId").text();
+    var teamId = parseInt(teamIdLabel, 10);
+    var awayTeamName = document.getElementById('AwayTeamName').value;
+    var teamGoals = parseInt(document.getElementById('myTeamScore').value, 10);
+    var awayGoals = parseInt(document.getElementById('AwayTeamScore').value, 10);
 
-    var object = {};
+    if (teamGoals == null) {
+        teamGoals = parseInt(0, 10);
+    }
+
+    if (awayGoals == null) {
+        awayGoals = parseInt(0, 10);
+    }
+
+    var GameObj = JSON.stringify({
+        CreatorTeamId: teamId,
+        Modstander: awayTeamName,
+        CreatorTeamGoals: teamGoals,
+        ModstanderGoals: awayGoals
+    });
+    console.log(GameObj);
     $.ajax({
         type: 'POST',
-        url: '/Game/PostGameToDb',
-        dataType: 
-    })
+        url: '/Game/RePostGameToDb',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: GameObj,
+        success: function (response) {
+        },
+        error: function() {
+            console.log("Could not send Data to PostGameToDB()");
+        }
+    });
+}
+
+var kId = 0;
+function getKampId() {
+    $.ajax({
+        type: 'GET',
+        url: '/Game/HTTPGetKampId',
+        dataType: "json",
+        success: function(response) {
+            kId = response;
+            console.log("Response: " + response);
+        },
+        error: function() {
+            console.log("Could not fetch Kamp ID!");
+        }
+    });
 }

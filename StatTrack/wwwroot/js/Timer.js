@@ -42,7 +42,7 @@ startBtn.addEventListener('click', function () {
     if (!stopWatch.isOn) {
         stopWatch.start();
         document.getElementById("SetGameTimeSelectionBar").style.visibility = 'hidden';
-
+        saveGameToDB();
     }
 });
 
@@ -81,8 +81,6 @@ function Timer(element) {
         }*/
 
 
-        console.log("Time: " + element.textContent);
-        console.log("GameLength: " + gameLength);
         element.textContent = formattedTime;
     }
 
@@ -159,14 +157,15 @@ function checkIfHalftime() {
     }
 };
 
+var x = 0;
 function checkIfFulltime() {
     var time = document.getElementById("timer").textContent;
-    if (time === gameLength) {
-        console.log("Game Ended");
+    if (time === gameLength && x === 0) {
         document.getElementById("primaryTimerBtnsRow").style.visibility = 'hidden';
         document.getElementById("halfTimeRow").style.visibility = 'hidden';
         stopWatch.stop();
         gameEnded();
+        x++;
     }
 };
 
@@ -180,31 +179,30 @@ function gameHalfTime() {
     titel.textContent = "Halvleg";
 
     document.getElementById("GameHalvleg").style.visibility = "visible";
+    saveGameToDB();
 }
 
+var i = 0;
 function gameEnded() {
-    var paragraphTitel = document.getElementById("GameFinishedResultTitel");
-    var paragraph = document.getElementById("GameFinishedResult");
-    var team1 = document.getElementById("myTeamName").value;
-    var scoreTeam1 = document.getElementById("myTeamScore").value;
-    var team2 = document.getElementById("AwayTeamName").value;
-    var scoreTeam2 = document.getElementById("AwayTeamScore").value;
+    if (i === 0) {
+        var paragraphTitel = document.getElementById("GameFinishedResultTitel");
+        var paragraph = document.getElementById("GameFinishedResult");
+        var team1 = document.getElementById("myTeamName").value;
+        var scoreTeam1 = parseInt(document.getElementById("myTeamScore").value, 10);
+        var team2 = document.getElementById("AwayTeamName").value;
+        var scoreTeam2 = parseInt(document.getElementById("AwayTeamScore").value, 10);
 
-    if (scoreTeam1 === "") {
-        scoreTeam1 = 0;
-    }
-    if (scoreTeam2 === "") {
-        scoreTeam2 = 0;
-    }
+        paragraphTitel.textContent = "Kamp Resultat:";
+        if (scoreTeam1 > scoreTeam2) {
+            paragraph.textContent = team1 + " vinder " + scoreTeam1 + ":" + scoreTeam2 + " over " + team2;
+        } else if (scoreTeam2 > scoreTeam1) {
+            paragraph.textContent = team2 + " vinder " + scoreTeam2 + ":" + scoreTeam1 + " over " + team1;
+        } else {
+            paragraph.textContent = team1 + " spiller uafgjort mod " + team2 + "\n" + scoreTeam1 + ":" + scoreTeam2;
+        }
 
-    paragraphTitel.textContent = "Kamp Resultat:";
-    if (scoreTeam1 > scoreTeam2) {
-        paragraph.textContent = team1 + " vinder " + scoreTeam1 + ":" + scoreTeam2 + " over " + team2;
-    } else if (scoreTeam2 > scoreTeam1) {
-        paragraph.textContent = team2 + " vinder " + scoreTeam2 + ":" + scoreTeam1 + " over " + team1;
-    } else {
-        paragraph.textContent = team1 + " spiller uafgjort mod " + team2 + "\n" + scoreTeam1 + ":" + scoreTeam2;
+        document.getElementById("GameFinished").style.visibility = "visible";
+        saveGameToDB();
+        i++;
     }
-
-    document.getElementById("GameFinished").style.visibility = "visible";
 }
