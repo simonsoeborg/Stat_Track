@@ -16,5 +16,6 @@ namespace DataLibrary.Models
         public int roedekort { get; set; }
         public int KampId { get; set; }
         public string KampDato { get; set; }
+
     }
 }

@@ -166,15 +166,15 @@ namespace StatTrack.Logic
             return AllPlayers;
         }
 
-        public List<PlayerStatsModel> GetCurrentSeasonPlayerStats(int playerId)
+        public List<DLPlayerStatsModel> GetCurrentSeasonPlayerStats(int playerId)
         {
             List<DataLibrary.Models.DLPlayerStatsModel> currentSeasonData = DataLibrary.Logic.PlayerStatsProcessor.GetCurrentSeasonPlayerStats(playerId);
             
-            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
+            List<DLPlayerStatsModel> myData = new List<DLPlayerStatsModel>();
 
             foreach (var item in currentSeasonData)
             {
-                myData.Add(new PlayerStatsModel()
+                myData.Add(new DLPlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
                     GoalAttempts = item.Attempts,
@@ -190,15 +190,15 @@ namespace StatTrack.Logic
             }
             return myData;
         }
-        public List<PlayerStatsModel> GetOverAllPlayerStats(int playerId)
+        public List<DLPlayerStatsModel> GetOverAllPlayerStats(int playerId)
         {
             List<DataLibrary.Models.DLPlayerStatsModel> overAllData = GetOverallPlayerStats(playerId);
 
-            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
+            List<DLPlayerStatsModel> myData = new List<DLPlayerStatsModel>();
 
             foreach (var item in overAllData)
             {
-                myData.Add(new PlayerStatsModel()
+                myData.Add(new DLPlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
                     GoalAttempts = item.Attempts,

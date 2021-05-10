@@ -45,8 +45,38 @@ namespace DataLibrary.Logic
             string query = @"SELECT KampId FROM KampData WHERE CreatorID = @creatorId AND CreatorTeamId = @teamId AND KampDato = @kampDato AND Modstander = @modstander;";
 
             List<DLGameDataModel> dataList = SqlDataAccess.GetData<DLGameDataModel>(query);
-            
+
             return dataList.FirstOrDefault().KampId;
+        }
+
+
+        public static List<DLPlayerStatsModel> GetOccurences(int kampId)
+        {
+            string query = @"SELECT * FROM SpillerStats WHERE KampId = @kampId;";
+
+            return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
+
+        }
+
+        public static int UpdateOccurences(int gulekort, int roedekort, int Mins2, int PlayerId, int KampId)
+        {
+            //   for (int i = 0; i < list.Count; i++)
+            // {
+
+            DLPlayerStatsModel data = new DLPlayerStatsModel() {
+                PlayerId = PlayerId,
+                Mins2 = Mins2,
+                gulekort = gulekort,
+                roedekort = roedekort,
+                KampId = KampId
+            };
+             
+            string query = @"UPDATE SpillerStats SET Mins2 = @Mins2, gulekort = @gulekort, roedekort = @roedekort WHERE SpillerId = @PlayerId AND KampId = KampId 
+            ELSE INSERT INTO SpillerStats (SpillerId, Mins2, gulekort, roedekort, KampId) VALUES (@PlayerId, @Mins2, @gulekort, @roedekort, @KampId);";
+
+            SqlDataAccess.SaveData(query, data);
+            return 0;
+
         }
     }
 }

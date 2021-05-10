@@ -9,8 +9,13 @@ using static DataLibrary.Logic.GameProcessor;
 
 namespace StatTrack.Controllers
 {
+
     public class GameController : Controller
     {
+        int mins2;
+        int gulekort;
+        int roedekort;
+
         public IActionResult Index(int Id)
         {
             var data = LoadTeamPlayers(Id);
@@ -69,14 +74,41 @@ namespace StatTrack.Controllers
             return Index(teamId);
         }
 
-
-        public IActionResult GameOccurrence()
+        public IActionResult GameOccurrence(int kampId, string OccurenceType, int PlayerId)
         {
+            var data = GetOccurences(kampId);
 
+            DLPlayerStatsModel model = new DLPlayerStatsModel;
 
-            return Index();
+            foreach (var item in data)
+            {
+                if (item.PlayerId == PlayerId)
+                {
+                    if (OccurenceType == "Mins2")
+                    {
+                        mins2 += model.Mins2++;
+                        break;
+                    }
 
+                    if (OccurenceType == "gulekort")
+                    {
+                        gulekort += model.gulekort++;
+                        break;
+
+                    }
+
+                    if (OccurenceType == "roedekort")
+                    {
+                        roedekort += model.roedekort++;
+                        break;
+
+                    }
+                }
+            }
+            UpdateOccurences(kampId, PlayerId, mins2, gulekort, roedekort);
+            return Index(kampId);
         }
+
 
     }
 }
