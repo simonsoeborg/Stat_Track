@@ -18,12 +18,12 @@ namespace DataLibrary.Logic
         }
 
 
-
-        public static List<DLPlayerStatsModel> loadSpecifiMatch (int MatchId)
+        public static List<DLMatchViewModel> LoadSpecifiMatchView (int MatchId)
         {
-        string query = @"SELECT * FROM Team WHERE CreatorId = '" + MatchId + "';";
+            string query = @"SELECT e.EventType, e.Time, t.Name FROM EventData e INNER JOIN TeamPlayer t ON e.PlayerId = t.Id WHERE e.KampId ='" + MatchId +"';";
 
-        return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
+        return SqlDataAccess.GetData<DLMatchViewModel>(query);
         }
+
     }
 }

@@ -18,12 +18,13 @@ namespace StatTrack.Controllers
         {
             ClaimsPrincipal currentUser = this.User;
             var currentUserID = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var data = LoadMatches(currentUserID);
+            var data1 = LoadMatches(currentUserID);
 
+            CombinedMatchViewModel matchViewModel = new CombinedMatchViewModel();
 
             List<GameDataModel> MatchModel = new List<GameDataModel>();
 
-            foreach (var item in data)
+            foreach (var item in data1)
             {
                 MatchModel.Add(new GameDataModel
                 {
@@ -33,23 +34,37 @@ namespace StatTrack.Controllers
                     KampDato = item.KampDato,
                     KampId = item.KampId,
                     Modstander = item.Modstander,
-                    ModstanderGoals =item.ModstanderGoals 
-                });;
+                    ModstanderGoals = item.ModstanderGoals
+                }); ;
+
+                matchViewModel.GameModel = MatchModel;
             }
+            return View(matchViewModel);
 
-            return View(MatchModel);
         }
 
 
-        public IActionResult MatchInfo(int matchId)
+        public List<MatchViewModel> SpecificData(int matchId)
         {
+            CombinedMatchViewModel matchViewModel = new CombinedMatchViewModel();
 
+            List<MatchViewModel> StatModel = new List<MatchViewModel>();
 
-            return View();
+           var data2 = LoadSpecifiMatchView(matchId);
+               
+            foreach (var obj in data2)
+                {
+                Console.WriteLine("Test_times");
+                    StatModel.Add(new MatchViewModel
+                    {
+                        EventType = obj.EventType,
+                        id = obj.id,
+                        Navn = obj.Navn,
+                        Time = obj.Time,
+                    });
+                }
 
+            return StatModel;
         }
-
-
-
     }
 }
