@@ -32,17 +32,45 @@ namespace DataLibrary.Logic
             return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
         }
 
+        public static List<int> AlreadyAddedPlayersToEntry = new List<int>();
+        public static void insertDataToPlayerStats(string tidspunkt, int Attempts, int Goals, int KeeperSaves,
+            int Assists, int playerId, int kampId)
+        {
+            if (AlreadyAddedPlayersToEntry.Contains(playerId))
+            {
+                UpdatePlayerStats(tidspunkt, Attempts, Goals, KeeperSaves, Assists, playerId, kampId);
+            }
+            else
+            {
+                AddPlayerStats(tidspunkt, Attempts, Goals, KeeperSaves, Assists, playerId, kampId);
+                AlreadyAddedPlayersToEntry.Add(playerId);
+            }
+        }
+
         public static int UpdatePlayerStats(string tidspunkt, int Attempts, int Goals, int KeeperSaves, int Assists, int playerId, int kampId)
         {
             DLPlayerStatsModel psm = new DLPlayerStatsModel
             {
-                tidspunkt = tidspunkt,
+                Tidspunkt = tidspunkt,
                 Attempts = Attempts,
                 Assists = Assists,
                 KeeperSaves = KeeperSaves,
                 Goals = Goals
             };
-            string query = @"UPDATE SpillerStats SET tidspunkt = @tidspunkt, Attempts = @Attempts, Goals = @Goals, Assists = @Assists, KeeperSaves = @KeeperSaves WHERE SpillerId = '" + playerId + "' AND KampId = '" + kampId + "';";
+            string query = @"UPDATE SpillerStats SET Tidspunkt = @Tidspunkt, Attempts = @Attempts, Goals = @Goals, Assists = @Assists, KeeperSaves = @KeeperSaves WHERE SpillerId = '" + playerId + "' AND KampId = '" + kampId + "';";
+            return SqlDataAccess.SaveData(query, psm);
+        }
+        public static int AddPlayerStats(string tidspunkt, int Attempts, int Goals, int KeeperSaves, int Assists, int playerId, int kampId)
+        {
+            DLPlayerStatsModel psm = new DLPlayerStatsModel
+            {
+                Tidspunkt = tidspunkt,
+                Attempts = Attempts,
+                Assists = Assists,
+                KeeperSaves = KeeperSaves,
+                Goals = Goals
+            };
+            string query = @"INSERT INTO SpillerStats (SpillerId, Tidspunkt, Attempts, Goals, Assists, KeeperSaves, Mins2, gulekort, roedekort, KampId) VALUES ('"+ playerId +"', @Tidspunkt, @Attempts, @Goals, @Assists, @KeeperSaves, Mins2, Gulekort, Roedekort,'" + kampId + "');";
             return SqlDataAccess.SaveData(query, psm);
         }
     }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StatTrack.Logic;
 using StatTrack.Models;
 using static DataLibrary.Logic.PlayerProcessor;
 using static DataLibrary.Logic.GameProcessor;
@@ -45,7 +46,6 @@ namespace StatTrack.Controllers
             string currentUser = TeamController.GetCurrentUser;
             DateTime date = DateTime.Now;
             string formatDate = date.Year.ToString() + "/" + date.Month.ToString() + "/" + date.Day.ToString();
-            int x = 0;
             if (d.CreatorTeamGoals == 0 && d.ModstanderGoals == 0 && x == 0)
             {
                 d.CreatorTeamGoals = 0;
@@ -65,11 +65,13 @@ namespace StatTrack.Controllers
                 CreateGame(gmd.CreatorID, gmd.CreatorTeamId, gmd.Modstander, gmd.KampDato, gmd.CreatorTeamGoals,
                     gmd.ModstanderGoals);
 
+                kampId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate);
+                Console.WriteLine("KampID: " + kampId);
+                DataHandler.GameId = kampId;
                 x++;
             }
             else
             {
-                kampId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate);
                 UpdateGameResults(kampId, d.CreatorTeamGoals, d.ModstanderGoals);
             }
 
@@ -79,7 +81,7 @@ namespace StatTrack.Controllers
 
         public JsonResult PlayerStatToDb([FromBody] PlayerStatsModel d)
         {
-            UpdatePlayerStats(d.tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, kampId);
+            insertDataToPlayerStats(d.Tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, kampId);
 
             return Json(d);
         }

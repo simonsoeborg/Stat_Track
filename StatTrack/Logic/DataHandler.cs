@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using static DataLibrary.Logic.ClubProcessor;
 using StatTrack.Models;
@@ -16,6 +17,7 @@ namespace StatTrack.Logic
 {
     public class DataHandler
     {
+        public static int GameId;
         public List<ClubModel> getClubs()
         {
             var data = LoadClubs();
@@ -188,8 +190,8 @@ namespace StatTrack.Logic
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
-                    Yellowcards = item.gulekort,
-                    Redcards = item.roedekort,
+                    Yellowcards = item.Gulekort,
+                    Redcards = item.Roedekort,
                     Assists = item.Assists,
                     KampId = item.KampId,
                     KampDato = item.KampDato
@@ -212,14 +214,24 @@ namespace StatTrack.Logic
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
-                    Yellowcards = item.gulekort,
-                    Redcards = item.roedekort,
+                    Yellowcards = item.Gulekort,
+                    Redcards = item.Roedekort,
                     Assists = item.Assists,
                     KampId = item.KampId,
                     KampDato = item.KampDato
                 });
             }
             return myData;
+        }
+
+        public async Task<int> checkForGameId()
+        {
+            while (GameId == 0)
+            {
+                await Task.Delay(500);
+            }
+
+            return GameId;
         }
     }
 }

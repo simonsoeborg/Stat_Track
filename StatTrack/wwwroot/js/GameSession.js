@@ -8,12 +8,12 @@ function saveSession(playerId, event) {
     var playerSaves = parseInt(document.getElementById('saves_' + playerId).value, 10);
     var currentTeamScore = parseInt(document.getElementById("myTeamScore").value, 10);
     var currentAwayTeamScore = parseInt(document.getElementById("AwayTeamScore").value, 10);
-    var currentTime = document.getElementById('timer').value;
+    var currentTime = document.getElementById("timer").textContent;
 
     // Save to DB
     var dataObj = JSON.stringify({
         PlayerId: playerId,
-        tidspunkt: currentTime,
+        Tidspunkt: currentTime,
         Attempts: playerCurrentAttempts,
         Goals: playerGoals,
         KeeperSaves: playerSaves,

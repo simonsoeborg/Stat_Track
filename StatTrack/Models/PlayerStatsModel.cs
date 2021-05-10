@@ -15,7 +15,7 @@ namespace StatTrack.Models
         public int Mins2 { get; set; }
         public int Yellowcards { get; set; }
         public int Redcards { get; set; }
-        public string tidspunkt { get; set; }
+        public string Tidspunkt { get; set; }
         public int KampId { get; set; }
         public string KampDato { get; set; }
     }
