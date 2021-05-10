@@ -17,5 +17,13 @@ namespace DataLibrary.Logic
             return SqlDataAccess.GetData<DLGameDataModel>(query);
         }
 
+
+
+        public static List<DLPlayerStatsModel> loadSpecifiMatch (int MatchId)
+        {
+        string query = @"SELECT * FROM Team WHERE CreatorId = '" + MatchId + "';";
+
+        return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
+        }
     }
 }

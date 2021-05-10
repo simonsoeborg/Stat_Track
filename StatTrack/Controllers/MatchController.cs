@@ -40,5 +40,16 @@ namespace StatTrack.Controllers
             return View(MatchModel);
         }
 
+
+        public IActionResult MatchInfo(int matchId)
+        {
+
+
+            return View();
+
+        }
+
+
+
     }
 }
