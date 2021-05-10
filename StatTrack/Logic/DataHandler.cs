@@ -177,12 +177,12 @@ namespace StatTrack.Logic
                 myData.Add(new DLPlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
-                    GoalAttempts = item.Attempts,
+                    Attempts = item.Attempts,
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
-                    Yellowcards = item.gulekort,
-                    Redcards = item.roedekort,
+                    gulekort = item.gulekort,
+                    roedekort = item.roedekort,
                     Assists = item.Assists,
                     KampId = item.KampId,
                     KampDato = item.KampDato
@@ -201,12 +201,12 @@ namespace StatTrack.Logic
                 myData.Add(new DLPlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
-                    GoalAttempts = item.Attempts,
+                    Attempts = item.Attempts,
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
-                    Yellowcards = item.gulekort,
-                    Redcards = item.roedekort,
+                    gulekort = item.gulekort,
+                    roedekort = item.roedekort,
                     Assists = item.Assists,
                     KampId = item.KampId,
                     KampDato = item.KampDato

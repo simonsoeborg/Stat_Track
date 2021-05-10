@@ -78,7 +78,7 @@ namespace StatTrack.Controllers
         {
             var data = GetOccurences(kampId);
 
-            DLPlayerStatsModel model = new DLPlayerStatsModel;
+            DLPlayerStatsModel model = new DLPlayerStatsModel();
 
             foreach (var item in data)
             {
