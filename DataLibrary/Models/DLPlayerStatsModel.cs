@@ -17,5 +17,6 @@ namespace DataLibrary.Models
         public string Tidspunkt { get; set; }
         public int KampId { get; set; }
         public string KampDato { get; set; }
+
     }
 }

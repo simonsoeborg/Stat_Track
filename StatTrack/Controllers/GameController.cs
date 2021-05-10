@@ -11,8 +11,13 @@ using static DataLibrary.Logic.PlayerStatsProcessor;
 
 namespace StatTrack.Controllers
 {
+
     public class GameController : Controller
     {
+        int mins2;
+        int gulekort;
+        int roedekort;
+
         public IActionResult Index(int Id)
         {
             var data = LoadTeamPlayers(Id);
@@ -86,5 +91,44 @@ namespace StatTrack.Controllers
             return Json(d);
         }
 
+
+        public IActionResult GameOccurrence(int kampId, string OccurenceType, int PlayerId)
+        {
+            
+            var data = GetOccurences(kampId);
+
+            PlayerStatsModel model = new PlayerStatsModel();
+
+            foreach (var item in data)
+            {
+                if (item.PlayerId == PlayerId)
+                {
+                    if (OccurenceType == "Mins2")
+                    {
+                        mins2 += model.Mins2++;
+                        break;
+                    }
+
+                    if (OccurenceType == "gulekort")
+                    {
+                        gulekort += model.Yellowcards++;
+                        break;
+
+                    }
+
+                    if (OccurenceType == "roedekort")
+                    {
+                        roedekort += model.Redcards++;
+                        break;
+
+                    }
+                }
+            }
+            UpdateOccurences(kampId, PlayerId, mins2, gulekort, roedekort);
+            return Index(kampId);
+        }
+
+
     }
+
 }

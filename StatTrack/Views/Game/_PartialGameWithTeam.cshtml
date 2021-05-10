@@ -289,47 +289,60 @@
 <div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h5 class="modal-title" id="HomeEventModalTitle">Hændelse</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+
             <div class="modal-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <!-- Load spillerliste -> Vælg spiller -->
-                <div class="input-group">
-                    <select class="form-select">
+                <div class="form-group">
+                    <label asp-for="OccurenceModel.PlayerId" class="form-label"> </label>
+                    <select asp-for="OccurenceModel.PlayerId" name="PlayerId" select class="form-select">
                         @foreach (var item in Model.TeamPlayerModels)
                         {
                             <option id="@item.Id">@item.Name</option>
                         }
                     </select>
                 </div>
+
                 <!-- Vælg hændelse -->
-                <div class="form-check">
-                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option1" id="Home2minEvent">
-                    <label class="form-check-label" for="Home2minEvent">
-                        2 minutters udvisning
-                    </label>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="2min" type="radio" id="Home2minEvent">
+                        <label class="form-check-label" for="Home2minEvent">
+
+                            2 minutters udvisning
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option2" type="radio" id="HomeWarningEvent">
+                        <label class="form-check-label" for="HomeWarningEvent">
+                            Gult kort
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option3" type="radio" id="HomeRedCardEvent">
+                        <label class="form-check-label" for="HomeRedCardEvent">
+                            Rødt kort
+                        </label>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option2" id="HomeWarningEvent">
-                    <label class="form-check-label" for="HomeWarningEvent">
-                        Gult kort
-                    </label>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline-primary" onclick="getEvent()"></button>
+              
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" name="penaltyEventHome" type="radio" value="option3" id="HomeRedCardEvent">
-                    <label class="form-check-label" for="HomeRedCardEvent">
-                        Rødt kort
-                    </label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline-success">Tilføj</button>
             </div>
         </div>
     </div>
 </div>
+
+
+
 
 <div class="modal fade" id="AwayEventModal" tabindex="-1" aria-labelledby="AwayEventModal" aria-hidden="true">
     <div class="modal-dialog">
