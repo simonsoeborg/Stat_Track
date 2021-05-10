@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StatTrack.Models;
 using static DataLibrary.Logic.PlayerProcessor;
+using static DataLibrary.Logic.GameProcessor;
 
 namespace StatTrack.Controllers
 {
@@ -12,7 +13,6 @@ namespace StatTrack.Controllers
     {
         public IActionResult Index(int Id)
         {
-            Console.WriteLine(Id);
             var data = LoadTeamPlayers(Id);
             var MasterModel = new MasterModel();
 
@@ -33,7 +33,40 @@ namespace StatTrack.Controllers
 
             return View(MasterModel);
 
-            // Id will be TeamId, load team, and team players
+            // Id will be teamId, load team, and team players
+        }
+
+        public IActionResult PostGameToDb(int teamId, string modstander, int teamGoals, int awayTeamGoals)
+        {
+            string currentUser = TeamController.GetCurrentUser;
+            DateTime date = DateTime.Now;
+            string formatDate = date.Year.ToString() + "/" + date.Month.ToString() + "/" + date.Day.ToString();
+            if (teamGoals == 0 && awayTeamGoals == 0)
+            {
+                teamGoals = 0;
+                awayTeamGoals = 0;
+
+                GameDataModel gmd = new GameDataModel
+                {
+                    CreatorID = currentUser,
+                    CreatorTeamId = teamId,
+                    Modstander = modstander,
+                    KampDato = formatDate,
+                    CreatorTeamGoals = teamGoals,
+                    ModstanderGoals = awayTeamGoals
+                };
+
+                CreateGame(gmd.CreatorID, gmd.CreatorTeamId, gmd.Modstander, gmd.KampDato, gmd.CreatorTeamGoals,
+                    gmd.ModstanderGoals);
+            }
+            else
+            {
+                int kampId = GetKampId(currentUser, teamId, modstander, formatDate);
+                UpdateGameResults(kampId, teamGoals, awayTeamGoals);
+            }
+
+
+            return Index(teamId);
         }
     }
 }
@@ -41,9 +74,9 @@ namespace StatTrack.Controllers
 
 
 
-       /* public IActionResult GetPlayerList(int TeamId)
+       /* public IActionResult GetPlayerList(int teamId)
         {
-            var data = LoadTeamPlayers(TeamId);
+            var data = LoadTeamPlayers(teamId);
 
 
             var MasterModel = new MasterModel();

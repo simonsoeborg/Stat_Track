@@ -42,6 +42,7 @@ startBtn.addEventListener('click', function () {
     if (!stopWatch.isOn) {
         stopWatch.start();
         document.getElementById("SetGameTimeSelectionBar").style.visibility = 'hidden';
+
     }
 });
 

@@ -1,5 +1,43 @@
 ﻿
 
+// Toggle Game button when Data is filled in and create Kamp in DB
+var isAllReady = false;
+var MTName = document.getElementById("myTeamName");
+var MTYear = document.getElementById("team1_yearBtn");
+var MTLeague = document.getElementById("team1_leagueBtn");
+var ATName = document.getElementById("AwayTeamName");
+var ATYear = document.getElementById("team2_yearBtn");
+var ATLeague = document.getElementById("team2_leagueBtn");
+var btn1, btn2;
+btn1 = document.getElementById("startBtn");
+btn2 = document.getElementById("stopBtn");
+btn1.disabled = true;
+btn2.disabled = true;
+
+MTName.addEventListener("change", checkGameIsReady);
+MTYear.addEventListener("change", checkGameIsReady);
+MTLeague.addEventListener("change", checkGameIsReady);
+ATName.addEventListener("change", checkGameIsReady);
+ATYear.addEventListener("change", checkGameIsReady);
+ATLeague.addEventListener("change", checkGameIsReady);
+
+function checkGameIsReady() {
+    if (MTName.value !== "" ||
+        MTName.value != null &&
+        MTYear.value !== "Vælg Årgang" &&
+        MTLeague.value !== "Vælg Række" &&
+        ATName.value !== "" ||
+        ATName.value != null &&
+        ATYear.value !== "Vælg Årgang" &&
+        ATLeague.value !== "Vælg Række") {
+        btn1.disabled = false;
+        btn2.disabled = false;
+        isAllReady = true;
+    }
+}
+
+// Incrementations
+
 function incrementMyTeamGoal(player) {
     var myTeamPlayerGoals = parseInt(document.getElementById("goals_" + player).value, 10);
     var myTeamScore = parseInt(document.getElementById("myTeamScore").value, 10);
