@@ -20,7 +20,7 @@
                 @foreach(var item in dataH.GetAllPlayersFromAllTeams()) { 
                     <tr>
                         <td>
-                            <a href="@Url.Action("Details", "Player", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB})">@item.Name</a>
+                            <a href="@Url.Action("DetailsList", "Player", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB })">@item.Name</a>
                         </td>
                         <td>
                             @item.YOB.ToString()[2]@item.YOB.ToString()[3]
