@@ -65,8 +65,8 @@ namespace DataLibrary.Logic
             DLPlayerStatsModel data = new DLPlayerStatsModel() {
                 PlayerId = PlayerId,
                 Mins2 = Mins2,
-                gulekort = gulekort,
-                roedekort = roedekort,
+                Gulekort = gulekort,
+                Roedekort = roedekort,
                 KampId = KampId
             };
              
