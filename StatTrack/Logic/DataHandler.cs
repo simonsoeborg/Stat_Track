@@ -41,10 +41,17 @@ namespace StatTrack.Logic
         public List<string> GetLeagues()
         {
             List<string> leagues = new List<string>();
-            leagues.Add("Liga");
+            leagues.Add("Håndboldligaen");
             leagues.Add("1. Div");
             leagues.Add("2. Div");
             leagues.Add("3. Div");
+            leagues.Add("Kvalifikationsrækken");
+            leagues.Add("Jyllandsserien");
+            leagues.Add("Fynsserien");
+            leagues.Add("Serie 1");
+            leagues.Add("Serie 2");
+            leagues.Add("Serie 3");
+            leagues.Add("Serie 4");
             leagues.Add("Niveaustævne");
             leagues.Add("Turnering");
             return leagues;
@@ -177,7 +184,7 @@ namespace StatTrack.Logic
                 myData.Add(new PlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
-                    GoalAttempts = item.Attempts,
+                    Attempts = item.Attempts,
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
@@ -201,7 +208,7 @@ namespace StatTrack.Logic
                 myData.Add(new PlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
-                    GoalAttempts = item.Attempts,
+                    Attempts = item.Attempts,
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,

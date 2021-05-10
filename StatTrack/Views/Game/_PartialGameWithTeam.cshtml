@@ -1,15 +1,26 @@
 ﻿@using StatTrack.Logic
+@using StatTrack.Controllers
+@using System.Threading;
 @model StatTrack.Models.MasterModel
 @{
-    DataHandler data = new DataHandler();
+        DataHandler data = new DataHandler();
 
-    List<string> uYearsNames = data.getYears();
-    List<string> Position = data.getPositions();
-    List<string> leagueList = data.GetLeagues();
+        List<string> uYearsNames = data.getYears();
+        List<string> Position = data.getPositions();
+        List<string> leagueList = data.GetLeagues();
 
-    var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
-    var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
+        var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
+        var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
+        //var getGameId = 0;
 
+@*        while (getGameId == 0)
+        {
+            getGameId = GameController.kampId;
+
+            Thread.Sleep(1000);
+        }*@
+        // data = Method();
+        
 }
 
 
