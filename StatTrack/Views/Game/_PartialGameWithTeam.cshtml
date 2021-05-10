@@ -296,11 +296,12 @@
             </div>
 
             <div class="modal-body">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="text-danger"></div>
                 <!-- Load spillerliste -> Vælg spiller -->
                 <div class="form-group">
-                    <label asp-for="OccurenceModel.PlayerId" class="form-label"> </label>
-                    <select asp-for="OccurenceModel.PlayerId" name="PlayerId" select class="form-select">
+                    <label class="form-label"> </label>
+                    <select class="form-select" onchange="setHomeEventPlayer(this);">
+                        <option selected></option>
                         @foreach (var item in Model.TeamPlayerModels)
                         {
                             <option id="@item.Id">@item.Name</option>
@@ -311,20 +312,19 @@
                 <!-- Vælg hændelse -->
                 <div class="form-group">
                     <div class="form-check">
-                        <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="2min" type="radio" id="Home2minEvent">
+                        <input value="2min" name="HomeEvent" type="radio" id="Home2minEvent">
                         <label class="form-check-label" for="Home2minEvent">
-
                             2 minutters udvisning
                         </label>
                     </div>
                     <div class="form-check">
-                        <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option2" type="radio" id="HomeWarningEvent">
-                        <label class="form-check-label" for="HomeWarningEvent">
+                        <input value="option2" name="HomeEvent" type="radio" id="HomeYellowCardEvent">
+                        <label class="form-check-label" for="HomeYellowCardEvent">
                             Gult kort
                         </label>
                     </div>
                     <div class="form-check">
-                        <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option3" type="radio" id="HomeRedCardEvent">
+                        <input value="option3" name="HomeEvent" type="radio" id="HomeRedCardEvent">
                         <label class="form-check-label" for="HomeRedCardEvent">
                             Rødt kort
                         </label>
@@ -332,7 +332,7 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" class="btn btn-outline-primary" onclick="getEvent()"></button>
+                    <button id="newEventHomeTeamBtn" type="button" class="btn btn-outline-primary" onclick="newEventHomeTeam();" data-bs-dismiss="modal">Tilføj</button>
               
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 </div>

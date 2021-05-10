@@ -41,9 +41,9 @@ function createDataString(playerName, event, time) {
     var data = "";
 
     if (event === "goal") {
-        data = time + ": " + playerName + getEvent(event);
+        data = time + " - " + playerName + getEvent(event);
     } else {
-        data = time + ": " + getEvent(event) + playerName;
+        data = time + " - " + getEvent(event) + playerName;
     }
 
     return data;
@@ -111,18 +111,111 @@ function saveGameToDB() {
     });
 }
 
-var kId = 0;
-function getKampId() {
+var homeEventPlayerId = 0;
+var homeEventPlayerName = "";
+document.getElementById("newEventHomeTeamBtn").disabled = true;
+
+function setHomeEventPlayer(val) {
+    homeEventPlayerId = parseInt(val.options[val.selectedIndex].id, 10);
+    homeEventPlayerName = val.options[val.selectedIndex].text;
+    console.log("Id: " + homeEventPlayerId);
+    console.log("Name: " + homeEventPlayerId);
+    document.getElementById("newEventHomeTeamBtn").disabled = false;
+}
+
+function newGoalOrSaveEvent(event, playerId, Time) {
+    
+}
+
+function newEventHomeTeam() {
+    var playerId = homeEventPlayerId;
+    var playerName = homeEventPlayerName;
+    var Time = document.getElementById("timer").textContent;
+    var eventName = "";
+    var eventType = "";
+    if (document.getElementById("Home2minEvent").checked) {
+        eventName = "2min";
+        eventType = "2 Minutters Udvisning";
+    }
+
+    if (document.getElementById("HomeYellowCardEvent").checked) {
+        eventName = "yCard";
+        eventType = "Gult Kort";
+    }
+
+    if (document.getElementById("HomeRedCardEvent").checked) {
+        eventName = "rCard";
+        eventType = "Rødt Kort";
+    }
+
+    // Add Event to DB
+    addNewEventDataToDB(eventType, playerId, Time);
+
+    // Data String for Kamp Historik
+    addNewDataStringToHistoryDB(createDataString(playerName, eventName, Time), Time);
+}
+
+function addNewDataStringToHistoryDB(DataString, Time) {
+    var dataObj = JSON.stringify({
+        DataString: DataString,
+        Time: Time
+    });
+
     $.ajax({
-        type: 'GET',
-        url: '/Game/HTTPGetKampId',
-        dataType: "json",
-        success: function(response) {
-            kId = response;
-            console.log("Response: " + response);
+        type: 'POST',
+        url: '/Game/EventToHistoryDB',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: dataObj,
+        success: function (response) {
+            console.log("Send to EventToHistoryDB(): ", response);
+        },
+        error: function () {
+            console.log("Failed to Add Event to History");
+        }
+    });
+}
+
+function addNewEventDataToDB(EventType, PlayerId, Time) {
+    var dataObj = "";
+
+    switch (EventType) {
+        case "goal":
+            var data = "Scoring";
+        dataObj = JSON.stringify({
+            EventType: data,
+            PlayerId: PlayerId,
+            Time: Time
+        });
+            break;
+        case "save":
+            var data = "Redning";
+        dataObj = JSON.stringify({
+            EventType: data,
+            PlayerId: PlayerId,
+            Time: Time
+        });
+        break;
+    default:
+        dataObj = JSON.stringify({
+            EventType: EventType,
+            PlayerId: PlayerId,
+            Time: Time
+        });
+        break;
+    }
+
+    $.ajax({
+        type: 'POST',
+        url: '/Game/EventToDB',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: dataObj,
+        success: function (response) {
+            console.log("Send to EventToDB(): ", response);
         },
         error: function() {
-            console.log("Could not fetch Kamp ID!");
+            console.log("Failed to Add Event");
         }
     });
 }
