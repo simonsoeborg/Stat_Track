@@ -35,10 +35,9 @@
         @Html.ActionLink("Edit", "Edit", new { playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, YOB = Model.YOB }, new { @class = "btn btn-outline-warning" })
 
 
-        @Html.ActionLink("Tilbage", "PlayerLineUp", new { id }, new { @class = "btn btn-outline-secondary" })
+        @Html.ActionLink("Tilbage", "Index", "Team", new { }, new { @class = "btn btn-outline-secondary" })
 
     </div>
 </div>
 
 @await Html.PartialAsync("/Views/Player/_DetailsStatsParital.cshtml", Model)
-

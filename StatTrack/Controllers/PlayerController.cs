@@ -104,6 +104,15 @@ namespace StatTrack.Controllers
             return View(model);       
         }
 
+        public IActionResult DetailsList(int playerId, string playerName, string playerPosition, int YOB)
+        {
+            var model = new PlayerModel { Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
+
+            return View(model);
+        }
+
+
+
         public IActionResult PlayerLineUp(int Id)
         {
             currentTeamId = Id;
