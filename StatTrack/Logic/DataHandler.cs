@@ -173,23 +173,23 @@ namespace StatTrack.Logic
             return AllPlayers;
         }
 
-        public List<DLPlayerStatsModel> GetCurrentSeasonPlayerStats(int playerId)
+        public List<PlayerStatsModel> GetCurrentSeasonPlayerStats(int playerId)
         {
             List<DataLibrary.Models.DLPlayerStatsModel> currentSeasonData = DataLibrary.Logic.PlayerStatsProcessor.GetCurrentSeasonPlayerStats(playerId);
             
-            List<DLPlayerStatsModel> myData = new List<DLPlayerStatsModel>();
+            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
 
             foreach (var item in currentSeasonData)
             {
-                myData.Add(new DLPlayerStatsModel()
+                myData.Add(new PlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
                     Attempts = item.Attempts,
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
-                    gulekort = item.gulekort,
-                    roedekort = item.roedekort,
+                    Yellowcards = item.gulekort,
+                    Redcards = item.roedekort,
                     Assists = item.Assists,
                     KampId = item.KampId,
                     KampDato = item.KampDato
@@ -197,23 +197,23 @@ namespace StatTrack.Logic
             }
             return myData;
         }
-        public List<DLPlayerStatsModel> GetOverAllPlayerStats(int playerId)
+        public List<PlayerStatsModel> GetOverAllPlayerStats(int playerId)
         {
             List<DataLibrary.Models.DLPlayerStatsModel> overAllData = GetOverallPlayerStats(playerId);
 
-            List<DLPlayerStatsModel> myData = new List<DLPlayerStatsModel>();
+            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
 
             foreach (var item in overAllData)
             {
-                myData.Add(new DLPlayerStatsModel()
+                myData.Add(new PlayerStatsModel()
                 {
                     PlayerId = item.PlayerId,
                     Attempts = item.Attempts,
                     Goals = item.Goals,
                     KeeperSaves = item.KeeperSaves,
                     Mins2 = item.Mins2,
-                    gulekort = item.gulekort,
-                    roedekort = item.roedekort,
+                    Yellowcards = item.gulekort,
+                    Redcards = item.roedekort,
                     Assists = item.Assists,
                     KampId = item.KampId,
                     KampDato = item.KampDato

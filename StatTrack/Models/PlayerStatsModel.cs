@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StatTrack.Models
 {
-    public class DLPlayerStatsModel
+    public class PlayerStatsModel
     {
         public int PlayerId { get; set; }
         public int Attempts { get; set; }

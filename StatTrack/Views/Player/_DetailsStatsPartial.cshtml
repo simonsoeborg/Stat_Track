@@ -4,8 +4,8 @@
 @{
     DataHandler data = new DataHandler();
     // Get player stats
-    List<DLPlayerStatsModel> currentSeason = data.GetCurrentSeasonPlayerStats(Model.Id);
-    List<DLPlayerStatsModel> overAllData = data.GetOverAllPlayerStats(Model.Id);
+    List<PlayerStatsModel> currentSeason = data.GetCurrentSeasonPlayerStats(Model.Id);
+    List<PlayerStatsModel> overAllData = data.GetOverAllPlayerStats(Model.Id);
 
 }
 
@@ -69,10 +69,9 @@
                                 amountOfGoals += item.Goals;
                                 amountOfSaves += item.KeeperSaves;
                                 amountOf2Mins += item.Mins2;
-                                amountOfYellow += item.gulekort;
-                                amountOfRed += item.roedekort;
+                                amountOfYellow += item.Yellowcards;
+                                amountOfRed += item.Redcards;
                             }
-
                         }
                         <tr>
                             <td id="amountOfPlayedGamesCurrent">
@@ -185,8 +184,8 @@
                                 amountOfSavesAll += item.KeeperSaves;
                                 amountOf2MinsAll += item.Mins2;
                                 amountOfAssistsAll += item.Assists;
-                                amountOfYellowAll += item.gulekort;
-                                amountOfRedAll += item.roedekort;
+                                amountOfYellowAll += item.Yellowcards;
+                                amountOfRedAll += item.Redcards;
                             }
 
                         }
