@@ -188,9 +188,9 @@ function gameEnded() {
         var paragraphTitel = document.getElementById("GameFinishedResultTitel");
         var paragraph = document.getElementById("GameFinishedResult");
         var team1 = document.getElementById("myTeamName").value;
-        var scoreTeam1 = document.getElementById("myTeamScore").value;
+        var scoreTeam1 = parseInt(document.getElementById("myTeamScore").value, 10);
         var team2 = document.getElementById("AwayTeamName").value;
-        var scoreTeam2 = document.getElementById("AwayTeamScore").value;
+        var scoreTeam2 = parseInt(document.getElementById("AwayTeamScore").value, 10);
 
         paragraphTitel.textContent = "Kamp Resultat:";
         if (scoreTeam1 > scoreTeam2) {

@@ -72,7 +72,6 @@ namespace StatTrack.Controllers
         public JsonResult RePostGameToDb([FromBody] GameDataModel d)
         {
             string currentUser = TeamController.GetCurrentUser;
-            Console.WriteLine("TeamId: " + d.CreatorTeamId);
             DateTime date = DateTime.Now;
             string formatDate = date.Year.ToString() + "/" + date.Month.ToString() + "/" + date.Day.ToString();
             if (d.CreatorTeamGoals == 0 && d.ModstanderGoals == 0)
@@ -96,7 +95,6 @@ namespace StatTrack.Controllers
             else
             {
                 int kampId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate);
-                Console.WriteLine("Kamp ID: " + kampId);
                 UpdateGameResults(kampId, d.CreatorTeamGoals, d.ModstanderGoals);
             }
 
