@@ -128,7 +128,18 @@ namespace StatTrack.Controllers
             return Index(kampId);
         }
 
+        public JsonResult EventToDB([FromBody] EventModel d)
+        {
+            AddNewEvent(d.EventType, d.PlayerId, d.Time, DataHandler.GameId);
 
+            return Json(d);
+        }
+
+        public JsonResult EventToHistoryDB([FromBody] GameHistory d)
+        {
+            AddNewHistoryEvent(d.DataString, d.Time, DataHandler.GameId);
+            return Json(d);
+        }
     }
 
 }
