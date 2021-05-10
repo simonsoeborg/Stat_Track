@@ -39,6 +39,7 @@ function checkGameIsReady() {
 // Incrementations
 
 function incrementMyTeamGoal(player) {
+    var Time = document.getElementById("timer").textContent;
     var myTeamPlayerGoals = parseInt(document.getElementById("goals_" + player).value, 10);
     var myTeamScore = parseInt(document.getElementById("myTeamScore").value, 10);
     var amountOfShots = parseInt(document.getElementById("amountOfShots_" + player).value, 10);
@@ -53,6 +54,8 @@ function incrementMyTeamGoal(player) {
     document.getElementById("myTeamScore").value = myTeamScore;
     document.getElementById("amountOfShots_" + player).value = amountOfShots;
     saveSession(player);
+    // Add Event to DB
+    addNewEventDataToDB("goal", player, Time);
 }
 
 function decrementMyTeamGoal(player) {
@@ -136,6 +139,7 @@ function decrementMyTeamAssists(player) {
 }
 
 function incrementMyTeamSaves(player) {
+    var Time = document.getElementById("timer").textContent;
     var amountOfSaves = parseInt(document.getElementById("saves_" + player).value, 10);
     amountOfSaves = isNaN(amountOfSaves) ? 0 : amountOfSaves;
     amountOfSaves++;
@@ -143,6 +147,8 @@ function incrementMyTeamSaves(player) {
     document.getElementById("saves_" + player).value = amountOfSaves;
 
     saveSession(player);
+    // Add Event to DB
+    addNewEventDataToDB("save", player, Time);
 }
 
 function decrementMyTeamSaves(player) {

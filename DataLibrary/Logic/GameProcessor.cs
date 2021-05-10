@@ -77,5 +77,32 @@ namespace DataLibrary.Logic
             return 0;
 
         }
+
+        public static int AddNewEvent(string EventType, int PlayerId, string Time, int KampId)
+        {
+            DLEventModel data = new DLEventModel()
+            {
+                EventType = EventType,
+                PlayerId = PlayerId,
+                Time = Time,
+                KampId = KampId
+            };
+
+            string query = @"INSERT INTO EventData (EventType, PlayerId, Time, KampId) VALUES (@EventType, @PlayerId, @Time, @KampId);";
+            return SqlDataAccess.SaveData(query, data);
+        }
+
+        public static int AddNewHistoryEvent(string DataString, string Time, int KampId)
+        {
+            DLGameHistory data = new DLGameHistory()
+            {
+                DataString = DataString,
+                Time = Time,
+                KampId = KampId
+            };
+
+            string query = @"INSERT INTO KampHistorik (DataString, Time, KampId) VALUES (@DataString, @Time, @KampId);";
+            return SqlDataAccess.SaveData(query, data);
+        }
     }
 }
