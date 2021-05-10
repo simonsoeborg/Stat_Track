@@ -11,7 +11,6 @@ namespace DataLibrary.Logic
     {
         public static int CreateGame(string creatorId, int teamId, string modstander, string kampdato, int teamGoals, int modstanderGoals)
         {
-
             DLGameDataModel data = new DLGameDataModel()
             {
                 CreatorID = creatorId,
@@ -35,14 +34,14 @@ namespace DataLibrary.Logic
                 CreatorTeamGoals = teamGoals,
                 ModstanderGoals = modstanderGoals
             };
-            string query = @"UPDATE KampData SET CreatorTeamGoals = @CreatorTeamGoals, ModstanderGoals = @ModstanderGoals WHERE KampId = @kampId;";
+            string query = @"UPDATE KampData SET CreatorTeamGoals = " + teamGoals + ", ModstanderGoals = " + modstanderGoals + " WHERE KampId = " + kampId + ";";
 
             return SqlDataAccess.SaveData(query, data);
         }
 
         public static int GetKampId(string creatorId, int teamId, string modstander, string kampDato)
         {
-            string query = @"SELECT KampId FROM KampData WHERE CreatorID = @creatorId AND CreatorTeamId = @teamId AND KampDato = @kampDato AND Modstander = @modstander;";
+            string query = @"SELECT KampId FROM KampData WHERE CreatorID = N'" + creatorId + "' AND CreatorTeamId = " + teamId + " AND Modstander = '" + modstander +"' AND KampDato = '" + kampDato + "';";
 
             List<DLGameDataModel> dataList = SqlDataAccess.GetData<DLGameDataModel>(query);
             

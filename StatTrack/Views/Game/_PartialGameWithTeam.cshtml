@@ -27,7 +27,7 @@
                     {
                         <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn">
                     }
-                    <input id="myTeamScore" type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input id="myTeamScore" type="number" class="form-control scoreForm" value="0" min="0" max="100">
                 </div>
                 <div class="row">
                     <!-- Set årgang & Række, dropdowns -->
@@ -147,7 +147,7 @@
             <div class="container">
                 <!-- Opponent Club Name and score -->
                 <div class="input-group">
-                    <input id="AwayTeamScore" type="number" class="form-control scoreForm" placeholder="0" min="0" max="100">
+                    <input id="AwayTeamScore" type="number" class="form-control scoreForm" value="0" min="0" max="100">
                     <input id="AwayTeamName" type="text" class="form-control teamForm" placeholder="Modstander klub navn">
                 </div>
                 <div class="row">
@@ -362,3 +362,5 @@
         </div>
     </div>
 </div>
+
+<label id="myTeamId" style="visibility: hidden;">@currentTeam.Id</label>
