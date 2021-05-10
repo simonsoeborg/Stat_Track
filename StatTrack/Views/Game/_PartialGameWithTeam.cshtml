@@ -277,58 +277,58 @@
     </div>
 </div>
 
-                    <div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
-                        <form asp-action="GameOccurrenc">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="HomeEventModalTitle">Hændelse</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                        <!-- Load spillerliste -> Vælg spiller -->
-                                        <div class="form-group">
-                                            <label asp-for="OccurenceModel.PlayerId" class="form-label"> </label>
-                                            <select asp-for="OccurenceModel.PlayerId" name="PlayerId" select class="form-select">
-                                                @foreach (var item in Model.TeamPlayerModels)
-                                                {
-                                                    <option id="@item.Id">@item.Name</option>
-                                                }
-                                            </select>
-                                        </div>
-
-                                        <!-- Vælg hændelse -->
-                                        <div class="form-group">
-                                            <div class="form-check">
-                                                <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option1" type="radio" id="Home2minEvent">
-                                                <label class="form-check-label" for="Home2minEvent">
-
-                                                    2 minutters udvisning
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option2" type="radio" id="HomeWarningEvent">
-                                                <label class="form-check-label" for="HomeWarningEvent">
-                                                    Gult kort
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option3" type="radio" id="HomeRedCardEvent">
-                                                <label class="form-check-label" for="HomeRedCardEvent">
-                                                    Rødt kort
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-outline-success">Tilføj</button>
-                                        </div>
-                                    </div>
-                            </div>
-                        </form>
+<div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="HomeEventModalTitle">Hændelse</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- Load spillerliste -> Vælg spiller -->
+                    <div class="form-group">
+                        <label asp-for="OccurenceModel.PlayerId" class="form-label"> </label>
+                        <select asp-for="OccurenceModel.PlayerId" name="PlayerId" select class="form-select">
+                            @foreach (var item in Model.TeamPlayerModels)
+                            {
+                                <option id="@item.Id">@item.Name</option>
+                            }
+                        </select>
                     </div>
 
+                    <!-- Vælg hændelse -->
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option1" type="radio" id="Home2minEvent">
+                            <label class="form-check-label" for="Home2minEvent">
+
+                                2 minutters udvisning
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option2" type="radio" id="HomeWarningEvent">
+                            <label class="form-check-label" for="HomeWarningEvent">
+                                Gult kort
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input asp-for="OccurenceModel.OccurenceType" name="OccurenceType" value="option3" type="radio" id="HomeRedCardEvent">
+                            <label class="form-check-label" for="HomeRedCardEvent">
+                                Rødt kort
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form asp-action="GameOccurrence" asp-route-id="@Model.OccurenceModel">
+                            <input type="submit" value="Tilføj" class="btn btn-outline-primary" />
+                        </form>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+</div>
+
+                   
 <div class="modal fade" id="AwayEventModal" tabindex="-1" aria-labelledby="AwayEventModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

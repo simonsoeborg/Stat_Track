@@ -69,7 +69,14 @@ namespace StatTrack.Controllers
             return Index(teamId);
         }
 
-      
+
+        public IActionResult GameOccurrence()
+        {
+
+
+            return Index();
+
+        }
 
     }
 }
