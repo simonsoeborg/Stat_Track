@@ -14,10 +14,6 @@ namespace StatTrack.Controllers
 
     public class GameController : Controller
     {
-        int mins2;
-        int gulekort;
-        int roedekort;
-
         public IActionResult Index(int Id)
         {
             var data = LoadTeamPlayers(Id);
@@ -42,8 +38,6 @@ namespace StatTrack.Controllers
 
             // Id will be teamId, load team, and team players
         }
-
-        public static int kampId = 0;
 
         public static int x = 0;
         public JsonResult RePostGameToDb([FromBody] GameDataModel d)
@@ -70,14 +64,13 @@ namespace StatTrack.Controllers
                 CreateGame(gmd.CreatorID, gmd.CreatorTeamId, gmd.Modstander, gmd.KampDato, gmd.CreatorTeamGoals,
                     gmd.ModstanderGoals);
 
-                kampId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate);
-                Console.WriteLine("KampID: " + kampId);
-                DataHandler.GameId = kampId;
+                DataHandler.GameId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate); ;
+
                 x++;
             }
             else
             {
-                UpdateGameResults(kampId, d.CreatorTeamGoals, d.ModstanderGoals);
+                UpdateGameResults(DataHandler.GameId, d.CreatorTeamGoals, d.ModstanderGoals);
             }
 
 
@@ -86,46 +79,9 @@ namespace StatTrack.Controllers
 
         public JsonResult PlayerStatToDb([FromBody] PlayerStatsModel d)
         {
-            insertDataToPlayerStats(d.Tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, kampId);
+            insertDataToPlayerStats(d.Tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, DataHandler.GameId);
 
             return Json(d);
-        }
-
-
-        public IActionResult GameOccurrence(int kampId, string OccurenceType, int PlayerId)
-        {
-            
-            var data = GetOccurences(kampId);
-
-            PlayerStatsModel model = new PlayerStatsModel();
-
-            foreach (var item in data)
-            {
-                if (item.PlayerId == PlayerId)
-                {
-                    if (OccurenceType == "Mins2")
-                    {
-                        mins2 += model.Mins2++;
-                        break;
-                    }
-
-                    if (OccurenceType == "gulekort")
-                    {
-                        gulekort += model.Yellowcards++;
-                        break;
-
-                    }
-
-                    if (OccurenceType == "roedekort")
-                    {
-                        roedekort += model.Redcards++;
-                        break;
-
-                    }
-                }
-            }
-            UpdateOccurences(kampId, PlayerId, mins2, gulekort, roedekort);
-            return Index(kampId);
         }
 
         public JsonResult EventToDB([FromBody] EventModel d)
@@ -135,9 +91,10 @@ namespace StatTrack.Controllers
             return Json(d);
         }
 
-        public JsonResult EventToHistoryDB([FromBody] GameHistory d)
+        public JsonResult EmptyGameId([FromBody] EventModel d)
         {
-            AddNewHistoryEvent(d.DataString, d.Time, DataHandler.GameId);
+            DataHandler.GameId = 0;
+            x = 0;
             return Json(d);
         }
     }

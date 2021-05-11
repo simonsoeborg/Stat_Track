@@ -48,36 +48,6 @@ namespace DataLibrary.Logic
             return dataList.FirstOrDefault().KampId;
         }
 
-
-        public static List<DLPlayerStatsModel> GetOccurences(int kampId)
-        {
-            string query = @"SELECT * FROM SpillerStats WHERE KampId = @kampId;";
-
-            return SqlDataAccess.GetData<DLPlayerStatsModel>(query);
-
-        }
-
-        public static int UpdateOccurences(int gulekort, int roedekort, int Mins2, int PlayerId, int KampId)
-        {
-            //   for (int i = 0; i < list.Count; i++)
-            // {
-
-            DLPlayerStatsModel data = new DLPlayerStatsModel() {
-                PlayerId = PlayerId,
-                Mins2 = Mins2,
-                Gulekort = gulekort,
-                Roedekort = roedekort,
-                KampId = KampId
-            };
-             
-            string query = @"UPDATE SpillerStats SET Mins2 = @Mins2, gulekort = @gulekort, roedekort = @roedekort WHERE SpillerId = @PlayerId AND KampId = KampId 
-            ELSE INSERT INTO SpillerStats (SpillerId, Mins2, gulekort, roedekort, KampId) VALUES (@PlayerId, @Mins2, @gulekort, @roedekort, @KampId);";
-
-            SqlDataAccess.SaveData(query, data);
-            return 0;
-
-        }
-
         public static int AddNewEvent(string EventType, int PlayerId, string Time, int KampId)
         {
             DLEventModel data = new DLEventModel()
@@ -89,19 +59,6 @@ namespace DataLibrary.Logic
             };
 
             string query = @"INSERT INTO EventData (EventType, PlayerId, Time, KampId) VALUES (@EventType, @PlayerId, @Time, @KampId);";
-            return SqlDataAccess.SaveData(query, data);
-        }
-
-        public static int AddNewHistoryEvent(string DataString, string Time, int KampId)
-        {
-            DLGameHistory data = new DLGameHistory()
-            {
-                DataString = DataString,
-                Time = Time,
-                KampId = KampId
-            };
-
-            string query = @"INSERT INTO KampHistorik (DataString, Time, KampId) VALUES (@DataString, @Time, @KampId);";
             return SqlDataAccess.SaveData(query, data);
         }
     }

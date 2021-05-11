@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVR9eFev6iEecO3qpaD9cqAAAAAACAAAAAAAQZgAAAAEAACAAAADe/IqGxDlvye0pZzwUTBnLujWqO00yrqmdMmeXnMH3bAAAAAAOgAAAAAIAACAAAAA+3ylj8y7CkbQsuchK6xglCjEffUmtwuTsai5/yz3guiAAAABK78Bpmj+FAozDFKG3FsvDzBWyuOk3V3ibGrN7IN1ePUAAAAB9woYnteBcq08yvZxZeOXZbXcyzoD0Zw2Vn4bImWwUEidAovhWbGi1pWTiryN8vZA/fMl3D7H5VPPQLWoGkZc0</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=83.90.136.195%3bInitial Catalog=master%3bPersist Security Info=True%3bUser ID=stattrack%3bPassword=100%25Kaffe</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="MySQLConnection">
+      <Value>Server=mysql30.unoeuro.com%3bDatabase=uglyrage_com_db_aspnet%3bUser=uglyrage_com%3bPassword=2d4f6r3t</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="StatTrack.Data.ApplicationDbContext">
+      <Value>Data Source=83.90.136.195%3bInitial Catalog=master%3bPersist Security Info=True%3bUser ID=stattrack%3bPassword=100%25Kaffe</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

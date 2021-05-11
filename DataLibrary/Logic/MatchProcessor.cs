@@ -21,13 +21,11 @@ namespace DataLibrary.Logic
 
         public static List<DLMatchViewModel> LoadSpecifiMatchView (int MatchId)
         {
-            Console.WriteLine(MatchId);
             string query = @"SELECT t.Name, e.Time, e.EventType, k.Modstander, k.KampDato 
                             FROM EventData e 
                             INNER JOIN TeamPlayer t ON e.PlayerId = t.Id
                             INNER JOIN KampData k ON e.KampId = k.KampId
-                            WHERE k.KampId = '" + MatchId + "'" +
-                           "ORDER BY e.Time DESC;";
+                            WHERE k.KampId = '" + MatchId + "' ORDER BY e.Time DESC;";
             return SqlDataAccess.GetData<DLMatchViewModel>(query);
         }
 

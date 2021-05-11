@@ -59,10 +59,12 @@ halfTimeBtn.addEventListener('click', function () {
 stopBtn.addEventListener('click', function () {
     stopWatch.stop();
     document.getElementById("SetGameTimeSelectionBar").style.visibility = 'visible';
+    saveGameToDB();
 });
 
 stopBtn.addEventListener('dblclick', function () {
     stopWatch.reset();
+    saveGameToDB();
 });
 
 
@@ -203,6 +205,7 @@ function gameEnded() {
 
         document.getElementById("GameFinished").style.visibility = "visible";
         saveGameToDB();
+        deleteGameId();
         i++;
     }
 }

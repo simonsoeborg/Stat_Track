@@ -33,8 +33,6 @@ function saveSession(playerId, event) {
             console.log("Could not send Data to PostGameToDB()");
         }
     });
-
-    // Save DataString to DB for Kamp Historik
 }
 
 function createDataString(playerName, event, time) {
@@ -150,31 +148,8 @@ function newEventHomeTeam() {
 
     // Add Event to DB
     addNewEventDataToDB(eventType, playerId, Time);
-
-    // Data String for Kamp Historik
-    addNewDataStringToHistoryDB(createDataString(playerName, eventName, Time), Time);
 }
 
-function addNewDataStringToHistoryDB(DataString, Time) {
-    var dataObj = JSON.stringify({
-        DataString: DataString,
-        Time: Time
-    });
-
-    $.ajax({
-        type: 'POST',
-        url: '/Game/EventToHistoryDB',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: dataObj,
-        success: function (response) {
-            console.log("Send to EventToHistoryDB(): ", response);
-        },
-        error: function () {
-            console.log("Failed to Add Event to History");
-        }
-    });
-}
 
 function addNewEventDataToDB(EventType, PlayerId, Time) {
     var dataObj = "";
@@ -216,6 +191,22 @@ function addNewEventDataToDB(EventType, PlayerId, Time) {
         },
         error: function() {
             console.log("Failed to Add Event");
+        }
+    });
+}
+
+function deleteGameId() {
+    $.ajax({
+        type: 'POST',
+        url: '/Game/EmptyGameId',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: 0,
+        success: function (response) {
+            console.log("Emptied the GameId");
+        },
+        error: function () {
+            console.log("Could not send Data to EmptyGameId()");
         }
     });
 }
