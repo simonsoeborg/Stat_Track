@@ -13,6 +13,13 @@
 
 
 #Matchdato {
-    right: 0 px !important;
-    top: 0 px !important; 
+    right: 0 !important;
+    top: 0 !important; 
 }
+
+.accordion-button:not(.collapsed) {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+}
+
+.accordion-item { margin-bottom: 0.15rem !important; }

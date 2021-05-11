@@ -14,15 +14,21 @@ namespace DataLibrary.Logic
             // Indputtet userId her sørger for at kun dine egne oprettede hold bliver vist.
             string query = @"SELECT * FROM KampData WHERE CreatorID = '" + userID + "';";
 
+
             return SqlDataAccess.GetData<DLGameDataModel>(query);
         }
 
 
         public static List<DLMatchViewModel> LoadSpecifiMatchView (int MatchId)
         {
-            string query = @"SELECT e.EventType, e.Time, t.Name FROM EventData e INNER JOIN TeamPlayer t ON e.PlayerId = t.Id WHERE e.KampId ='" + MatchId +"';";
-
-        return SqlDataAccess.GetData<DLMatchViewModel>(query);
+            Console.WriteLine(MatchId);
+            string query = @"SELECT t.Name, e.Time, e.EventType, k.Modstander, k.KampDato 
+                            FROM EventData e 
+                            INNER JOIN TeamPlayer t ON e.PlayerId = t.Id
+                            INNER JOIN KampData k ON e.KampId = k.KampId
+                            WHERE k.KampId = '" + MatchId + "'" +
+                           "ORDER BY e.Time DESC;";
+            return SqlDataAccess.GetData<DLMatchViewModel>(query);
         }
 
     }

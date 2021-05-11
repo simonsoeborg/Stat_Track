@@ -7,7 +7,7 @@
     var id = PlayerController.currentTeamId;
 }
 
-<h1>Spiller: @Model.PlayerName</h1>
+<h1>@Model.PlayerName</h1>
 
 <div class="row justify-content-md-start">
     <hr />
@@ -40,4 +40,4 @@
     </div>
 </div>
 
-@await Html.PartialAsync("/Views/Player/_DetailsStatsParital.cshtml", Model)
+@await Html.PartialAsync("/Views/Player/_DetailsStatsPartial.cshtml", Model)

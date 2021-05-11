@@ -6,10 +6,12 @@ namespace DataLibrary.Models
 {
     public class DLMatchViewModel
     {
-        public string EventType { get; set; }
+        public int Id { get; set; }
+        public int KampId { get; set; }
+        public string Name { get; set; }
         public string Time { get; set; }
-        public string Navn { get; set; }
-
-        public int id { get; set; }
+        public string EventType { get; set; }
+        public string Modstander { get; set; }
+        public string KampDato { get; set; }
     }
 }

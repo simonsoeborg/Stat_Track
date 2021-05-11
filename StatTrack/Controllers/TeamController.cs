@@ -54,7 +54,6 @@ public class TeamController : Controller
     public IActionResult Create(TeamModel model)
         {
        
-        Console.WriteLine("test 2");
             if (ModelState.IsValid)
             {
             Console.WriteLine(model.Name + "  " + model.ClubId + "  " + model.CreatorId + "   " + model.TeamUYear + "    " + model.Division); 
@@ -70,7 +69,6 @@ public class TeamController : Controller
     public IActionResult Delete(int id)
     {
         DeleteTeams(id);
-        Console.WriteLine("I was here u dunky");
 
         return RedirectToAction("Index");
     }
