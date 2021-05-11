@@ -1,15 +1,19 @@
 ﻿@model IEnumerable<StatTrack.Models.TeamModel>
 
+@{
+    int i = 0;
+}
+
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="card border-primary mb-3" style="width: 16rem">
             <div class="card-body">
 
-                <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#DeleteTeam"></button>
+                <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#DeleteTeam_@i"></button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="DeleteTeam" tabindex="-1" aria-labelledby="TeamModalLabel" aria-hidden="true">
+                <div class="modal fade" id="DeleteTeam_@i" tabindex="-1" aria-labelledby="TeamModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <form asp-action="Create">
@@ -58,7 +62,6 @@
 
 
 
-
                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
 
                 <p style="font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division): <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b></p>
@@ -70,6 +73,7 @@
                 <a class="btn btn-outline-primary" asp-area="" asp-controller="Game" asp-action="Index" asp-route-id="@item.Id">Start Kamp</a>
             </div>
         </div>
+        i++;
     }
 </div>
 
