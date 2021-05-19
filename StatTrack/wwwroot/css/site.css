@@ -2,126 +2,110 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    text-align: center;
+    white-space: normal;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
+
+a { color: #0366d6; }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+    color: #fff;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
-}
+
+html { font-size: 14px; }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html { font-size: 16px; }
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
+.border-top { border-top: 1px solid #e5e5e5; }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
-  position: relative;
-  min-height: 100%;
+    min-height: 100%;
+    position: relative;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    bottom: 0;
+    line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .btn-outline-facebook {
-    color: #4267B2 !important;
     background-color: transparent !important;
     border-color: #4267B2 !important;
+    color: #4267B2 !important;
 }
 
 .btn-outline-facebook:hover {
-    color: #304c82 !important;
     background-color: #8fa7d6 !important;
     border-color: #304c82 !important;
+    color: #304c82 !important;
 }
 
 .btn-outline-twitter {
-    color: #1DA1F2 !important;
     background-color: transparent !important;
     border-color: #1DA1F2 !important;
+    color: #1DA1F2 !important;
 }
 
 .btn-outline-twitter:hover {
-    color: #085c91 !important;
     background-color: #9fd7f9 !important;
     border-color: #085c91 !important;
+    color: #085c91 !important;
 }
 
 .btn-outline-google {
-    color: #DB4437 !important;
     background-color: transparent !important;
     border-color: #DB4437 !important;
+    color: #DB4437 !important;
 }
 
 .btn-outline-google:hover {
-    color: #c23124 !important;
     background-color: #f7d7d4 !important;
     border-color: #c23124 !important;
+    color: #c23124 !important;
 }
 
-.specific-a {
-    text-decoration: none;
-}
+.specific-a { text-decoration: none; }
 
-.success-a {
-    color: var(--bs-success);
-}
+.success-a { color: var(--bs-success); }
 
-.success-a:hover {
-    color: white;
-}
+.success-a:hover { color: white; }
 
-.secondary-a {
-    color: var(--bs-secondary);
-}
+.secondary-a { color: var(--bs-secondary); }
 
-.secondary-a:hover {
-    color: white;
-}
+.secondary-a:hover { color: white; }

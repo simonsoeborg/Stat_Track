@@ -1,19 +1,15 @@
 ﻿@using StatTrack.Logic
-@using StatTrack.Controllers
-@using System.Threading;
-@model StatTrack.Models.MasterModel
+@model MasterModel
 @{
-    DataHandler data = new DataHandler();
+    var data = new DataHandler();
 
-    List<string> uYearsNames = data.getYears();
-    List<string> Position = data.getPositions();
-    List<string> leagueList = data.GetLeagues();
+    var uYearsNames = data.getYears();
+    var positions = data.getPositions();
+    var leagueList = data.GetLeagues();
 
-    var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
-    var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
+    var currentTeam = data.getTeamModel(int.Parse(ViewContext.RouteData.Values["id"].ToString()));
+    var currentClub = data.getClub(int.Parse(currentTeam.ClubId));
 
-    int GameId;
-    
 }
 
 
@@ -21,31 +17,24 @@
     <div class="row overall_row">
         <div class="col-4">
             <div class="container">
-                <!-- My Club Name and score -->
                 <div class="input-group">
                     @if (currentClub != null)
                     {
-                        <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn" value="@currentClub.Initials" />
+                        <input id="myTeamName" type="text" class="form-control teamForm" disabled="true" placeholder="Mit klub navn" value="@currentClub.Initials"/>
                     }
                     else
                     {
-                        <input id="myTeamName" type="text" class="form-control teamForm" placeholder="Mit klub navn">
+                        <input id="myTeamName" type="text" class="form-control teamForm" disabled="true" placeholder="Mit klub navn">
                     }
                     <input id="myTeamScore" type="number" class="form-control scoreForm" value="0" min="0" max="100">
                 </div>
                 <div class="row">
-                    <!-- Set årgang & Række, dropdowns -->
                     <div class="input-group">
-                        <select class="form-select" id="team1_yearBtn">
-                            @*
-                                Hent data fra Databasen
-                                U3 - U19 (U3, U5, U7, U9, U11, U13, U15, U17, U19)
-                                2021 - 4 = 2018 = 18, (18, 16, 14, 12, 10, 08, 06, 04, 02)
-                            *@
+                        <select class="form-select" id="team1_yearBtn" disabled="true">
                             @if (currentTeam.TeamUYear != null)
                             {
                                 <option selected>@currentTeam.TeamUYear</option>
-                                @for (int i = 0; i < uYearsNames.Count; i++)
+                                @for (var i = 0; i < uYearsNames.Count; i++)
                                 {
                                     if (uYearsNames[i] != currentTeam.TeamUYear)
                                     {
@@ -55,21 +44,18 @@
                             }
                             else
                             {
-                                <option selected>Vælg Årgang</option>
-                                @for (int i = 0; i < uYearsNames.Count; i++)
+                                <option selected disabled="true">Vælg Årgang</option>
+                                @for (var i = 0; i < uYearsNames.Count; i++)
                                 {
                                     <option value="@i">@uYearsNames[i]</option>
                                 }
                             }
                         </select>
-                        <select class="form-select" id="team1_leagueBtn">
-                            @*
-                                Liga, 1. Div, 2. Div, 3. Div, Cup event
-                            *@
+                        <select class="form-select" id="team1_leagueBtn" disabled="disabled">
                             @if (currentTeam.Division != null)
                             {
                                 <option selected>@currentTeam.Division</option>
-                                @for (int i = 0; i < leagueList.Count; i++)
+                                @for (var i = 0; i < leagueList.Count; i++)
                                 {
                                     if (leagueList[i] != currentTeam.Division)
                                     {
@@ -80,7 +66,7 @@
                             else
                             {
                                 <option selected>Vælg Række</option>
-                                @for (int i = 0; i < leagueList.Count; i++)
+                                @for (var i = 0; i < leagueList.Count; i++)
                                 {
                                     <option value="@i">@leagueList[i]</option>
                                 }
@@ -90,7 +76,6 @@
                 </div>
                 <div class="row">
                     <div class="col-4">
-                        <!-- Penalty button, modal -->
                         <div class="container ctnr_nopadding">
                             <p align="left">
                                 <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#HomeEventModal">
@@ -109,7 +94,7 @@
                     <div id="primaryTimerBtnsRow" class="row justify-content-md-center">
                         <div class="col-4">
                             <div class="btn-group" role="group">
-                                <button id="startBtn" type="button" class="btn btn-outline-success" onclick="@data.checkForGameId();" >Start</button>
+                                <button id="startBtn" type="button" class="btn btn-outline-success" onclick="@data.checkForGameId();">Start</button>
                                 <button id="stopBtn" type="button" class="btn btn-outline-danger">Stop</button>
                             </div>
                         </div>
@@ -138,24 +123,22 @@
         </div>
         <div class="col-4">
             <div class="container">
-                <!-- Opponent Club Name and score -->
                 <div class="input-group">
                     <input id="AwayTeamScore" type="number" class="form-control scoreForm" value="0" min="0" max="100">
                     <input id="AwayTeamName" type="text" class="form-control teamForm" placeholder="Modstander klub navn">
                 </div>
                 <div class="row">
-                    <!-- Set årgang & Række, dropdowns -->
                     <div class="input-group">
                         <select class="form-select" id="team2_yearBtn">
                             <option selected>Vælg Årgang</option>
-                            @for (int i = 0; i < uYearsNames.Count; i++)
+                            @for (var i = 0; i < uYearsNames.Count; i++)
                             {
                                 <option value="@i">@uYearsNames[i]</option>
                             }
                         </select>
                         <select class="form-select" id="team2_leagueBtn">
                             <option selected>Vælg Række</option>
-                            @for (int i = 0; i < leagueList.Count; i++)
+                            @for (var i = 0; i < leagueList.Count; i++)
                             {
                                 <option value="@i">@leagueList[i]</option>
                             }
@@ -165,7 +148,6 @@
                 <div class="row">
                     <div class="container">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <!-- Penalty button, modal -->
                             <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#AwayEventModal">
                                 Hændelse
                             </button>
@@ -207,14 +189,25 @@
 </div>
 <div class="row justify-content-md-center">
     <div class="container" style="display: block; margin-left: auto; margin-right: auto;">
-        <!-- Tabel for all players -->
         <div class="row">
-            <div class="col-2"><b>Spillernavn</b></div>
-            <div class="col-2"><b>Spillerposition</b></div>
-            <div class="col-2"><b>Skud</b></div>
-            <div class="col-2"><b>Mål</b></div>
-            <div class="col-2"><b>Assists</b></div>
-            <div class="col-2"><b>Redninger</b></div>
+            <div class="col-2">
+                <b>Spillernavn</b>
+            </div>
+            <div class="col-2">
+                <b>Spillerposition</b>
+            </div>
+            <div class="col-2">
+                <b>Skud</b>
+            </div>
+            <div class="col-2">
+                <b>Mål</b>
+            </div>
+            <div class="col-2">
+                <b>Assists</b>
+            </div>
+            <div class="col-2">
+                <b>Redninger</b>
+            </div>
         </div>
         <div class="row">
             @foreach (var item in Model.TeamPlayerModels)
@@ -222,15 +215,15 @@
                 <div class="row" style="margin: 0.10rem; padding: 0.10rem;">
                     <div class="col-2">
                         <div class="input-group">
-                            <input id="playerName_@item.Id" type="text" class="form-control" value="@item.Name" />
+                            <input id="playerName_@item.Id" type="text" class="form-control" value="@item.Name"/>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-group">
                             <select id="playerPosition_@item.Id" asp-for="@item.Position" name="Position" select class="form-select">
-                                @for (int i = 0; i < Position.Count; i++)
+                                @for (var i = 0; i < positions.Count; i++)
                                 {
-                                    <option value="@Position[i].ToString()">@Position[i]</option>
+                                    <option value="@positions[i]">@positions[i]</option>
                                 }
                             </select>
                         </div>
@@ -240,7 +233,7 @@
                             <div class="input-group-prepend">
                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAttempts(@item.Id);">-</button>
                             </div>
-                            <input id="amountOfShots_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <input id="amountOfShots_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0"/>
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAttempts(@item.Id);">+</button>
                             </div>
@@ -251,7 +244,7 @@
                             <div class="input-group-prepend">
                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamGoal(@item.Id);">-</button>
                             </div>
-                            <input id="goals_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <input id="goals_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0"/>
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamGoal(@item.Id);">+</button>
                             </div>
@@ -262,7 +255,7 @@
                             <div class="input-group-prepend">
                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamAssists(@item.Id);">-</button>
                             </div>
-                            <input id="assists_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <input id="assists_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0"/>
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamAssists(@item.Id);">+</button>
                             </div>
@@ -273,7 +266,7 @@
                             <div class="input-group-prepend">
                                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="decrementMyTeamSaves(@item.Id);">-</button>
                             </div>
-                            <input id="saves_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0" />
+                            <input id="saves_@item.Id" type="text" style="padding: 0; text-align: center;" class="form-control" value="0"/>
                             <div class="input-group-append">
                                 <button type="button" class="btn btn-outline-success btn-sm" onclick="incrementMyTeamSaves(@item.Id);">+</button>
                             </div>
@@ -283,7 +276,6 @@
             }
         </div>
     </div>
-</div>
 </div>
 
 <div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
@@ -297,7 +289,6 @@
 
             <div class="modal-body">
                 <div class="text-danger"></div>
-                <!-- Load spillerliste -> Vælg spiller -->
                 <div class="form-group">
                     <label class="form-label"> </label>
                     <select class="form-select" onchange="setHomeEventPlayer(this);">
@@ -309,7 +300,6 @@
                     </select>
                 </div>
 
-                <!-- Vælg hændelse -->
                 <div class="form-group">
                     <div class="form-check">
                         <input value="2min" name="HomeEvent" type="radio" id="Home2minEvent">
@@ -332,17 +322,13 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button id="newEventHomeTeamBtn" type="button" class="btn btn-outline-primary" onclick="newEventHomeTeam();" data-bs-dismiss="modal">Tilføj</button>
-              
+                    <button id="newEventHomeTeamBtn" disabled type="button" class="btn btn-outline-primary" onclick="newEventHomeTeam();" data-bs-dismiss="modal">Tilføj</button>
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 <div class="modal fade" id="AwayEventModal" tabindex="-1" aria-labelledby="AwayEventModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -352,12 +338,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Load spillerliste -> Vælg spiller -->
                 <div class="input-group flex-nowrap">
                     <span class="input-group-text" id="addon-wrapping">#</span>
                     <input type="number" class="form-control" placeholder="Spillernummer" aria-label="Spillernummer" aria-describedby="addon-wrapping">
                 </div>
-                <!-- Vælg hændelse -->
                 <div class="form-check">
                     <input class="form-check-input" name="penaltyEventAway" type="radio" value="option1" id="Away2minEvent">
                     <label class="form-check-label" for="Away2minEvent">

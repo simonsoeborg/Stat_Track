@@ -1,13 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DataLibrary;
-using DataLibrary.Logic;
-using StatTrack.Data;
-using static DataLibrary.Logic.ClubProcessor;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using StatTrack.Models;
+using static DataLibrary.Logic.ClubProcessor;
 
 namespace StatTrack.Controllers
 {
@@ -16,11 +10,10 @@ namespace StatTrack.Controllers
         public IActionResult Index()
         {
             var data = LoadClubs();
-            List<ClubModel> clubs = new List<ClubModel>();
+            var clubs = new List<ClubModel>();
 
             foreach (var item in data)
-            {
-                clubs.Add(new ClubModel()
+                clubs.Add(new ClubModel
                 {
                     Id = item.Id,
                     Initials = item.Initials,
@@ -29,7 +22,6 @@ namespace StatTrack.Controllers
                     Postal = item.Postal,
                     City = item.City
                 });
-            }
             return View(clubs);
         }
 
@@ -45,16 +37,22 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                CreateClub(model.Initials,model.Name, model.Address, model.Postal, model.City);
+                CreateClub(model.Initials, model.Name, model.Address, model.Postal, model.City);
 
                 return RedirectToAction("Index");
             }
+
             return View();
         }
 
-        public IActionResult Delete(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
+        public IActionResult Delete(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal,
+            string clubAddress)
         {
-            var model = new ClubModel { Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal, Address = clubAddress};
+            var model = new ClubModel
+            {
+                Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal,
+                Address = clubAddress
+            };
 
             return View(model);
         }
@@ -68,13 +66,19 @@ namespace StatTrack.Controllers
                 DeleteClub(Id);
                 return RedirectToAction("Index");
             }
+
             return View();
         }
 
 
-        public IActionResult Edit(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
+        public IActionResult Edit(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal,
+            string clubAddress)
         {
-            var model = new ClubModel { Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal, Address = clubAddress };
+            var model = new ClubModel
+            {
+                Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal,
+                Address = clubAddress
+            };
             return View(model);
         }
 
@@ -84,17 +88,22 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(model.Id);
-                UpdateClub(model.Id,model.Initials,model.Name,model.City,model.Postal,model.Address);
+                UpdateClub(model.Id, model.Initials, model.Name, model.City, model.Postal, model.Address);
                 return RedirectToAction("Index");
             }
+
             return View();
         }
 
 
-        public IActionResult Details(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal, string clubAddress)
+        public IActionResult Details(int clubId, string clubInitials, string clubName, string clubCity, int clubPostal,
+            string clubAddress)
         {
-            var model = new ClubModel { Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal, Address = clubAddress};
+            var model = new ClubModel
+            {
+                Id = clubId, Initials = clubInitials, Name = clubName, City = clubCity, Postal = clubPostal,
+                Address = clubAddress
+            };
 
             return View(model);
         }

@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
-using static DataLibrary.Logic.ClubProcessor;
-using StatTrack.Models;
-using DataLibrary;
 using DataLibrary.Logic;
-using Org.BouncyCastle.Bcpg;
+using StatTrack.Models;
+using static DataLibrary.Logic.ClubProcessor;
 using static DataLibrary.Logic.TeamProcessor;
 using static DataLibrary.Logic.PlayerProcessor;
 using static DataLibrary.Logic.PlayerStatsProcessor;
+using TeamPlayerModel = DataLibrary.Models.TeamPlayerModel;
 
 namespace StatTrack.Logic
 {
     public class DataHandler
     {
         public static int GameId;
+
         public List<ClubModel> getClubs()
         {
             var data = LoadClubs();
-            List<ClubModel> clubs = new List<ClubModel>();
+            var clubs = new List<ClubModel>();
 
             foreach (var item in data)
-            {
-                clubs.Add(new ClubModel()
+                clubs.Add(new ClubModel
                 {
                     Id = item.Id,
                     Initials = item.Initials,
@@ -34,7 +30,6 @@ namespace StatTrack.Logic
                     Postal = item.Postal,
                     City = item.City
                 });
-            }
 
             return clubs;
         }
@@ -42,7 +37,7 @@ namespace StatTrack.Logic
 
         public List<string> GetLeagues()
         {
-            List<string> leagues = new List<string>();
+            var leagues = new List<string>();
             leagues.Add("Håndboldligaen");
             leagues.Add("1. Div");
             leagues.Add("2. Div");
@@ -61,7 +56,7 @@ namespace StatTrack.Logic
 
         public List<string> getYears()
         {
-            List<string> uYearsNames = new List<string>();
+            var uYearsNames = new List<string>();
             uYearsNames.Add("Senior");
             uYearsNames.Add("Oldies");
             uYearsNames.Add("U19");
@@ -82,7 +77,7 @@ namespace StatTrack.Logic
 
         public List<string> getPositions()
         {
-            List<string> playerPositions = new List<string>();
+            var playerPositions = new List<string>();
             playerPositions.Add("Målvogter");
             playerPositions.Add("Højrefløj");
             playerPositions.Add("Venstrefløj");
@@ -97,7 +92,7 @@ namespace StatTrack.Logic
         {
             var teamModelData = GetTeam(teamId);
 
-            List<TeamModel> team = new List<TeamModel>();
+            var team = new List<TeamModel>();
 
             foreach (var item in teamModelData)
             {
@@ -109,7 +104,8 @@ namespace StatTrack.Logic
                     Division = item.Division,
                     TeamUYear = item.TeamUYear,
                     Id = item.Id
-                }); ;
+                });
+                ;
             }
 
             return team[0].Name;
@@ -119,7 +115,7 @@ namespace StatTrack.Logic
         {
             var teamModelData = GetTeam(teamId);
 
-            List<TeamModel> team = new List<TeamModel>();
+            var team = new List<TeamModel>();
 
             foreach (var item in teamModelData)
             {
@@ -131,7 +127,8 @@ namespace StatTrack.Logic
                     Division = item.Division,
                     TeamUYear = item.TeamUYear,
                     Id = item.Id
-                }); ;
+                });
+                ;
             }
 
             return team.FirstOrDefault();
@@ -141,11 +138,11 @@ namespace StatTrack.Logic
         {
             var clubModelView = GetClub(clubId);
 
-            List<ClubModel> club = new List<ClubModel>();
+            var club = new List<ClubModel>();
 
             foreach (var item in clubModelView)
             {
-                club.Add(new ClubModel()
+                club.Add(new ClubModel
                 {
                     Name = item.Name,
                     Initials = item.Initials,
@@ -153,37 +150,33 @@ namespace StatTrack.Logic
                     Postal = item.Postal,
                     City = item.City,
                     Id = item.Id
-                }); ;
+                });
+                ;
             }
 
             return club.FirstOrDefault();
         }
 
-        public List<DataLibrary.Models.TeamPlayerModel> GetAllPlayersFromAllTeams()
+        public List<TeamPlayerModel> GetAllPlayersFromAllTeams()
         {
-            string userId = TeamController.GetCurrentUser;
-            List<DataLibrary.Models.TeamModel> teams = LoadTeams(userId);
-            List<DataLibrary.Models.TeamPlayerModel> AllPlayers = new List<DataLibrary.Models.TeamPlayerModel>();
+            var userId = TeamController.GetCurrentUser;
+            var teams = LoadTeams(userId);
+            var AllPlayers = new List<TeamPlayerModel>();
             foreach (var team in teams)
-            {
-                foreach (var player in LoadAllUsersPlayers(team.Id))
-                {
-                    AllPlayers.Add(player);
-                }
-            }
+            foreach (var player in LoadAllUsersPlayers(team.Id))
+                AllPlayers.Add(player);
 
             return AllPlayers;
         }
 
         public List<PlayerStatsModel> GetCurrentSeasonPlayerStats(int playerId)
         {
-            List<DataLibrary.Models.DLPlayerStatsModel> currentSeasonData = DataLibrary.Logic.PlayerStatsProcessor.GetCurrentSeasonPlayerStats(playerId);
-            
-            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
+            var currentSeasonData = PlayerStatsProcessor.GetCurrentSeasonPlayerStats(playerId);
+
+            var myData = new List<PlayerStatsModel>();
 
             foreach (var item in currentSeasonData)
-            {
-                myData.Add(new PlayerStatsModel()
+                myData.Add(new PlayerStatsModel
                 {
                     PlayerId = item.PlayerId,
                     Attempts = item.Attempts,
@@ -196,18 +189,17 @@ namespace StatTrack.Logic
                     KampId = item.KampId,
                     KampDato = item.KampDato
                 });
-            }
             return myData;
         }
+
         public List<PlayerStatsModel> GetOverAllPlayerStats(int playerId)
         {
-            List<DataLibrary.Models.DLPlayerStatsModel> overAllData = GetOverallPlayerStats(playerId);
+            var overAllData = GetOverallPlayerStats(playerId);
 
-            List<PlayerStatsModel> myData = new List<PlayerStatsModel>();
+            var myData = new List<PlayerStatsModel>();
 
             foreach (var item in overAllData)
-            {
-                myData.Add(new PlayerStatsModel()
+                myData.Add(new PlayerStatsModel
                 {
                     PlayerId = item.PlayerId,
                     Attempts = item.Attempts,
@@ -220,16 +212,12 @@ namespace StatTrack.Logic
                     KampId = item.KampId,
                     KampDato = item.KampDato
                 });
-            }
             return myData;
         }
 
         public async Task<int> checkForGameId()
         {
-            while (GameId == 0)
-            {
-                await Task.Delay(500);
-            }
+            while (GameId == 0) await Task.Delay(500);
 
             return GameId;
         }

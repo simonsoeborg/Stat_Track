@@ -1,25 +1,24 @@
-﻿
-#MatchListHeader {
+﻿#MatchListHeader {
     font-size: 18px !important;
     text-align: center !important;
 }
 
 #MatchListscore {
-    text-align : center !important;
     color: #0d6efd !important;
     font-size: 18px !important;
     font-weight: bold !important;
+    text-align: center !important;
 }
 
 
 #Matchdato {
     right: 0 !important;
-    top: 0 !important; 
+    top: 0 !important;
 }
 
 .accordion-button:not(.collapsed) {
-    color: #000000 !important;
     background-color: #ffffff !important;
+    color: #000000 !important;
 }
 
 .accordion-item { margin-bottom: 0.15rem !important; }

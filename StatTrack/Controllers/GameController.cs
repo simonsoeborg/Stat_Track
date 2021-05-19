@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using StatTrack.Logic;
 using StatTrack.Models;
 using static DataLibrary.Logic.PlayerProcessor;
@@ -11,18 +9,18 @@ using static DataLibrary.Logic.PlayerStatsProcessor;
 
 namespace StatTrack.Controllers
 {
-
     public class GameController : Controller
     {
+        public static int x;
+
         public IActionResult Index(int Id)
         {
             var data = LoadTeamPlayers(Id);
-            var MasterModel = new MasterModel();
+            var masterModel = new MasterModel();
 
-            List<TeamPlayerModel> players = new List<TeamPlayerModel>();
+            var players = new List<TeamPlayerModel>();
             foreach (var item in data)
-            {
-                players.Add(new TeamPlayerModel()
+                players.Add(new TeamPlayerModel
                 {
                     Name = item.Name,
                     Position = item.Position,
@@ -30,27 +28,25 @@ namespace StatTrack.Controllers
                     Id = item.Id,
                     TeamID = item.TeamID
                 });
-            }
 
-            MasterModel.TeamPlayerModels = players;
+            masterModel.TeamPlayerModels = players;
 
-            return View(MasterModel);
+            return View(masterModel);
 
             // Id will be teamId, load team, and team players
         }
 
-        public static int x = 0;
         public JsonResult RePostGameToDb([FromBody] GameDataModel d)
         {
-            string currentUser = TeamController.GetCurrentUser;
-            DateTime date = DateTime.Now;
-            string formatDate = date.Year.ToString() + "/" + date.Month.ToString() + "/" + date.Day.ToString();
+            var currentUser = TeamController.GetCurrentUser;
+            var date = DateTime.Now;
+            var formatDate = date.Year + "/" + date.Month + "/" + date.Day;
             if (d.CreatorTeamGoals == 0 && d.ModstanderGoals == 0 && x == 0)
             {
                 d.CreatorTeamGoals = 0;
                 d.ModstanderGoals = 0;
 
-                GameDataModel gmd = new GameDataModel
+                var gmd = new GameDataModel
                 {
                     CreatorID = currentUser,
                     CreatorTeamId = d.CreatorTeamId,
@@ -64,7 +60,8 @@ namespace StatTrack.Controllers
                 CreateGame(gmd.CreatorID, gmd.CreatorTeamId, gmd.Modstander, gmd.KampDato, gmd.CreatorTeamGoals,
                     gmd.ModstanderGoals);
 
-                DataHandler.GameId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate); ;
+                DataHandler.GameId = GetKampId(currentUser, d.CreatorTeamId, d.Modstander, formatDate);
+                ;
 
                 x++;
             }
@@ -79,12 +76,13 @@ namespace StatTrack.Controllers
 
         public JsonResult PlayerStatToDb([FromBody] PlayerStatsModel d)
         {
-            insertDataToPlayerStats(d.Tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId, DataHandler.GameId);
+            insertDataToPlayerStats(d.Tidspunkt, d.Attempts, d.Goals, d.KeeperSaves, d.Assists, d.PlayerId,
+                DataHandler.GameId);
 
             return Json(d);
         }
 
-        public JsonResult EventToDB([FromBody] EventModel d)
+        public JsonResult EventToDb([FromBody] EventModel d)
         {
             AddNewEvent(d.EventType, d.PlayerId, d.Time, DataHandler.GameId);
 
@@ -98,5 +96,4 @@ namespace StatTrack.Controllers
             return Json(d);
         }
     }
-
 }

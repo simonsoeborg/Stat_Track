@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc;
 using StatTrack.Models;
 using static DataLibrary.Logic.MatchProcessor;
-using System.Security.Claims;
 
 
 namespace StatTrack.Controllers
@@ -16,16 +13,16 @@ namespace StatTrack.Controllers
 
         public IActionResult MatchesList()
         {
-            ClaimsPrincipal currentUser = this.User;
+            var currentUser = User;
             var currentUserId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
             var data1 = LoadMatches(currentUserId);
 
-            MatchViewModel mvm = new MatchViewModel();
+            var mvm = new MatchViewModel();
 
 
-            CombinedMatchViewModel matchViewModel = new CombinedMatchViewModel();
+            var matchViewModel = new CombinedMatchViewModel();
 
-            List<GameDataModel> MatchModel = new List<GameDataModel>();
+            var MatchModel = new List<GameDataModel>();
 
             foreach (var item in data1)
             {
@@ -38,24 +35,23 @@ namespace StatTrack.Controllers
                     KampId = item.KampId,
                     Modstander = item.Modstander,
                     ModstanderGoals = item.ModstanderGoals
-                }); ;
+                });
+                ;
 
                 matchViewModel.GameModel = MatchModel;
             }
-            return View(matchViewModel);
 
+            return View(matchViewModel);
         }
 
 
         public List<MatchViewModel> SpecificData(int matchId)
         {
-
-            List<MatchViewModel> mvm = new List<MatchViewModel>();
+            var mvm = new List<MatchViewModel>();
 
             var data2 = LoadSpecifiMatchView(matchId);
 
             foreach (var obj in data2)
-            {
                 mvm.Add(new MatchViewModel
                 {
                     Id = obj.Id,
@@ -65,7 +61,6 @@ namespace StatTrack.Controllers
                     KampDato = obj.KampDato,
                     Modstander = obj.Modstander
                 });
-            }
 
             return mvm;
         }

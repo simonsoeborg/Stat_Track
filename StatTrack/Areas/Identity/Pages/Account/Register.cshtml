@@ -9,21 +9,21 @@
     <div class="col-md-4">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <h4>Opret en ny konto.</h4>
-            <hr />
+            <hr/>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
+                <input asp-for="Input.Email" class="form-control"/>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Password">Kodeord</label>
-                <input asp-for="Input.Password" class="form-control" />
+                <input asp-for="Input.Password" class="form-control"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ConfirmPassword">Bekræft kodeord</label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <input asp-for="Input.ConfirmPassword" class="form-control"/>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-outline-success">Opret</button>
@@ -32,7 +32,7 @@
     <div class="col-md-6 col-md-offset-2">
         <section>
             <h4>Opret via en anden service.</h4>
-            <hr />
+            <hr/>
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
@@ -52,17 +52,23 @@
                                 {
                                     if (provider.DisplayName == "Google")
                                     {
-                                        <button type="submit" class="btn btn-outline-google" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="bi bi-google"></i> @provider.DisplayName</button>
+                                        <button type="submit" class="btn btn-outline-google" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <i class="bi bi-google"></i> @provider.DisplayName
+                                        </button>
                                     }
 
                                     if (provider.DisplayName == "Twitter")
                                     {
-                                        <button type="submit" class="btn btn-outline-twitter" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="bi bi-twitter"></i> @provider.DisplayName</button>
+                                        <button type="submit" class="btn btn-outline-twitter" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <i class="bi bi-twitter"></i> @provider.DisplayName
+                                        </button>
                                     }
 
                                     if (provider.DisplayName == "Facebook")
                                     {
-                                        <button type="submit" class="btn btn-outline-facebook" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="bi bi-facebook"></i> @provider.DisplayName</button>
+                                        <button type="submit" class="btn btn-outline-facebook" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                            <i class="bi bi-facebook"></i> @provider.DisplayName
+                                        </button>
                                     }
                                 }
                             </p>
@@ -75,5 +81,5 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

@@ -1,10 +1,6 @@
-﻿.btn {
-    margin: .10rem;
-}
+﻿.btn { margin: .10rem; }
 
-.overall_row {
-    justify-content: center;
-}
+.overall_row { justify-content: center; }
 
 .timeContainer {
     justify-content: center;
@@ -12,20 +8,16 @@
 }
 
 #timer {
-    font-size: 38pt;
     font-family: Lato;
+    font-size: 38pt;
     font-weight: 300;
 }
 
 .scoreForm {
-    width: 25% !important;
     text-align: center !important;
+    width: 25% !important;
 }
 
-.teamForm {
-    width: 75% !important;
-}
+.teamForm { width: 75% !important; }
 
-.ctnr_nopadding {
-    padding: 0;
-}
+.ctnr_nopadding { padding: 0; }
