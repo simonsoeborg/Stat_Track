@@ -56,8 +56,6 @@ public class TeamController : Controller
        
             if (ModelState.IsValid)
             {
-            Console.WriteLine(model.Name + "  " + model.ClubId + "  " + model.CreatorId + "   " + model.TeamUYear + "    " + model.Division); 
-
                 CreateTeam(model.Name, model.ClubId, model.CreatorId, model.TeamUYear, model.Division);
 
                 return RedirectToAction("Index");
@@ -77,9 +75,6 @@ public class TeamController : Controller
 
     public void DeleteTeams(int Id)
     {
-        Console.WriteLine("I was here");
-
-        Console.WriteLine(Id);
         if (ModelState.IsValid)
         {
             DeleteTeam(Id);

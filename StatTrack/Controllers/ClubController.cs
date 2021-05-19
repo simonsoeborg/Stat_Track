@@ -84,7 +84,6 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(model.Id);
                 UpdateClub(model.Id,model.Initials,model.Name,model.City,model.Postal,model.Address);
                 return RedirectToAction("Index");
             }

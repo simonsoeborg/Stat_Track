@@ -27,10 +27,8 @@ function saveSession(playerId, event) {
         contentType: 'application/json',
         data: dataObj,
         success: function (response) {
-            console.log("Send to PlayerStatToDB(): ", response);
         },
         error: function () {
-            console.log("Could not send Data to PostGameToDB()");
         }
     });
 }
@@ -94,7 +92,6 @@ function saveGameToDB() {
         CreatorTeamGoals: teamGoals,
         ModstanderGoals: awayGoals
     });
-    console.log(GameObj);
     $.ajax({
         type: 'POST',
         url: '/Game/RePostGameToDb',
@@ -104,7 +101,6 @@ function saveGameToDB() {
         success: function (response) {
         },
         error: function() {
-            console.log("Could not send Data to PostGameToDB()");
         }
     });
 }
@@ -116,8 +112,6 @@ document.getElementById("newEventHomeTeamBtn").disabled = true;
 function setHomeEventPlayer(val) {
     homeEventPlayerId = parseInt(val.options[val.selectedIndex].id, 10);
     homeEventPlayerName = val.options[val.selectedIndex].text;
-    console.log("Id: " + homeEventPlayerId);
-    console.log("Name: " + homeEventPlayerId);
     document.getElementById("newEventHomeTeamBtn").disabled = false;
 }
 
@@ -187,10 +181,8 @@ function addNewEventDataToDB(EventType, PlayerId, Time) {
         contentType: 'application/json',
         data: dataObj,
         success: function (response) {
-            console.log("Send to EventToDB(): ", response);
         },
         error: function() {
-            console.log("Failed to Add Event");
         }
     });
 }
@@ -203,10 +195,8 @@ function deleteGameId() {
         contentType: 'application/json',
         data: 0,
         success: function (response) {
-            console.log("Emptied the GameId");
         },
         error: function () {
-            console.log("Could not send Data to EmptyGameId()");
         }
     });
 }

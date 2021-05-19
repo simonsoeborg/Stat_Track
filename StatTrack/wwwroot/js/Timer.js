@@ -10,7 +10,6 @@ var boolFlag = false;
 function setGameTime(val) {
     //var temp = val.options[val.selectedIndex].getAttribute('value');
     var temp = val.options[val.selectedIndex].text;
-    console.log(temp);
     gameLength = temp;
 }
 
@@ -77,12 +76,6 @@ function Timer(element) {
     function update() {
         time += delta();
         formattedTime = timeFormatter(time);
-/*        console.log(timeFormatter(10));
-        if (formattedTime >= timeFormatter(gameLength) || formattedTime >= timeFormatter(gameLength/2) ) {
-            stopWatch.stop();
-        }*/
-
-
         element.textContent = formattedTime;
     }
 
@@ -118,8 +111,6 @@ function Timer(element) {
             setInterval(checkIfFulltime, 500);
             offset = Date.now();
             this.isOn = true;
-            console.log("Timer Started");
-            console.log("isOn status: " + this.isOn);
         }
     };
 
@@ -128,8 +119,6 @@ function Timer(element) {
             clearInterval(interval);
             interval = null;
             this.isOn = false;
-            console.log("Timer Stopped");
-            console.log("isOn status: " + this.isOn);
         }
     };
 
@@ -150,7 +139,6 @@ function Timer(element) {
 
 function checkIfHalftime() {
     if (timer.textContent === getHalfTime() && stopWatch.isOn && !boolFlag) {
-        console.log("Halftime");
         document.getElementById("primaryTimerBtnsRow").style.visibility = 'hidden';
         document.getElementById("halfTimeRow").style.visibility = 'visible';
         boolFlag = true;

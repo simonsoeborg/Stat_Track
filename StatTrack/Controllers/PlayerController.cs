@@ -45,8 +45,6 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(model.Id);
-                Console.WriteLine(currentTeamId);
 
                 CreatePlayer(model.Name , model.Position, model.YOB, currentTeamId);
             }
@@ -57,7 +55,6 @@ namespace StatTrack.Controllers
         public IActionResult Edit(int playerId, string playerName, string playerPosition, int YOB)
         {
             var model = new PlayerModel {Id = playerId, PlayerName = playerName, PlayerPosition = playerPosition, YOB = YOB };
-            Console.WriteLine(playerId);
 
             return View(model);
         }
@@ -68,7 +65,6 @@ namespace StatTrack.Controllers
         {
             if (ModelState.IsValid)
             {
-                Console.WriteLine(model.Id);
                 UpdatePlayer(model.Id, model.PlayerName, model.PlayerPosition, model.YOB);
                 return RedirectToAction("PlayerLineUp", new { id = currentTeamId});
             }

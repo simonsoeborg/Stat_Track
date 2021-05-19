@@ -12,8 +12,6 @@
     var currentTeam = data.getTeamModel(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
     var currentClub = data.getClub(Int32.Parse(currentTeam.ClubId));
 
-    int GameId;
-    
 }
 
 
@@ -284,7 +282,6 @@
         </div>
     </div>
 </div>
-</div>
 
 <div class="modal fade" id="HomeEventModal" tabindex="-1" aria-labelledby="HomeEventModal" aria-hidden="true">
     <div class="modal-dialog">
@@ -340,9 +337,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <div class="modal fade" id="AwayEventModal" tabindex="-1" aria-labelledby="AwayEventModal" aria-hidden="true">
     <div class="modal-dialog">
