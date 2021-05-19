@@ -1,5 +1,3 @@
-using System;
-
 namespace StatTrack.Models
 {
     public class ErrorViewModel

@@ -1,13 +1,5 @@
-﻿.card:hover {
-    background-color: #E4E4E4;
-}
+﻿.card:hover { background-color: #E4E4E4; }
 
-.card {
-    margin: 1rem;
-}
+.card { margin: 1rem; }
 
-.btn-close {
-    color: coral;
-}
-
-
+.btn-close { color: coral; }

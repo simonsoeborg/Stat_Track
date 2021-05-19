@@ -10,7 +10,6 @@ var boolFlag = false;
 function setGameTime(val) {
     //var temp = val.options[val.selectedIndex].getAttribute('value');
     var temp = val.options[val.selectedIndex].text;
-    console.log(temp);
     gameLength = temp;
 }
 
@@ -25,7 +24,7 @@ function getHalfTime() {
         break;
     case "50:00":
         result = "25:00";
-            break;
+        break;
     case "00:10":
         result = "00:05";
         break;
@@ -38,34 +37,38 @@ function getHalfTime() {
 
 var stopWatch = new Timer(timer);
 
-startBtn.addEventListener('click', function () {
-    if (!stopWatch.isOn) {
-        stopWatch.start();
-        document.getElementById("SetGameTimeSelectionBar").style.visibility = 'hidden';
+startBtn.addEventListener("click",
+    function() {
+        if (!stopWatch.isOn) {
+            stopWatch.start();
+            document.getElementById("SetGameTimeSelectionBar").style.visibility = "hidden";
+            saveGameToDB();
+        }
+    });
+
+halfTimeBtn.addEventListener("click",
+    function() {
+        if (!stopWatch.isOn) {
+            stopWatch.start();
+            document.getElementById("primaryTimerBtnsRow").style.visibility = "visible";
+            document.getElementById("halfTimeRow").style.visibility = "hidden";
+            document.getElementById("GameHalvleg").style.visibility = "hidden";
+        }
+
+    });
+
+stopBtn.addEventListener("click",
+    function() {
+        stopWatch.stop();
+        document.getElementById("SetGameTimeSelectionBar").style.visibility = "visible";
         saveGameToDB();
-    }
-});
+    });
 
-halfTimeBtn.addEventListener('click', function () {
-    if (!stopWatch.isOn) {
-        stopWatch.start();
-        document.getElementById("primaryTimerBtnsRow").style.visibility = 'visible';
-        document.getElementById("halfTimeRow").style.visibility = 'hidden';
-        document.getElementById("GameHalvleg").style.visibility = "hidden";
-    }
-
-});
-
-stopBtn.addEventListener('click', function () {
-    stopWatch.stop();
-    document.getElementById("SetGameTimeSelectionBar").style.visibility = 'visible';
-    saveGameToDB();
-});
-
-stopBtn.addEventListener('dblclick', function () {
-    stopWatch.reset();
-    saveGameToDB();
-});
+stopBtn.addEventListener("dblclick",
+    function() {
+        stopWatch.reset();
+        saveGameToDB();
+    });
 
 
 function Timer(element) {
@@ -77,12 +80,6 @@ function Timer(element) {
     function update() {
         time += delta();
         formattedTime = timeFormatter(time);
-/*        console.log(timeFormatter(10));
-        if (formattedTime >= timeFormatter(gameLength) || formattedTime >= timeFormatter(gameLength/2) ) {
-            stopWatch.stop();
-        }*/
-
-
         element.textContent = formattedTime;
     }
 
@@ -99,41 +96,37 @@ function Timer(element) {
         var seconds = tempTime.getSeconds().toString();
 
         if (minutes.length < 2) {
-            minutes = '0' + minutes;
+            minutes = "0" + minutes;
         }
 
         if (seconds.length < 2) {
-            seconds = '0' + seconds;
+            seconds = "0" + seconds;
         }
 
-        return minutes + ':' + seconds;
+        return minutes + ":" + seconds;
     }
 
     this.isOn = false;
 
-    this.start = function () {
+    this.start = function() {
         if (!this.isOn) {
             interval = setInterval(update, 500);
             setInterval(checkIfHalftime, 500);
             setInterval(checkIfFulltime, 500);
             offset = Date.now();
             this.isOn = true;
-            console.log("Timer Started");
-            console.log("isOn status: " + this.isOn);
         }
     };
 
-    this.stop = function () {
+    this.stop = function() {
         if (this.isOn) {
             clearInterval(interval);
             interval = null;
             this.isOn = false;
-            console.log("Timer Stopped");
-            console.log("isOn status: " + this.isOn);
         }
     };
 
-    this.reset = function () {
+    this.reset = function() {
         time = 0;
         var formattedTime = timeFormatter(time);
         element.textContent = formattedTime;
@@ -150,9 +143,8 @@ function Timer(element) {
 
 function checkIfHalftime() {
     if (timer.textContent === getHalfTime() && stopWatch.isOn && !boolFlag) {
-        console.log("Halftime");
-        document.getElementById("primaryTimerBtnsRow").style.visibility = 'hidden';
-        document.getElementById("halfTimeRow").style.visibility = 'visible';
+        document.getElementById("primaryTimerBtnsRow").style.visibility = "hidden";
+        document.getElementById("halfTimeRow").style.visibility = "visible";
         boolFlag = true;
         stopWatch.stop();
         gameHalfTime();
@@ -160,11 +152,12 @@ function checkIfHalftime() {
 };
 
 var x = 0;
+
 function checkIfFulltime() {
     var time = document.getElementById("timer").textContent;
     if (time === gameLength && x === 0) {
-        document.getElementById("primaryTimerBtnsRow").style.visibility = 'hidden';
-        document.getElementById("halfTimeRow").style.visibility = 'hidden';
+        document.getElementById("primaryTimerBtnsRow").style.visibility = "hidden";
+        document.getElementById("halfTimeRow").style.visibility = "hidden";
         stopWatch.stop();
         gameEnded();
         x++;
@@ -185,6 +178,7 @@ function gameHalfTime() {
 }
 
 var i = 0;
+
 function gameEnded() {
     if (i === 0) {
         var paragraphTitel = document.getElementById("GameFinishedResultTitel");

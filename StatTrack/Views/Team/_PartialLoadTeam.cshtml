@@ -1,7 +1,7 @@
-﻿@model IEnumerable<StatTrack.Models.TeamModel>
+﻿@model IEnumerable<TeamModel>
 
 @{
-    int i = 0;
+    var i = 0;
 }
 
 <div class="row">
@@ -61,12 +61,11 @@
                 </div>
 
 
-
                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name) </h5>
 
-                <p style="font-size:18px;">@Html.DisplayNameFor(modelItem => item.Division): <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.Division)</b></p>
+                <p style="font-size: 18px;">@Html.DisplayNameFor(modelItem => item.Division): <b style="font-size: 18px;"> @Html.DisplayFor(modelItem => item.Division)</b></p>
 
-                <p style="font-size:18px;">Årgang: <b style="font-size:18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b></p>
+                <p style="font-size: 18px;">Årgang: <b style="font-size: 18px;"> @Html.DisplayFor(modelItem => item.TeamUYear)</b></p>
 
                 <a class="btn btn-outline-primary" asp-area="" asp-controller="Player" asp-action="PlayerLineUp" asp-route-id="@item.Id">Se Hold</a>
 
@@ -76,4 +75,3 @@
         i++;
     }
 </div>
-

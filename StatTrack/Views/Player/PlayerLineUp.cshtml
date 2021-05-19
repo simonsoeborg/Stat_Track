@@ -8,10 +8,10 @@
     ViewData["Title"] = "PlayerLineUp";
     var id = PlayerController.currentTeamId;
 
-    DataHandler data = new DataHandler();
-    List<string> playerPosition = data.getPositions();
+    var data = new DataHandler();
+    var playerPosition = data.getPositions();
 
-    string currentTeam = data.getTeamName(Int32.Parse(ViewContext.RouteData.Values["id"].ToString()));
+    var currentTeam = data.getTeamName(int.Parse(ViewContext.RouteData.Values["id"].ToString()));
 }
 
 <h1>Spillerliste for @currentTeam</h1>
@@ -38,7 +38,7 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="TModel.Name" class="form-label">Navn</label>
-                        <input asp-for="TModel.Name" name="Name" class="form-control" />
+                        <input asp-for="TModel.Name" name="Name" class="form-control"/>
                         <span asp-validation-for="TModel.Name" class="text-danger"></span>
                     </div>
 
@@ -46,16 +46,16 @@
                         <label asp-for="TModel.Position" class="form-label"> </label>
                         <select asp-for="TModel.Position" name="Position" select class="form-select">
                             <option selected>Vælg Position</option>
-                            @for (int i = 0; i < playerPosition.Count; i++)
+                            @for (var i = 0; i < playerPosition.Count; i++)
                             {
-                                <option value="@playerPosition[i].ToString()">@playerPosition[i]</option>
+                                <option value="@playerPosition[i]">@playerPosition[i]</option>
                             }
                         </select>
                         <span asp-validation-for="TModel.Position" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="TModel.YOB" class="form-label">Årgang</label>
-                        <input asp-for="TModel.YOB" name="YOB" class="form-control" placeholder="1980" />
+                        <input asp-for="TModel.YOB" name="YOB" class="form-control" placeholder="1980"/>
                         <span asp-validation-for="TModel.YOB" class="text-danger"></span>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                 <!-- Modal footer -->
 
                 <div class="modal-footer">
-                    <input type="submit" value="Opret" class="btn btn-outline-success" />
+                    <input type="submit" value="Opret" class="btn btn-outline-success"/>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
                 </div>
             </form>
@@ -73,42 +73,42 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Navn
-            </th>
-            <th>
-                Position
-            </th>
-            <th>
-                Årgang
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Navn
+        </th>
+        <th>
+            Position
+        </th>
+        <th>
+            Årgang
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.TModels)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Position)
-                </td>
-                <td>
-                    @{
-                        var yearTwoDigits = item.YOB.ToString();
-                        yearTwoDigits = yearTwoDigits[2] + "" + yearTwoDigits[3];
-                    }
-                    @yearTwoDigits
-                </td>
-                <td>
-                    @Html.ActionLink("Rediger", "Edit", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-secondary" })
-                    @Html.ActionLink("Info", "Details", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-secondary" })
-                    @Html.ActionLink("Slet", "Delete", new { playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB }, new { @class = "btn btn-outline-danger" })
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model.TModels)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @{
+                    var yearTwoDigits = item.YOB.ToString();
+                    yearTwoDigits = yearTwoDigits[2] + "" + yearTwoDigits[3];
+                }
+                @yearTwoDigits
+            </td>
+            <td>
+                @Html.ActionLink("Rediger", "Edit", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, item.YOB}, new {@class = "btn btn-outline-secondary"})
+                @Html.ActionLink("Info", "Details", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, item.YOB}, new {@class = "btn btn-outline-secondary"})
+                @Html.ActionLink("Slet", "Delete", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, item.YOB}, new {@class = "btn btn-outline-danger"})
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
