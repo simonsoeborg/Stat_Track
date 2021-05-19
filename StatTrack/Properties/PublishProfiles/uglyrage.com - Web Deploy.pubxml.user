@@ -6,19 +6,6 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVR9eFev6iEecO3qpaD9cqAAAAAACAAAAAAAQZgAAAAEAACAAAADe/IqGxDlvye0pZzwUTBnLujWqO00yrqmdMmeXnMH3bAAAAAAOgAAAAAIAACAAAAA+3ylj8y7CkbQsuchK6xglCjEffUmtwuTsai5/yz3guiAAAABK78Bpmj+FAozDFKG3FsvDzBWyuOk3V3ibGrN7IN1ePUAAAAB9woYnteBcq08yvZxZeOXZbXcyzoD0Zw2Vn4bImWwUEidAovhWbGi1pWTiryN8vZA/fMl3D7H5VPPQLWoGkZc0</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAVR9eFev6iEecO3qpaD9cqAAAAAACAAAAAAAQZgAAAAEAACAAAACW6hS5DOptXwPtnw+t3TkeQS+leyvoxmkwCmRDj+WXZwAAAAAOgAAAAAIAACAAAABfPdR4IEXWrR7acx50/TgvKm2eLFl7hyPMdBk+iN23wCAAAABzttgm3Zn0nPdAHaUvrX1hdd+dq+Ew4H86Tc1frZV3dUAAAABKkM0qO9SAuw6qiPHq4HkepdotxQfW9DcnuP53N0/sdaTNitGrjyR05himpXb8lVkdVYgKfDfe92HKOBhW9Kvu</EncryptedPassword>
   </PropertyGroup>
-  <ItemGroup>
-    <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>Data Source=83.90.136.195%3bInitial Catalog=master%3bPersist Security Info=True%3bUser ID=stattrack%3bPassword=100%25Kaffe</Value>
-    </DestinationConnectionStrings>
-    <DestinationConnectionStrings Include="MySQLConnection">
-      <Value>Server=mysql30.unoeuro.com%3bDatabase=uglyrage_com_db_aspnet%3bUser=uglyrage_com%3bPassword=2d4f6r3t</Value>
-    </DestinationConnectionStrings>
-  </ItemGroup>
-  <ItemGroup>
-    <EFMigrations Include="StatTrack.Data.ApplicationDbContext">
-      <Value>Data Source=83.90.136.195%3bInitial Catalog=master%3bPersist Security Info=True%3bUser ID=stattrack%3bPassword=100%25Kaffe</Value>
-    </EFMigrations>
-  </ItemGroup>
 </Project>

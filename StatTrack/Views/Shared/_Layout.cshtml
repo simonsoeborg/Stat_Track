@@ -21,13 +21,11 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StatTrack</a>
-                } else { 
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StatTrack</a>
-                }
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="images/Logo.png" alt="" width="80" height="50">
+                </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

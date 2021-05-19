@@ -49,19 +49,19 @@ namespace StatTrack
                     IConfigurationSection googleAuthNSection =
                         Configuration.GetSection("Authentication:Google");
 
-                    googleOptions.ClientId = googleAuthNSection["ClientId"];
-                    googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
+                    googleOptions.ClientId = "47266529244-amd19lobme86i8fpbuhav12i117ugolh.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "TyAwBSFWCotNCg7RB_9wTI2z";
                 })
                 .AddTwitter(twitterOptions =>
                 {
-                    twitterOptions.ConsumerKey = Configuration["Authentication:Twitter:ConsumerAPIKey"];
-                    twitterOptions.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
+                    twitterOptions.ConsumerKey = "vp0vCOmXRHnkJDrSi0DoQlXfe";
+                    twitterOptions.ConsumerSecret = "Td53cVluoD27PfV2C2yZmknII79B9816I2HuBdpjHV06wuz4Xi";
                     twitterOptions.RetrieveUserDetails = true;
                 })
                 .AddFacebook(facebookOptions =>
                 {
-                    facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-                    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                    facebookOptions.AppId = "1069231943601316";
+                    facebookOptions.AppSecret = "80419389c542fabc8c54650d787fbe87";
                 });
         }
 
