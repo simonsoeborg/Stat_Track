@@ -40,18 +40,18 @@ namespace StatTrack
                         Configuration.GetSection("Authentication:Google");
 
                     googleOptions.ClientId = "47266529244-amd19lobme86i8fpbuhav12i117ugolh.apps.googleusercontent.com";
-                    googleOptions.ClientSecret = "TyAwBSFWCotNCg7RB_9wTI2z";
+                    googleOptions.ClientSecret = Configuration.GetConnectionString("google");
                 })
                 .AddTwitter(twitterOptions =>
                 {
                     twitterOptions.ConsumerKey = "vp0vCOmXRHnkJDrSi0DoQlXfe";
-                    twitterOptions.ConsumerSecret = "Td53cVluoD27PfV2C2yZmknII79B9816I2HuBdpjHV06wuz4Xi";
+                    twitterOptions.ConsumerSecret = Configuration.GetConnectionString("twitter");
                     twitterOptions.RetrieveUserDetails = true;
                 })
                 .AddFacebook(facebookOptions =>
                 {
                     facebookOptions.AppId = "1069231943601316";
-                    facebookOptions.AppSecret = "80419389c542fabc8c54650d787fbe87";
+                    facebookOptions.AppSecret = Configuration.GetConnectionString("facebook");
                 });
         }
 
