@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace StatTrack.Models
+﻿namespace StatTrack.Models
 {
     public class PlayerStatsModel
     {
@@ -18,6 +13,5 @@ namespace StatTrack.Models
         public string Tidspunkt { get; set; }
         public int KampId { get; set; }
         public string KampDato { get; set; }
-
     }
 }

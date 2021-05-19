@@ -1,8 +1,6 @@
-﻿@using StatTrack.Controllers
-@using StatTrack.Logic
-
+﻿@using StatTrack.Logic
 @{
-    DataHandler data = new DataHandler();
+    var data = new DataHandler();
     // Get player stats
     List<PlayerStatsModel> currentSeason = data.GetCurrentSeasonPlayerStats(Model.Id);
     List<PlayerStatsModel> overAllData = data.GetOverAllPlayerStats(Model.Id);
@@ -17,97 +15,97 @@
                 <h2>Spillerstatistik for nuværende sæson</h2>
                 <table class="table">
                     <thead>
-                        <tr>
+                    <tr>
+                        <th>
+                            Kampe
+                        </th>
+                        <th>
+                            Skudforsøg
+                        </th>
+                        <th>
+                            Mål
+                        </th>
+                        <th>
+                            Scoringsprocent
+                        </th>
+                        <th>
+                            Assists
+                        </th>
+                        @if (Model.PlayerPosition == "Målvogter")
+                        {
                             <th>
-                                Kampe
+                                Redninger
                             </th>
-                            <th>
-                                Skudforsøg
-                            </th>
-                            <th>
-                                Mål
-                            </th>
-                            <th>
-                                Scoringsprocent
-                            </th>
-                            <th>
-                                Assists
-                            </th>
-                            @if (Model.PlayerPosition == "Målvogter")
-                            {
-                                <th>
-                                    Redninger
-                                </th>
-                            }
-                            <th>
-                                Udvisninger (2 min)
-                            </th>
-                            <th>
-                                Gulekort
-                            </th>
-                            <th>
-                                Rødekort
-                            </th>
-                        </tr>
+                        }
+                        <th>
+                            Udvisninger (2 min)
+                        </th>
+                        <th>
+                            Gulekort
+                        </th>
+                        <th>
+                            Rødekort
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @{
-                            int amountOfPlayedGames = 0;
-                            int amountOfAttempts = 0;
-                            int amountOfGoals = 0;
-                            int amountOfSaves = 0;
-                            int amountOf2Mins = 0;
-                            int amountOfYellow = 0;
-                            int amountOfRed = 0;
-                            int amountOfAssists = 0;
+                    @{
+                        var amountOfPlayedGames = 0;
+                        var amountOfAttempts = 0;
+                        var amountOfGoals = 0;
+                        var amountOfSaves = 0;
+                        var amountOf2Mins = 0;
+                        var amountOfYellow = 0;
+                        var amountOfRed = 0;
+                        var amountOfAssists = 0;
 
-                            foreach (var item in currentSeason)
-                            {
-                                amountOfPlayedGames += 1;
-                                amountOfAttempts += item.Attempts;
-                                amountOfAssists += item.Assists;
-                                amountOfGoals += item.Goals;
-                                amountOfSaves += item.KeeperSaves;
-                                amountOf2Mins += item.Mins2;
-                                amountOfYellow += item.Yellowcards;
-                                amountOfRed += item.Redcards;
-                            }
+                        foreach (var item in currentSeason)
+                        {
+                            amountOfPlayedGames += 1;
+                            amountOfAttempts += item.Attempts;
+                            amountOfAssists += item.Assists;
+                            amountOfGoals += item.Goals;
+                            amountOfSaves += item.KeeperSaves;
+                            amountOf2Mins += item.Mins2;
+                            amountOfYellow += item.Yellowcards;
+                            amountOfRed += item.Redcards;
                         }
-                        <tr>
-                            <td id="amountOfPlayedGamesCurrent">
-                                @amountOfPlayedGames
-                            </td>
-                            <td id="amountOfGoalAttemptsCurrent">
-                                @amountOfAttempts
-                            </td>
-                            <td id="amountOfGoalsCurrent">
-                                @amountOfGoals
-                            </td>
-                            <td>
-                                @{
-                                    double percentageCurrentSeason = ((double)amountOfGoals / (double)amountOfAttempts) * 100;
-                                }
-                                (@amountOfGoals/@amountOfAttempts) | @percentageCurrentSeason.ToString("0.00")%
-                            </td>
-                            <td id="amountOfAssistsCurrent">
-                                @amountOfAssists
-                            </td>
-                            @if (Model.PlayerPosition == "Målvogter")
-                            {
-                                <td id="amountOfSavesCurrent">
-                                    @amountOfSaves
-                                </td>
+                    }
+                    <tr>
+                        <td id="amountOfPlayedGamesCurrent">
+                            @amountOfPlayedGames
+                        </td>
+                        <td id="amountOfGoalAttemptsCurrent">
+                            @amountOfAttempts
+                        </td>
+                        <td id="amountOfGoalsCurrent">
+                            @amountOfGoals
+                        </td>
+                        <td>
+                            @{
+                                var percentageCurrentSeason = amountOfGoals / (double) amountOfAttempts * 100;
                             }
-                            <td id="amountOf2MinsCurrent">
-                                @amountOf2Mins
+                            (@amountOfGoals/@amountOfAttempts) | @percentageCurrentSeason.ToString("0.00")%
+                        </td>
+                        <td id="amountOfAssistsCurrent">
+                            @amountOfAssists
+                        </td>
+                        @if (Model.PlayerPosition == "Målvogter")
+                        {
+                            <td id="amountOfSavesCurrent">
+                                @amountOfSaves
                             </td>
-                            <td id="amountOfYellowCardsCurrent">
-                                @amountOfYellow
-                            </td>
-                            <td id="amountOfRedCardsCurrent">
-                                @amountOfRed
-                            </td>
-                        </tr>
+                        }
+                        <td id="amountOf2MinsCurrent">
+                            @amountOf2Mins
+                        </td>
+                        <td id="amountOfYellowCardsCurrent">
+                            @amountOfYellow
+                        </td>
+                        <td id="amountOfRedCardsCurrent">
+                            @amountOfRed
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -132,98 +130,98 @@
                 <h2>Spillerstatistik for alle sæsoner</h2>
                 <table class="table">
                     <thead>
-                        <tr>
+                    <tr>
+                        <th>
+                            Kampe
+                        </th>
+                        <th>
+                            Skudforsøg
+                        </th>
+                        <th>
+                            Mål
+                        </th>
+                        <th>
+                            Scoringsprocent
+                        </th>
+                        <th>
+                            Assists
+                        </th>
+                        @if (Model.PlayerPosition == "Målvogter")
+                        {
                             <th>
-                                Kampe
+                                Redninger
                             </th>
-                            <th>
-                                Skudforsøg
-                            </th>
-                            <th>
-                                Mål
-                            </th>
-                            <th>
-                                Scoringsprocent
-                            </th>
-                            <th>
-                                Assists
-                            </th>
-                            @if (Model.PlayerPosition == "Målvogter")
-                            {
-                                <th>
-                                    Redninger
-                                </th>
-                            }
-                            <th>
-                                Udvisninger (2 min)
-                            </th>
-                            <th>
-                                Gulekort
-                            </th>
-                            <th>
-                                Rødekort
-                            </th>
-                        </tr>
+                        }
+                        <th>
+                            Udvisninger (2 min)
+                        </th>
+                        <th>
+                            Gulekort
+                        </th>
+                        <th>
+                            Rødekort
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @{
-                            int amountOfPlayedGamesAll = 0;
-                            int amountOfAttemptsAll = 0;
-                            int amountOfGoalsAll = 0;
-                            int amountOfSavesAll = 0;
-                            int amountOf2MinsAll = 0;
-                            int amountOfYellowAll = 0;
-                            int amountOfAssistsAll = 0;
-                            int amountOfRedAll = 0;
+                    @{
+                        var amountOfPlayedGamesAll = 0;
+                        var amountOfAttemptsAll = 0;
+                        var amountOfGoalsAll = 0;
+                        var amountOfSavesAll = 0;
+                        var amountOf2MinsAll = 0;
+                        var amountOfYellowAll = 0;
+                        var amountOfAssistsAll = 0;
+                        var amountOfRedAll = 0;
 
-                            foreach (var item in overAllData)
-                            {
-                                amountOfPlayedGamesAll += 1;
-                                amountOfAttemptsAll += item.Attempts;
-                                amountOfGoalsAll += item.Goals;
-                                amountOfSavesAll += item.KeeperSaves;
-                                amountOf2MinsAll += item.Mins2;
-                                amountOfAssistsAll += item.Assists;
-                                amountOfYellowAll += item.Yellowcards;
-                                amountOfRedAll += item.Redcards;
-                            }
-
+                        foreach (var item in overAllData)
+                        {
+                            amountOfPlayedGamesAll += 1;
+                            amountOfAttemptsAll += item.Attempts;
+                            amountOfGoalsAll += item.Goals;
+                            amountOfSavesAll += item.KeeperSaves;
+                            amountOf2MinsAll += item.Mins2;
+                            amountOfAssistsAll += item.Assists;
+                            amountOfYellowAll += item.Yellowcards;
+                            amountOfRedAll += item.Redcards;
                         }
-                        <tr>
-                            <td id="amountOfPlayedGamesOverAll">
-                                @amountOfPlayedGamesAll
-                            </td>
-                            <td id="amountOfGoalAttemptsOverAll">
-                                @amountOfAttemptsAll
-                            </td>
-                            <td id="amountOfGoalsOverAll">
-                                @amountOfGoalsAll
-                            </td>
-                            <td>
-                                @{
-                                    double percentageOverAll = ((double)amountOfGoalsAll / (double)amountOfAttemptsAll) * 100;
-                                }
-                                (@amountOfGoalsAll/@amountOfAttemptsAll) | @percentageOverAll.ToString("0.00")%
-                            </td>
-                            <td id="amountOfAssistsOverAll">
-                                @amountOfAssistsAll
-                            </td>
-                            @if (Model.PlayerPosition == "Målvogter")
-                            {
-                                <td id="amountOfSavesOverAll">
-                                    @amountOfSaves
-                                </td>
+
+                    }
+                    <tr>
+                        <td id="amountOfPlayedGamesOverAll">
+                            @amountOfPlayedGamesAll
+                        </td>
+                        <td id="amountOfGoalAttemptsOverAll">
+                            @amountOfAttemptsAll
+                        </td>
+                        <td id="amountOfGoalsOverAll">
+                            @amountOfGoalsAll
+                        </td>
+                        <td>
+                            @{
+                                var percentageOverAll = amountOfGoalsAll / (double) amountOfAttemptsAll * 100;
                             }
-                            <td id="amountOf2MinsOverAll">
-                                @amountOf2MinsAll
+                            (@amountOfGoalsAll/@amountOfAttemptsAll) | @percentageOverAll.ToString("0.00")%
+                        </td>
+                        <td id="amountOfAssistsOverAll">
+                            @amountOfAssistsAll
+                        </td>
+                        @if (Model.PlayerPosition == "Målvogter")
+                        {
+                            <td id="amountOfSavesOverAll">
+                                @amountOfSaves
                             </td>
-                            <td id="amountOfYellowCardsOverAll">
-                                @amountOfYellowAll
-                            </td>
-                            <td id="amountOfRedCardsOverAll">
-                                @amountOfRedAll
-                            </td>
-                        </tr>
+                        }
+                        <td id="amountOf2MinsOverAll">
+                            @amountOf2MinsAll
+                        </td>
+                        <td id="amountOfYellowCardsOverAll">
+                            @amountOfYellowAll
+                        </td>
+                        <td id="amountOfRedCardsOverAll">
+                            @amountOfRedAll
+                        </td>
+                    </tr>
 
                     </tbody>
                 </table>

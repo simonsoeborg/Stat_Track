@@ -1,4 +1,4 @@
-﻿@model StatTrack.Models.ClubModel
+﻿@model ClubModel
 
 @{
     ViewData["Title"] = "Detaljer";
@@ -7,7 +7,7 @@
 <h1>Informationer om @Model.Initials</h1>
 
 <div>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Initials)
@@ -41,8 +41,8 @@
         </dd>
     </dl>
     <div class="form-group">
-        @Html.ActionLink("Edit", "Edit", new { clubId = Model.Id, clubInitials = Model.Initials, clubName = Model.Name, clubAddress = Model.Address, clubCity = Model.City, clubPostal = Model.Postal }, new {@class="btn btn-outline-warning"})
-    
+        @Html.ActionLink("Edit", "Edit", new {clubId = Model.Id, clubInitials = Model.Initials, clubName = Model.Name, clubAddress = Model.Address, clubCity = Model.City, clubPostal = Model.Postal}, new {@class = "btn btn-outline-warning"})
+
         <form asp-action="Index">
             <button type="submit" class="btn btn-outline-secondary">Tilbage</button>
         </form>

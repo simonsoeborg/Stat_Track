@@ -1,5 +1,5 @@
-﻿@model StatTrack.Models.PlayerModel
-@using StatTrack.Controllers
+﻿@using StatTrack.Controllers
+@model PlayerModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -10,7 +10,7 @@
 <h1>Er du sikker på, at du vil slette @Model.PlayerName?</h1>
 
 <div>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlayerName)
@@ -33,10 +33,10 @@
     </dl>
     <div class="form-group">
         <form asp-action="Delete" asp-route-id="@Model.Id">
-            <input type="submit" value="Slet" class="btn btn-outline-danger" />
+            <input type="submit" value="Slet" class="btn btn-outline-danger"/>
         </form>
 
-        @Html.ActionLink("Tilbage", "PlayerLineUp", new { id }, new { @class = "btn btn-outline-secondary" })
+        @Html.ActionLink("Tilbage", "PlayerLineUp", new {id}, new {@class = "btn btn-outline-secondary"})
 
     </div>
 </div>

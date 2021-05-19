@@ -1,6 +1,5 @@
-﻿@model StatTrack.Models.PlayerModel
-@using StatTrack.Controllers
-@using StatTrack.Logic
+﻿@using StatTrack.Controllers
+@model PlayerModel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,7 +9,7 @@
 <h1>@Model.PlayerName</h1>
 
 <div class="row justify-content-md-start">
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlayerName)
@@ -32,10 +31,10 @@
         </dd>
     </dl>
     <div class="form-group">
-        @Html.ActionLink("Edit", "Edit", new { playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, YOB = Model.YOB }, new { @class = "btn btn-outline-warning" })
+        @Html.ActionLink("Edit", "Edit", new {playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, Model.YOB}, new {@class = "btn btn-outline-warning"})
 
 
-        @Html.ActionLink("Tilbage", "Index", "Team", new { }, new { @class = "btn btn-outline-secondary" })
+        @Html.ActionLink("Tilbage", "Index", "Team", new {}, new {@class = "btn btn-outline-secondary"})
 
     </div>
 </div>

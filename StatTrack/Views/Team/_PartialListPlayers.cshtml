@@ -1,12 +1,12 @@
-﻿@model StatTrack.Models.TeamModel
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @using StatTrack.Logic
+@model TeamModel
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
 @{
-    DataHandler dataH = new DataHandler();
+    var dataH = new DataHandler();
 }
 
 <div class="accordion-item">
@@ -17,10 +17,11 @@
         <div class="accordion-body">
             <table class="table">
                 <tbody>
-                @foreach(var item in dataH.GetAllPlayersFromAllTeams()) { 
+                @foreach (var item in dataH.GetAllPlayersFromAllTeams())
+                {
                     <tr>
                         <td>
-                            <a href="@Url.Action("DetailsList", "Player", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, YOB = item.YOB })">@item.Name</a>
+                            <a href="@Url.Action("DetailsList", "Player", new {playerId = item.Id, playerName = item.Name, playerPosition = item.Position, item.YOB})">@item.Name</a>
                         </td>
                         <td>
                             @item.YOB.ToString()[2]@item.YOB.ToString()[3]
@@ -34,5 +35,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
