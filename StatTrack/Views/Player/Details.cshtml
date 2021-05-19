@@ -9,7 +9,7 @@
 <h1>Spiller: @Model.PlayerName</h1>
 
 <div class="row justify-content-md-start">
-    <hr/>
+    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PlayerName)
@@ -31,12 +31,12 @@
         </dd>
     </dl>
     <div class="form-group">
-        @Html.ActionLink("Edit", "Edit", new {playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, Model.YOB}, new {@class = "btn btn-outline-warning"})
+        @Html.ActionLink("Edit", "Edit", new { playerId = Model.Id, playerName = Model.PlayerName, playerPosition = Model.PlayerPosition, Model.YOB }, new { @class = "btn btn-outline-warning" })
 
 
-        @Html.ActionLink("Tilbage", "PlayerLineUp", new {id}, new {@class = "btn btn-outline-secondary"})
+        @Html.ActionLink("Tilbage", "PlayerLineUp", new { id }, new { @class = "btn btn-outline-secondary" })
 
     </div>
 </div>
 
-@await Html.PartialAsync("/Views/Player/_DetailsStatsParital.cshtml", Model)
+@await Html.PartialAsync("/Views/Player/_DetailsStatsPartial.cshtml", Model)
